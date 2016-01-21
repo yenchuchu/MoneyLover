@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Money Lover</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="padding:0px 0px; background-color: #000;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="index-admin.html">
+                    <i class="fa fa-play-circle"></i>  <span class="light">Money</span> Lover
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li>
+                        <a class=" dropdown-toggle page-scroll" data-toggle="dropdown">Accounts 
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="account-active.html">account active</a></li>
+                          <li><a href="account-request.html">account request</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="admin-categories.html">Categories</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="main.html">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section id="categories" class="content-section text-center">
+        <div class="categories-section">
+            <div class="container">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel-heading" style="background-color: transparent !important; color: black; ">
+                        <h1>Categories</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-6 categories-income">
+                            <h3> Income </h3> 
+                            <ul>
+                                <li>
+                                    <i class="fa fa-trophy fa-2x"></i>
+                                    <a href="#category-details">Award</a>
+                                </li>
+                                 <li>
+                                    <i class="fa fa-gift fa-2x"></i>
+                                    <a href="#category-details">Interest Money</a>
+                                </li>                            
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i>                                
+                                    <a href="#category-details">Salary</a>
+                                </li>                            
+                                <li>
+                                <i class="fa fa-gift fa-2x"></i>
+                                    <a href="#category-details">Gifts</a>
+                                </li>
+                               <li>
+                                   <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Selling</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Others</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 categories-expense">
+                            <h3> Expense </h3>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Food & Beverage</a>
+                                </li>
+                                 <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Transportation</a>
+                                </li>                            
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Shopping</a>
+                                </li>                            
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Friends & Lover</a>
+                                </li>
+                               <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Entertainment</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-money fa-2x"></i> 
+                                    <a href="#category-details">Travel</a>
+                                </li>
+                            </ul>    
+                        </div>
+                        <button style=" background-color: #D95E3F; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 35px; color: white; font-weight: bold; margin-top: 30px;">
+                            <a href="#add-category" style="color: white;">+</a>
+                        </button>
+                    </div>
+                    <div id="category-details" class="modalDialog ">      
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-body" style="color: black;border-top: 1px solid #841717;">
+                                <i class="fa fa-calendar" style="font-size: 22px; float: left; padding-top: 10px; background-color: black; margin-left: 3px; border-radius: 50%; height: 42px; width: 14%; color: #55DE9A;" title="Caterory"></i>
+                                <span style=" float: left; text-align: left; padding-left: 12px; font-size: 20px; padding-top: 6px; font-weight: bold; color: black;width:80%;"><b>Shopping</b></span>
+                                <p style="text-align: left; padding-left: 60px; padding-top: 39px;">Income</p>
+                                <div class="submit-category">
+                                    <a href="#edit-category" class="btn category-edit" style="width: 30%;">Edit</a>
+                                    <a href="#delete-category" class="btn category-delete">Delete</a>
+                                    <a href="#close" class="btn category-cancel" style="width: 30%;">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- /#category-detail -->
+                    <div id="edit-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Edit Category</h3>
+                            </div>
+                            <div class="panel-body" style="color: black;">
+                                <div class="form-group">
+                                    <label style="text-align: left; margin-left: -127px; font-size: 15px;">Select Icon:</label>
+                                    <select name="cars">
+                                        <option value="volvo">a</option>
+                                        <option value="saab">b</option>
+                                        <option value="fiat">c</option>
+                                        <option value="audi">d</option>
+                                    </select>
+                                </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="admin-income" type="checkbox" value="Income">Income
+                                </label>
+                                <label>
+                                    <input name="admin-expense" type="checkbox" value="Expense">Expense
+                                </label>
+                            </div>
+                                <div class="submit-edit-category">
+                                    <a href="#" class="btn edit-category-save">Save</a>
+                                    <a href="#category-details" class="btn edit-category-cancel">Cancel</a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /#edit-category -->
+
+                    <div id="delete-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-body" style="color: black; border-top: 1px solid #841717;">
+                                <p>Are you want to delete?</p>
+                                <div class="submit-delete-category">
+                                    <a href="#category-details" class="btn delete-category-cancel">Cancel</a>
+                                    <a href="#" class="btn delete-category-delete">Delete</a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /#delete-category -->
+                    <div id="add-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Add Category</h3>
+                            </div>
+                            <div class="panel-body" style="color: black;">
+                                <div class="form-group">
+                                    <label style="text-align: left; margin-left: -127px; font-size: 15px;">Select Icon:</label>
+                                    <select name="cars">
+                                        <option value="volvo">a</option>
+                                        <option value="saab">b</option>
+                                        <option value="fiat">c</option>
+                                        <option value="audi">d</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="admin-income" type="checkbox" value="Income">Income
+                                    </label>
+                                    <label>
+                                        <input name="admin-expense" type="checkbox" value="Expense">Expense
+                                    </label>
+                                </div>
+                                <div class="submit-edit-category">
+                                    <a href="#" class="btn edit-category-save">Save</a>
+                                    <a href="#close" class="btn edit-category-cancel">Cancel</a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /#add-category -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Your Website 2014</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>
