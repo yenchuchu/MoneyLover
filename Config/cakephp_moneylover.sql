@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `transfer_wallets` (
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(10) NOT NULL,
-  `name` varchar(32) DEFAULT NULL,
+  `username` varchar(32) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `avatar` varchar(100) DEFAULT NULL,
   `password` varchar(64) NOT NULL,
