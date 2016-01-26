@@ -174,10 +174,10 @@ class UsersController extends AppController {
 			}
 
 		} 
-		elseif ($id = 'signin') {
+		elseif ( $this->request->data('signin') ==='Sign-in') {
 			if ($this->request->is('post')) {
 				if ($this->Auth->login()) {
-					return $this->redirect(array('Controller'=>'users', 'action'=>'index'));
+					return $this->redirect(array('Controller'=>'transactions', 'action'=>'index'));
 				}
 				$this->Flash->error(__('Invalid usersname or password, try again'));
 			}
