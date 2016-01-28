@@ -1,29 +1,4 @@
-<!-- <div class="categories form">
-<?php echo $this->Form->create('Category'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Category'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('description');
-		echo $this->Form->input('type');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Category.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Category.id')))); ?></li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('action' => 'index')); ?></li>
-	</ul>
-</div>
- -->
-
- <!-- ................................ -->
-
-  <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000;">
         <div class="container">
             <div class="navbar-header">
@@ -39,15 +14,16 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li>
-                        <a class="page-scroll"  href="wallet.html">My Wallets </a>
+                     <li>
+                        <a class=" dropdown-toggle page-scroll" data-toggle="dropdown">Accounts 
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="account-active.html">account active</a></li>
+                          <li><a href="account-request.html">account request</a></li>
+                        </ul>
                     </li>
-                    </li>
                     <li>
-                        <a class="page-scroll" href="transaction.html">Transactions</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="report-month.html">Report Month</a>
+                        <?php echo $this->Html->link(__('Categories'), array('controller' => 'Categories', 'action' => 'index')); ?> 
                     </li>
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -102,8 +78,7 @@
 
     <!-- Contact Section -->
     <section id="edit-category" class="content-section text-center">
-         <h1> Change Transactions</h1>
-      
+         <h1><?php echo __('Edit Category'); ?></h1>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-6 col-lg-offset-3">
@@ -114,92 +89,34 @@
                <ul>
                    <li>
                    <div class="categories-edit-wrapper">
-                        <div style=" height: 50px; padding-top: 8px;">
-                           <div class="form-group" style="float: left;    padding-top: 2px;">
-                                <select name="cars" style="    border: 1px solid #761628; border-radius: 5px; padding: 5px; margin-left: 11px;">
-                                    <option value="select icon">Select Icon:</option>
-                                    <option value="volvo">a</option>
-                                    <option value="saab">b</option>
-                                    <option value="fiat">c</option>
-                                    <option value="audi">d</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="float: left;    margin-left: 30px;">
-                                <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
-                            </div>
-                            <div class="checkbox" style="    float: left; top: -6px; margin-top: 3px; color: black;">
-                                <label>
-                                    <input name="admin-income" type="checkbox" value="Income" style="    position: absolute; left: 58px; top: 10px;">Income
-                                </label>
-                                <label>
-                                    <input name="admin-expense" type="checkbox" value="Expense" style="    position: absolute; right: 24px; top: 10px;">Expense
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-            </li>
-            <li>
-                   <div class="categories-edit-wrapper">
-                        <div style=" height: 50px; padding-top: 8px;">
-                           <div class="form-group" style="float: left;    padding-top: 2px;">
-                                <select name="cars" style="    border: 1px solid #761628; border-radius: 5px; padding: 5px; margin-left: 11px;">
-                                    <option value="select icon">Select Icon:</option>
-                                    <option value="volvo">a</option>
-                                    <option value="saab">b</option>
-                                    <option value="fiat">c</option>
-                                    <option value="audi">d</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="float: left;    margin-left: 30px;">
-                                <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
-                            </div>
-                            <div class="checkbox" style="    float: left; top: -6px; margin-top: 3px; color: black;">
-                                <label>
-                                    <input name="admin-income" type="checkbox" value="Income" style="    position: absolute; left: 58px; top: 10px;">Income
-                                </label>
-                                <label>
-                                    <input name="admin-expense" type="checkbox" value="Expense" style="    position: absolute; right: 24px; top: 10px;">Expense
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-            </li>
-            <li>
-                   <div class="categories-edit-wrapper">
-                        <div style=" height: 50px; padding-top: 8px;">
-                           <div class="form-group" style="float: left;    padding-top: 2px;">
-                                <select name="cars" style="    border: 1px solid #761628; border-radius: 5px; padding: 5px; margin-left: 11px;">
-                                    <option value="select icon">Select Icon:</option>
-                                    <option value="volvo">a</option>
-                                    <option value="saab">b</option>
-                                    <option value="fiat">c</option>
-                                    <option value="audi">d</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="float: left;    margin-left: 30px;">
-                                <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
-                            </div>
-                            <div class="checkbox" style="    float: left; top: -6px; margin-top: 3px; color: black;">
-                                <label>
-                                    <input name="admin-income" type="checkbox" value="Income" style="    position: absolute; left: 58px; top: 10px;">Income
-                                </label>
-                                <label>
-                                    <input name="admin-expense" type="checkbox" value="Expense" style="    position: absolute; right: 24px; top: 10px;">Expense
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-            </li>
-       </ul>
-                   </div></div>     
-        <div class="submit-wallet" style="margin-top:30px;">
-            <a href="#" class="btn wallet-save">Save</a>
-        </div>
+                        <?php echo $this->Form->create('Category'); ?>
+                        	<fieldset style="    padding-top: 10px; height: 50px;">
+                        	 <div class="form-group" style="float: left;    margin-left: 30px;">
+                             <?php	echo $this->Form->input('id'); ?>
+                             </div>
+                        		<div class="form-group" style="float: left;    margin-left: 30px;">
+                                <?php echo $this->Form->input('name'); ?>
+                        		</div>
+                                
+                                <div class="form-group" style="float: left;    margin-left: 30px;">
+                        		<?php echo $this->Form->input('type'); ?>
                                 </div>
-                            </li>
-                        </ul>
+                        	</fieldset>
+                            
                     </div>
-                </div>
+                </li>
+                </ul>
+            </div>
+            <?php 
+                $sumbit = array(
+                'class' => 'btn wallet-save',
+                'div' => array(
+                    'class' => 'submit-wallet',
+                    'style' => 'margin-top:30px;'
+                    )
+                );
+                echo $this->Form->end($sumbit); ?>
             </div>
         </div>
-    </section>
+    </div>
+</section>

@@ -1,70 +1,4 @@
-<!-- <div class="transactions index">
-	<h2><?php echo __('Transactions'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('categorie_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('wallet_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('transaction_date'); ?></th>
-			<th><?php echo $this->Paginator->sort('transaction_money'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($transactions as $transaction): ?>
-	<tr>
-		<td><?php echo h($transaction['Transaction']['id']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($transaction['Categorie']['name'], array('controller' => 'categories', 'action' => 'view', $transaction['Categorie']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($transaction['Wallet']['name'], array('controller' => 'wallets', 'action' => 'view', $transaction['Wallet']['id'])); ?>
-		</td>
-		<td><?php echo h($transaction['Transaction']['transaction_date']); ?>&nbsp;</td>
-		<td><?php echo h($transaction['Transaction']['transaction_money']); ?>&nbsp;</td>
-		<td><?php echo h($transaction['Transaction']['created']); ?>&nbsp;</td>
-		<td><?php echo h($transaction['Transaction']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $transaction['Transaction']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $transaction['Transaction']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $transaction['Transaction']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']))); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Categorie'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Wallets'), array('controller' => 'wallets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Wallet'), array('controller' => 'wallets', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
- -->
-
- <!-- ..........................  -->
-
- <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000; margin-bottom: 0;">
         <div class="container">
             <div class="navbar-header">
@@ -81,14 +15,13 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li>
-                        <a class=" page-scroll"  href="wallet.html">My Wallets </a>
-                    </li>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="transaction.html">Transactions</a>
+                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
-                        <a class="page-scroll" href="report-month.html">Report Month</a>
+                        <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
+                    </li>
+                    <li>
+                    <?php echo $this->Html->link(__('Report Month'), array('controller' => 'Report', 'action' => 'index')); ?>
                     </li>
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -148,22 +81,11 @@
                 <!-- /#change-password -->
    
                 <form id="search" role="form" action="#" method="GET" class="form-inline form-search-top">
-            <select name="category" class="select-style select2-offscreen" tabindex="-1" style="background-color: rgba(251, 248, 248, 0.95)">
-                <option value="income" style="color: red;">Income</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-                <option value="expense" style="color: red;">Expense</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-            </select>
+           <?php  echo $this->Form->input('categorie_id', array('options' => $categories,
+                                                                'class' => 'select-style select2-offscreen',
+                                                                'style' => 'background-color: rgba(251, 248, 248, 0.95)',
+                                                                'label' => false,
+                                                                'div' => false ));  ?>
             <select name="money" class="select-style select2-offscreen" tabindex="-1" title="Chonj tien"  >
              <option value="">-- Select Money--</option>
                 <option value="">10000</option>
@@ -183,9 +105,10 @@
     <section id="transaction" class="content-section text-center">
         <span >
             <h1>Transactions</h1>
-            <button type="button" style="position: relative;     top: -130px;
-    right: -282px;" data-toggle="modal" data-target="#add-transaction" > Add Transactions </button>
+<!--            <button type="button" style="position: relative;     top: -130px;
+    right: -282px;" data-toggle="modal" data-target="#add-transaction" > Add Transactions </button> -->
         </span> 
+<?php echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-8 col-lg-offset-2">
@@ -193,119 +116,55 @@
                 <div id="transaction-month" class="transaction-wrapper">
                    
                     <div class="panel-body" style="position: relative;">
-                        <ul style="padding-left: 0;     padding-bottom: 50px;" id="transaction-content">
+                        <ul style="padding-left: 0;     padding-bottom: 50px;" id="transaction-content"> 
                             <li>
                                 <div class="transaction-detail-wrapper">
                                     <a href="#" class="transaction-detail">  
                                         <div style="padding-bottom: 15px; padding-top: 5px;">
                                             <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
+                                            <span style="width:15%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Category</b></span>
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Wallet</b></span>
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Money</b></span>
+                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Create</b></span>
+                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Modified</b> </span>
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><i class="fa fa-pencil"></i><b>Edit</b></span>
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black; text-align: right"><i class="fa fa-trash"></i><b>Delete</b></span>
                                         </div>
                                     </a>
                                 </div>
                             </li>
-                             <li>
+                            <?php foreach ($transactions as $transaction): ?>
+                                <li>
                                 <div class="transaction-detail-wrapper">
                                     <a href="#" class="transaction-detail">  
                                         <div style="padding-bottom: 15px; padding-top: 5px;">
                                             <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
+                                            <span style="width:15%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;">
+                                            <?php
+                                             if (!isset($transaction['Transaction']['categorie_id'])):
+                                                echo '-Deleted-';
+                                             else:
+                                             echo h($categories[$transaction['Transaction']['categorie_id']]); 
+                                            endif;
+                                         ?></span>  
+                                            
+
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($wallets[$transaction['Transaction']['wallet_id']]); ?> </span>
+
+                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['transaction_money']); ?> VND</span>
+                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['created']); ?></span>
+                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['modified']); ?></span>
+                                            <?php
+                                             echo $this->Html->link('Edit', array('action' => 'edit', $transaction['Transaction']['id']), array('class' => 'edit-transaction', 'style' => 'width:10%'));
+                                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $transaction['Transaction']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']), 'class' => 'delete-transaction',  'style' => 'width:10%', 'id' => 'delete-transaction'
+                                        ));
+                                     ?>
+                                    
                                         </div>
                                     </a>
                                 </div>
                             </li>
-                            <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li> 
-                             <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                             <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:20%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Shopping</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">5000000 VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">15/1/2016</span>
-                                            <a  href="edit-transaction.html" title="edit" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
-                                    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
 
                         <!-- phan trang -->
