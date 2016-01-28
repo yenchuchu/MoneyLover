@@ -23,6 +23,10 @@ class TransactionsController extends AppController {
 	public function index() {
 		$this->Transaction->recursive = 0;
 		$this->set('transactions', $this->Paginator->paginate());
+      
+                $categories = $this->Transaction->Categorie->find('list');
+		$wallets = $this->Transaction->Wallet->find('list');
+		$this->set(compact('categories', 'wallets'));
 	}
 
 /**

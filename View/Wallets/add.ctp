@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend><?php echo __('Add Wallet'); ?></legend>
 	<?php
-		echo $this->Form->input('user_id');
+//		echo $this->Form->input('user_id');
 		echo $this->Form->input('name');
 		echo $this->Form->input('info');
 		echo $this->Form->input('money_current');
