@@ -78,12 +78,24 @@
     <section id="wallet" class="content-section text-center">
         <span style="    position: relative;
     top: -50px;">
-            <h1 style="margin-bottom: 0; color: white">My Wallets</h1>          
+            <h1 style="color: white;top: 37px;
+    position: relative;">My Wallets</h1>          
             <!--<button type="button" style="position: relative; top: -39px; right: -250px ;" data-toggle="modal" data-target="#add-wallet" > Add Wallet </button>-->
         </span>
-        <?php echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?>
+        <?php //echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?>
+         <a href="#add-category" style="position: relative;
+    top: -79px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+    "> Add Category</a> 
         <div class="row" style="margin-right:0px">
             <?php foreach ($wallets as $wallet): ?>
+                <?php //echo h($users[$wallet['Wallet']['user_id']]);  ?>
             <div class="col-lg-5 " style=" ">
                 <h2 style="border-bottom: 1px solid;  padding-top: 8px;">
                 <?php echo h($wallet['Wallet']['name']); ?>
@@ -203,38 +215,42 @@
                   </div>
                 </div>
                 <!-- /#transfer-money -->
-                
-                <div id="add-wallet" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
 
-                    <div class="modal-content" style="width: 80%; height: 375px;">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add Wallet</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Wallet Name" name="wallet-name" type="text" value="">
+                <div id="add-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Wallet</h3>
+                            </div> 
+                            <div class="panel-body" style="color: black;">
+                                <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                                  <div class="form-group">
+                                  <label class="control-label" for="CategoryName" style="    padding-right: 0;">Wallet Name:</label>
+                                        <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">
                                     </div>
                                      <div class="form-group">
-                                        <input class="form-control" placeholder="Current Money" name="current-money" type="number" value="">
+                                     <label class="control-label" for="CategoryName" style="    padding-right: 0;">Current Money:</label>
+                                        <input name="data[Wallet][money_current]" step="any" type="number" class="form-control" placeholder="Wallet Name" id="WalletMoneyCurrent" required="required">
                                     </div>
                                       <div class="form-group">
-                                        <textarea class="form-control" placeholder="Info Wallet" name="info-wallet" rows="5" value=""></textarea>
+                                      <label class="control-label" for="CategoryName" style="    padding-right: 0;">Info Wallet:</label>
+                                        <input name="data[Wallet][info]"  class="form-control" placeholder="Wallet Name" maxlength="500" type="text" id="WalletInfo">
                                     </div>
-                                    <!-- <a href="#" class="">Forgotten your password? </a> -->
-                                    <!-- Change this to a button or input when using this as a form -->
-                                    
-                                </fieldset>
-                            </form>
+                                  <div class="form-group"> 
+                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+    width: 100%;
+    margin-left: -10px">
+    <button type="submit" class="btn wallet-save " style="float: left;
+    margin-right: -13px;
+"><a href="#close" style="color: white;
+    text-decoration: none;">Cancel</a></button>
+                                        <button type="submit" class="btn wallet-save" style="float: right;
+    margin-right: -13px;
+">Add</button>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="modal-footer-wallet" style="margin: 0 15px;">
-                            <button type="button" class="btn btn-default add-wallet-save" data-dismiss="modal">Add</button>
-                            <button type="button" class="btn btn-default add-wallet-cancel" data-dismiss="modal">Cancel</button>
-                        </div> 
                     </div>
-
-                  </div>
-                </div>
-                <!-- /#add-wallet -->
+                    <!-- /#add-category -->
