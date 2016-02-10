@@ -22,7 +22,10 @@ class WalletsController extends AppController {
  */
 	public function index() {
 		$this->Wallet->recursive = 0;
-		$this->set('wallets', $this->Paginator->paginate());
+		$this->set('wallets', $this->Paginator->paginate()); 
+
+		// $users = $this->Wallets->User->find(); 
+		// $this->set(compact('users'));
 	}
 
 	public function logout() {

@@ -60,7 +60,7 @@ class Wallet extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		) 
 	);
 
 /**

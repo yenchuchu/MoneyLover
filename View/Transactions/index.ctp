@@ -99,6 +99,9 @@
                 <button class="btn btn-default" type="button" style="    color: rgba(255,255,255,.5); background: rgba(0,0,0,.13); border: 1px solid rgba(0,0,0,.13);     border: none;" title="search">
                     <i class="fa fa-search"></i>
                 </button>
+                <?php 
+                    // search ~~
+                 ?>
                    </form>  
 
     <!-- Contact Section -->
@@ -108,80 +111,54 @@
 <!--            <button type="button" style="position: relative;     top: -130px;
     right: -282px;" data-toggle="modal" data-target="#add-transaction" > Add Transactions </button> -->
         </span> 
-<?php echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
+<?php //echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
+ <a href="#add-category" style="position: relative;
+    top: -79px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+    "> Add Category</a>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-10 col-lg-offset-1">
                
                 <div id="transaction-month" class="transaction-wrapper">
                    
                     <div class="panel-body" style="position: relative;">
-                        <ul style="padding-left: 0;     padding-bottom: 50px;" id="transaction-content"> 
-                            <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:15%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;"><b>Category</b></span>
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Wallet</b></span>
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Money</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Create</b></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><b>Modified</b> </span>
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><i class="fa fa-pencil"></i><b>Edit</b></span>
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black; text-align: right"><i class="fa fa-trash"></i><b>Delete</b></span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
+                        <table style="    width: 100%;"  class="table table-striped table-hover">
+                            <thead>
+                                <th></th>
+                                <th><?php echo $this->Paginator->sort('Category'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Wallet'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Money'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Created'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Modified'); ?></th>
+                                <th class="actions"><?php echo $this->Paginator->sort('Actions'); ?></th> 
+                            </thead>
                             <?php foreach ($transactions as $transaction): ?>
-                                <li>
-                                <div class="transaction-detail-wrapper">
-                                    <a href="#" class="transaction-detail">  
-                                        <div style="padding-bottom: 15px; padding-top: 5px;">
-                                            <input type="checkbox" name="vehicle" value="Bike" style="float: left">
-                                            <span style="width:15%; float: left; text-align: left; padding-left: 12px; font-size: 17px; padding-top: 4px; color: black;">
-                                            <?php
-                                             if (!isset($transaction['Transaction']['categorie_id'])):
-                                                echo '-Deleted-';
-                                             else:
-                                             echo h($categories[$transaction['Transaction']['categorie_id']]); 
-                                            endif;
-                                         ?></span>  
-                                            
-
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($wallets[$transaction['Transaction']['wallet_id']]); ?> </span>
-
-                                            <span style="width:10%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['transaction_money']); ?> VND</span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['created']); ?></span>
-                                            <span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;"><?php echo h($transaction['Transaction']['modified']); ?></span>
-                                            <?php
-                                             echo $this->Html->link('Edit', array('action' => 'edit', $transaction['Transaction']['id']), array('class' => 'edit-transaction', 'style' => 'width:10%'));
-                                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $transaction['Transaction']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']), 'class' => 'delete-transaction',  'style' => 'width:10%', 'id' => 'delete-transaction'
-                                        ));
-                                     ?>
-                                    
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
+                            <tr>
+                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
+                                <td><?php echo h($categories[$transaction['Transaction']['categorie_id']]);  ?>&nbsp;</td>
+                                <td><?php echo h($wallets[$transaction['Transaction']['wallet_id']]); ?>&nbsp;</td>
+                                <td><?php echo h($transaction['Transaction']['transaction_money']);; ?>&nbsp;</td>
+                                <td><?php echo h($transaction['Transaction']['created']);; ?>&nbsp;</td>
+                                <td><?php echo h($transaction['Transaction']['modified']);; ?>&nbsp;</td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link('Edit', array('action' => 'edit', $transaction['Transaction']['id']), array('class' => 'edit-transaction', 'style' => 'width:10%')); ?>
+                                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $transaction['Transaction']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $transaction['Transaction']['id']), 'class' => 'delete-transaction',  'style' => 'width:10%', 'id' => 'delete-transaction'
+                                                                )); ?>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
-                        </ul>
-
+                        </table>
                         <!-- phan trang -->
 
 <div class="page" style="    position: absolute;
     bottom: 5px;    width: 100%;">
-<ul id="pagination-digg" style="    width: 50%;">
-   <li class="previous-off">«Previous</li>
-   <li class="active">1</li>
-   <li><a href="?page=2">2</a></li>
-   <li><a href="?page=3">3</a></li>
-   <li><a href="?page=4">4</a></li>
-   <li><a href="?page=5">5</a></li>
-   <li><a href="?page=6">6</a></li>
-   <li><a href="?page=7">7</a></li>
-   <li class="next"><a href="?page=2">Next »</a></li>
-</ul>        
      <span style="    float: left;
     margin-left: 30px;
     width: 50%;">
@@ -189,6 +166,14 @@
     <a href="edit-transaction.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
     <a href="#delete-transaction" title="delete" class="delete-transaction"  style=" color: black;"><i class="fa fa-trash"></i>Delete</a>
     </span>
+       <div class="paging">
+        <?php
+            echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+            echo $this->Paginator->numbers(array('separator' => ''));
+            echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+        ?>
+        </div>
+
 </div>
 
          
@@ -204,51 +189,44 @@
                     </div>
                 </div>
                 <!-- /#delete-transaction -->
-                <div id="add-transaction" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
 
-                    <div class="modal-content" style="width: 80%; height: 414px;">
-                        <div class="modal-header">
-                            <h4 class="modal-title" >Add Transaction</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <fieldset>
-                                    <div class="form-group" style="float: left;">
-                                        <select name="cars" style="border: 1px solid #9A3745; border-radius:5px; padding: 3px;">
-                                            <option value="volvo">Select Category:</option>
-                                            <option value="volvo">Shopping</option>
-                                            <option value="saab">Travel</option>
-                                            <option value="fiat">Fiat</option>
-                                            <option value="audi">Audi</option>
-                                        </select>
+
+                                <div id="add-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Transaction</h3>
+                            </div> 
+                            <div class="panel-body" style="color: black;">
+                                <?php echo $this->Form->create('Transaction',array('action' => 'add')); ?>
+                                <div class="form-group" style="    width: 100%;
+    text-align: left;"> 
+                                    <?php echo $this->Form->input('wallet_id'); ?>
+                                </div>
+                                <div class="form-group" style="text-align: left;  width: 100%;">
+                                        <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
+                                </div>
+                                <div class="form-group">
+                                        <?php echo $this->Form->input('transaction_money'); ?>
+                                </div>
+                                      
+                                  <div class="form-group"> 
+                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+    width: 100%;
+    margin-left: -10px">
+    <button type="submit" class="btn wallet-save " style="float: left;
+    margin-right: -13px;
+"><a href="#close" style="color: white;
+    text-decoration: none;">Cancel</a></button>
+                                        <button type="submit" class="btn wallet-save" style="float: right;
+    margin-right: -13px;
+">Add</button>
                                     </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Enter Money" name="transaction-money" type="number" value="">
+                                  </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <!-- <i class="fa fa-delete"></i> -->
-                            <textarea class="form-control" placeholder="Note..." name="transaction-money" rows="5" value=""></textarea>
-                        </div>
-                        <div class="form-group">
-                            <!-- <i class="fa fa-calendar"></i>  -->
-                            <input class="form-control" placeholder="Date..." name="transaction-money" type="date" value="">
-                        </div>
-                                    <!-- <a href="#" class="">Forgotten your password? </a> -->
-                                    <!-- Change this to a button or input when using this as a form -->
-                                    
-                                </fieldset>
-                            </form>
-                        </div>
-                        <div class="modal-footer-transaction" style="margin: 0 15px;">
-                            <button type="button" class="btn btn-default add-transaction-save" data-dismiss="modal">Add</button>
-                            <button type="button" class="btn btn-default add-transaction-cancel" data-dismiss="modal">Cancel</button>
-                        </div> 
                     </div>
-
-                  </div>
-                </div>
-                 <!-- /.add-transaction -->
+                    <!-- /#add-category -->
             </div>
         </div>
     </div>
