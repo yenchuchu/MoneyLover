@@ -1,34 +1,4 @@
-<!-- <div class="transactions form">
-<?php echo $this->Form->create('Transaction'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Transaction'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('categorie_id');
-		echo $this->Form->input('wallet_id');
-		echo $this->Form->input('transaction_date');
-		echo $this->Form->input('transaction_money');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Transaction.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Transaction.id')))); ?></li>
-		<li><?php echo $this->Html->link(__('List Transactions'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Categorie'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Wallets'), array('controller' => 'wallets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Wallet'), array('controller' => 'wallets', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
- -->
-
- <!-- ............................... -->
-
- <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000;">
         <div class="container">
             <div class="navbar-header">
@@ -45,14 +15,13 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li>
-                        <a class="page-scroll" href="wallet.html">My Wallets </a>
-                    </li>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="transaction.html">Transactions</a>
+                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
-                        <a class="page-scroll" href="report-month.html">Report Month</a>
+                        <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
+                    </li>
+                    <li>
+                    <?php echo $this->Html->link(__('Report Month'), array('controller' => 'Report', 'action' => 'index')); ?>
                     </li>
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -105,22 +74,7 @@
                 <!-- /#change-password -->
    
                 <form id="search" role="form" action="#" method="GET" class="form-inline form-search-top">
-            <select name="category" class="select-style select2-offscreen" tabindex="-1" style="background-color: rgba(251, 248, 248, 0.95)">
-                <option value="income" style="color: red;">Income</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-                <option value="expense" style="color: red;">Expense</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-            </select>
+            <?php  echo $this->Form->input('categorie_id', array('options' => $categories, 'class' => 'select-style select2-offscreen', 'style' => 'background-color: rgba(251, 248, 248, 0.95)', 'label' => false, 'div' => false ));  ?>
             <select name="money" class="select-style select2-offscreen" tabindex="-1">
                 <option value="">10000</option>
                 <option value="10">50000</option>
@@ -137,44 +91,28 @@
 
     <!-- Contact Section -->
     <section id="transaction" class="content-section text-center">
-         <h1> Change Transactions</h1>
-      
+        <h1><?php echo __('Edit Transactions'); ?></h1>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
-
             <div class="col-lg-8 col-lg-offset-2">
-            <div id="transaction-month" class="transaction-wrapper">
-                   
-                    <div class="panel-body" style="position: relative; min-height: 60px;">
-                        
-               <ul>
-                   <li>
-                   <div class="transaction-detail-wrapper">
-                   <div style="padding-bottom: 15px; padding-top: 5px;">
-                        <select name="cars" style="float: left; margin-right: 30px; margin-left: 10px; margin-top: 7px;"> 
-                            <option value="income" disabled style="color: red;">Income</option>
-                            <option value="">Award</option>
-                            <option value="10">Bán hàng</option>
-                            <option value="">Interest Money</option>
-                            <option value="">Salary</option>
-                            <option value="">Gifts</option>
-                            <option value="">Selling</option>
-                            <option value="expense" disabled  style="color: red;">Expense</option>
-                            <option value="">Award</option>
-                            <option value="10">Bán hàng</option>
-                            <option value="">Interest Money</option>
-                            <option value="">Salary</option>
-                            <option value="">Gifts</option>
-                            <option value="">Selling</option>
-                        </select>
-                        <input class="form-control" placeholder="Enter Money" name="transaction-money" type="number" value="" style=" width: 40%; top: 5px; position: relative;">
-                    </div>
-                </div>
-            </li>
-       </ul>
-                   </div></div>     
-        <div class="submit-wallet" style="margin-top:30px;">
-            <a href="#" class="btn wallet-save">Save</a>
-        </div>
+                <div id="transaction-month" class="transaction-wrapper"> 
+                    <div class="panel-body" style="position: relative; min-height: 60px;">    
+                        <ul>
+                           <li>
+                                <div class="transaction-detail-wrapper">
+                                    <div style="padding-bottom: 15px; padding-top: 5px;">
+                                        <div class="transactions form">
+                                            <?php echo $this->Form->create('Transaction'); ?>
+                                        	<fieldset> 
+                                               <?php echo $this->Form->input('id'); ?>
+                                        	  <div class="form-group" style="float: left;    margin-left: 30px;"><?php echo $this->Form->input('categorie_id'); ?>
+                                              </div>
+                                              <div class="form-group" style="float: left;    margin-left: 30px;"> <?php echo $this->Form->input('wallet_id'); ?>
+                                              </div>
+                                              <div class="form-group" style="float: left; margin-left: 30px;"> <?php echo $this->Form->input('transaction_money'); ?>
+                                              </div>
+                                        	</fieldset>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -182,4 +120,14 @@
                 </div>
             </div>
         </div>
+        <?php  
+        $sumbit = array(
+            'class' => 'btn wallet-save',
+            'div' => array(
+                'class' => 'submit-wallet',
+                'style' => 'margin-top:30px; margin-left: 225px;'
+                )
+            );
+            echo $this->Form->end($sumbit);
+        ?>
     </section>

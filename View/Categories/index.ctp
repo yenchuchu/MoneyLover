@@ -1,60 +1,4 @@
-<!-- <div class="categories index">
-	<h2><?php echo __('Categories'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
-			<th><?php echo $this->Paginator->sort('type'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($categories as $category): ?>
-	<tr>
-		<td><?php echo h($category['Category']['id']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['name']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['description']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['type']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['created']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Category'), array('action' => 'add')); ?></li>
-	</ul>
-</div>
- -->
-
- <!-- .............................. -->
-
- <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="padding:0px 0px; background-color: #000;">
         <div class="container">
             <div class="navbar-header">
@@ -74,8 +18,12 @@
                         <a class=" dropdown-toggle page-scroll" data-toggle="dropdown">Accounts 
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="account-active.html">account active</a></li>
-                          <li><a href="account-request.html">account request</a></li>
+                            <li>
+                                <?php echo $this->Html->link(__('account request'), array('controller' => 'users', 'action' => 'index')); ?> 
+                            </li>
+                            <li>
+                                <?php echo $this->Html->link(__('account request'), array('controller' => 'users', 'action' => 'index')); ?>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -106,8 +54,8 @@
         <div class="categories-section">
             <div class="container">
                     <div class="panel-heading" style="background-color: transparent !important;  padding-bottom: 0;">
-                        <h1>Categories</h1>
-                      <button type="button" style="    position: relative;
+                        <h1 class="title"><?php echo __('Categories'); ?></h1>
+                      <!-- <button type="button" style="    position: relative;
     top: -72px;
     right: -250px;
     border: none;
@@ -115,217 +63,134 @@
     font-size: 17px;
     border-radius: 5px;
     background-color: rebeccapurple;
-    " > <a href="#add-category" style="color: white;">Add Category</a> </button>
-
+    " > <a href="#add-category" style="color: white;">Add Category</a> </button> -->
+     <a href="#add-category" style="position: relative;
+    top: -72px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+    "> Add Category</a> 
+    <?php
+     // echo $this->Html->link(__('New Category'), array('action' => 'add')); ?>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-6 categories-income">
+                        <div class="col-lg-12 categories-income"> 
+                        <table style="    width: 100%;"  class="table table-striped table-hover">
+                            <thead>
+                                <th></th>
+                                <th><?php echo $this->Paginator->sort('Id'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Name'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Type'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Created'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Modified'); ?></th>
+                                <th class="actions"><?php echo $this->Paginator->sort('Actions'); ?></th> 
+                            </thead>
+                            <?php foreach ($categories as $category): ?>
+    <tr>
+    <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
+        <td><?php echo h($category['Category']['id']); ?>&nbsp;</td>
+        <td><?php echo h($category['Category']['name']); ?>&nbsp;</td> 
+        <td><?php 
+            if($category['Category']['type'] == 1):
+                echo "Income";
+            else :
+                echo "Expense";
+            endif; ?></td>
+        <td><?php echo h($category['Category']['created']); ?>&nbsp;</td>
+        <td><?php echo h($category['Category']['modified']); ?>&nbsp;</td>
+        <td class="actions">
+            <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']), array( 'class' =>'delete-transaction')); ?>
+            <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array( 'class' =>'delete-transaction' ), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+</div>
 
-                            <h3> Income </h3> 
-                        <table>
-                             <tr>
-                                <td> </td>
-                                <td>icon</td>
-                                <td>Category</td>
-                                <td>Day Create</td>
-                                <td>Edit</td>
-                                <td>Delete</td>
-                            </tr>
-                            <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Award</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Interest Money</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Salary</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Gifts</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                        </table>
-                    </div>
-                        <div class="col-lg-6 categories-expense">
-                            <h3> Expense </h3>
-                      <table>
-                             <tr>
-                                <td> </td>
-                                <td>icon</td>
-                                <td>Category</td>
-                                <td>Day Create</td>
-                                <td>Edit</td>
-                                <td>Delete</td>
-                            </tr>
-                            <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Award</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Interest Money</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Salary</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                             <tr>
-                                <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><i class="fa fa-trophy fa-2x"></i></td>
-                                <td>Gifts</td>
-                                <td>15/2/2015</td>
-                                <td><a href="edit-category.html" title="edit" class="edit-transaction"><i class="fa fa-pencil" style="color: #3C3131;"></i></a></td>
-                                <td><a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                        </table>  
-                        </div>
-                        <span style="    float: left;
-    margin-left: 30px;
-    width: 50%;">
-    <input type="checkbox" name="vehicle" value="Bike" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
-    <a href="edit-category.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
-    <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-                       
-                    </div>
-                    <div id="category-details" class="modalDialog ">      
-                        <div class="login-panel panel panel-default">
-                            <div class="panel-body" style="color: black;border-top: 1px solid #841717;">
-                                <i class="fa fa-calendar" style="font-size: 22px; float: left; padding-top: 10px; background-color: black; margin-left: 3px; border-radius: 50%; height: 42px; width: 14%; color: #55DE9A;" title="Caterory"></i>
-                                <span style=" float: left; text-align: left; padding-left: 12px; font-size: 20px; padding-top: 6px; font-weight: bold; color: black;width:80%;"><b>Shopping</b></span>
-                                <p style="text-align: left; padding-left: 60px; padding-top: 39px;">Income</p>
-                                <div class="submit-category">
-                                    <a href="#edit-category" class="btn category-edit" style="width: 30%;">Edit</a>
-                                    <a href="#delete-category" class="btn category-delete">Delete</a>
-                                    <a href="#close" class="btn category-cancel" style="width: 30%;">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    <!-- /#category-detail -->
-                    <!-- <div id="edit-category" class="modalDialog">      
+        <span style="    float: left; margin-left: 30px; width: 50%;">
+        <input type="checkbox" name="vehicle" value="Bike" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
+        <a href="edit-category.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
+        <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
+        <p>
+        <?php
+        // echo $this->Paginator->counter(array(
+        //     'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+        // ));
+        ?>  </p>
+        <div class="paging">
+        <?php
+            echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+            echo $this->Paginator->numbers(array('separator' => ''));
+            echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+        ?>
+        </div>
+
+
+         <div id="add-category" class="modalDialog">      
                         <div class="login-panel panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Edit Category</h3>
+                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Category</h3>
                             </div>
                             <div class="panel-body" style="color: black;">
+                                <form action="/MoneyLover/categories/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div> 
                                 <div class="form-group">
-                                    <label style="text-align: left; margin-left: -127px; font-size: 15px;">Select Icon:</label>
-                                    <select name="cars">
-                                        <option value="volvo">a</option>
-                                        <option value="saab">b</option>
-                                        <option value="fiat">c</option>
-                                        <option value="audi">d</option>
-                                    </select>
-                                </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="admin-income" type="checkbox" value="Income">Income
-                                </label>
-                                <label>
-                                    <input name="admin-expense" type="checkbox" value="Expense">Expense
-                                </label>
-                            </div>
-                                <div class="submit-edit-category">
-                                    <a href="#" class="btn edit-category-save">Save</a>
-                                    <a href="#category-details" class="btn edit-category-cancel">Cancel</a>
-                                </div> 
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- /#edit-category -->
-
-                    <div id="delete-category" class="modalDialog">      
-                        <div class="login-panel panel panel-default">
-                            <div class="panel-body" style="color: black; border-top: 1px solid #841717;">
-                                <p>Are you want to delete?</p>
-                                <div class="submit-delete-category">
-                                    <a href="#category-details" class="btn delete-category-cancel">Cancel</a>
-                                    <a href="#" class="btn delete-category-delete">Delete</a>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /#delete-category -->
-                    <div id="add-category" class="modalDialog">      
-                        <div class="login-panel panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Add Category</h3>
-                            </div>
-                            <div class="panel-body" style="color: black;">
-                                <div class="form-group">
-                                    <label style="text-align: left; margin-left: -127px; font-size: 15px;">Select Icon:</label>
-                                    <select name="cars">
-                                        <option value="volvo">a</option>
-                                        <option value="saab">b</option>
-                                        <option value="fiat">c</option>
-                                        <option value="audi">d</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Enter Name Category" name="name-category" type="text" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="admin-income" type="checkbox" value="Income">Income
-                                    </label>
-                                    <label>
-                                        <input name="admin-expense" type="checkbox" value="Expense">Expense
-                                    </label>
-                                </div>
-                                <div class="submit-edit-category">
-                                    <a href="#" class="btn edit-category-save">Save</a>
-                                    <a href="#close" class="btn edit-category-cancel">Cancel</a>
-                                </div> 
+                                    <label class="control-label col-sm-4" for="CategoryName" style="    padding-right: 0;">Category Name:</label>
+                                    <div class="col-sm-8">
+                                      <input name="data[Category][name]" maxlength="100" type="text" id="CategoryName" class="form-control" required="required">
+                                    </div>
+                                  </div>
+                                  <div class="form-group"> 
+                                    <label class="control-label col-sm-4" style="    margin-top: 17px;text-align: right;    padding-right: 0;">Type:</label>
+                                    <div class="col-sm-8" style="text-align: left;">
+                                        <label class="radio-inline"><input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked" style="    position: relative;
+                                    top: 11px;
+                                    margin-right: 8px;
+                                ">Income</label>
+                                        <label class="radio-inline"><input type="radio"  name="data[Category][type]" value="0" id="CategoryType" checked="checked" style="    position: relative;
+                                    top: 11px;
+                                    margin-right: 8px;
+                                ">Expense</label>
+                                       
+                                    </div>
+                                  </div>
+                                  <div class="form-group"> 
+                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+    width: 100%;
+    margin-left: -10px">
+    <button type="submit" class="btn wallet-save " style="float: left;
+    margin-right: -13px;
+"><a href="#close" style="color: white;
+    text-decoration: none;">Cancel</a></button>
+                                        <button type="submit" class="btn wallet-save" style="float: right;
+    margin-right: -13px;
+">Add</button>
+                                    </div>
+                                  </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- /#add-category -->
-                    <div id="delete-transaction" class="modalDialog">      
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-body" style="color: black; border-top: 1px solid #841717;">
-                            <p>Are you want to delete?</p>
-                            <div class="submit-wallet">
-                                <a href="#show-a-transaction" class="btn wallet-cancel">Cancel</a>
-                                <a href="#" class="btn wallet-save">Delete</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                <!-- /#delete-transaction -->
+
+        <div id="delete-transaction" class="modalDialog">      
+        <div class="login-panel panel panel-default">
+            <div class="panel-body" style="color: black; border-top: 1px solid #841717;">
+
+                <p>Are you want to delete?</p>
+                <div class="submit-wallet">
+                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array( 'class' =>'btn wallet-save' )); ?>
+
+                    <a href="#show-a-transaction" class="btn wallet-cancel">Cancel</a>
+                </div> 
             </div>
         </div>
-    </section>
+    </div>
+    <!-- /#delete-transaction -->
+        </div>
+    </div>
+</section>
