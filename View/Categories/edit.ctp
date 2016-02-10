@@ -99,7 +99,14 @@
                         		</div>
                                 
                                 <div class="form-group" style="float: left;    margin-left: 30px;">
-                        		<?php echo $this->Form->input('type'); ?>
+                                <label class="radio-inline"><input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked" style="    position: relative;
+                                    top: 11px;
+                                    margin-right: 8px;
+                                ">Income</label>
+                                        <label class="radio-inline"><input type="radio"  name="data[Category][type]" value="0" id="CategoryType" checked="checked" style="    position: relative;
+                                    top: 11px;
+                                    margin-right: 8px;
+                                ">Expense</label>
                                 </div>
                         	</fieldset>
                             

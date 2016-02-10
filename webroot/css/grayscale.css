@@ -387,8 +387,8 @@ body {
 /* categories */
 
 #categories {
-    background-color: rgb(57, 175, 126);
-    color: white;
+    background-color: rgb(237, 249, 244);
+    color: #151313;
 }
 
 #categories .container {
@@ -448,6 +448,10 @@ body {
     text-align: center;
 }
 
+#categories .title {
+    color: black;
+}
+
 #navbar-default {
     background-color: #E3F4F9;
 }
@@ -482,9 +486,8 @@ body {
 /* accounts */
 
 #accounts {
-    background-color: #1fa67a;
-    color: #c7e7dc;
-    /*text-shadow: 4px 3px 0px #1d9d74, 9px 8px 0px rgba(0, 0, 0, 0.15);*/
+    background-color: rgb(237, 249, 244);
+    color: #151313;
 }
 
 /* wallet - user */
@@ -679,13 +682,12 @@ footer {
 
 /* transaction */
 #transaction {
-    background-color: #36465D;
+    background-color: rgb(216, 247, 234);
 }
 
 #transaction h1 {
     position: relative;
     top: -54px;
-    color: white;
     font-weight: bold;
 
 }
@@ -737,7 +739,7 @@ footer {
     border-radius: 5px;
     width: 100%;
     padding-left: 11px;
-    height: 50px;
+    min-height: 50px;
     padding-top: 5px;
 }
 
@@ -930,16 +932,14 @@ border:solid 1px #0e509e
 
 /*   table - account   */
 
-table,
-tr,
-td {
-    border: 2px solid black;
-    padding: 5px 19px !important;
-    font-size: 16px;
+table td {
+    padding-top: 15px !important;
 }
 
-table .table-header {
+table th {
+    text-align: center;
 }
+
 
 /* report month */
 
