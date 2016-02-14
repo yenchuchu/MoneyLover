@@ -22,7 +22,11 @@ class TransferWalletsController extends AppController {
  */
 	public function index() {
 		$this->TransferWallet->recursive = 0;
-		$this->set('transferWallets', $this->Paginator->paginate());
+		$this->set('transferWallets', $this->Paginator->paginate()); 
+
+		$sentWallets = $this->TransferWallet->SentWallet->find('list');
+		$receiveWallets = $this->TransferWallet->ReceiveWallet->find('list');
+		$this->set(compact('sentWallets', 'receiveWallets'));
 	}
 
 /**
@@ -70,7 +74,9 @@ class TransferWalletsController extends AppController {
 	public function edit($id = null) {
 		if (!$this->TransferWallet->exists($id)) {
 			throw new NotFoundException(__('Invalid transfer wallet'));
-		}
+		} 
+		debug($this->request->is(array('post', 'put')));
+		die();
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->TransferWallet->save($this->request->data)) {
 				$this->Flash->success(__('The transfer wallet has been saved.'));
