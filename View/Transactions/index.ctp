@@ -205,8 +205,8 @@
                                 <div class="form-group" style="text-align: left;  width: 100%;">
                                         <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
                                 </div>
-                                <div class="form-group">
-                                        <?php echo $this->Form->input('transaction_money'); ?>
+                                <div class="form-group" style="text-align: left;  width: 100%;">
+                                    <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
                                 </div>
                                       
                                   <div class="form-group"> 
@@ -221,11 +221,10 @@
     margin-right: -13px;
 ">Add</button>
                                     </div>
-                                  </div>
-                                </form>
+                                  </div> 
                             </div>
                         </div>
-                    </div>
+                    </div></div>
                     <!-- /#add-category -->
             </div>
         </div>

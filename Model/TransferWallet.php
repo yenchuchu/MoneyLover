@@ -63,20 +63,24 @@ class TransferWallet extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array(
-		'SentWallet' => array(
-			'className' => 'SentWallet',
-			'foreignKey' => 'sent_wallet_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'ReceiveWallet' => array(
-			'className' => 'ReceiveWallet',
-			'foreignKey' => 'receive_wallet_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+	public $hasAndBelongsToMany = array(
+         'SentWallet' =>
+             array(
+                 'className' => 'Wallet', 
+                 'foreignKey' => 'sent_wallet_id',  
+                 'unique' => true,
+                 'conditions' => '',
+                 'fields' => '',
+                 'order' => ''
+             ),
+         'ReceiveWallet' =>
+             array(
+                 'className' => 'Wallet', 
+                 'foreignKey' => 'receive_wallet_id',
+                 'unique' => true,  
+                 'conditions' => '',
+                 'fields' => '',
+                 'order' => ''
+             )
+     ); 
 }

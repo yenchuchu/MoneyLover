@@ -94,30 +94,32 @@
         <h1><?php echo __('Edit Transactions'); ?></h1>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
             <div class="col-lg-8 col-lg-offset-2">
-                <div id="transaction-month" class="transaction-wrapper"> 
-                    <div class="panel-body" style="position: relative; min-height: 60px;">    
-                        <ul>
-                           <li>
-                                <div class="transaction-detail-wrapper">
-                                    <div style="padding-bottom: 15px; padding-top: 5px;">
-                                        <div class="transactions form">
+                <table style="    width: 100%;" class="table table-striped table-hover">
+                                            <thead>
+                                                <th><?php echo $this->Paginator->sort('Category'); ?></th>
+                                                <th><?php echo $this->Paginator->sort('Wallet'); ?></th>
+                                                <th><?php echo $this->Paginator->sort('Money'); ?></th>
+                                            </thead>
+                                            <?php //foreach ($categories as $category): ?>
                                             <?php echo $this->Form->create('Transaction'); ?>
-                                        	<fieldset> 
-                                               <?php echo $this->Form->input('id'); ?>
-                                        	  <div class="form-group" style="float: left;    margin-left: 30px;"><?php echo $this->Form->input('categorie_id'); ?>
-                                              </div>
-                                              <div class="form-group" style="float: left;    margin-left: 30px;"> <?php echo $this->Form->input('wallet_id'); ?>
-                                              </div>
-                                              <div class="form-group" style="float: left; margin-left: 30px;"> <?php echo $this->Form->input('transaction_money'); ?>
-                                              </div>
-                                        	</fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    <tr>
+                        <?php echo $this->Form->input('id'); ?>
+                        <td><?php echo $this->Form->input('categorie_id', array('label'=>false,'style'=>'    padding-left: 10px;
+                    border: 1px solid gray;
+                    border-radius: 5px;    position: relative;
+                    top: 5px;color: black;')); ?>&nbsp;</td>
+                    <td><?php echo $this->Form->input('wallet_id', array('label'=>false,'style'=>'    padding-left: 10px;
+                    border: 1px solid gray;
+                    border-radius: 5px;    position: relative;
+                    top: 5px;color: black;')); ?>&nbsp;</td>
+                    <td><?php echo $this->Form->input('transaction_money', array('label'=>false,'placeholder'=>'enter money', 'style'=>'    padding-left: 10px;
+                    border: 1px solid gray;
+                    border-radius: 5px;    position: relative;
+                    top: 5px;color: black;')); ?>&nbsp;</td>
+
+                    </tr>
+                <?php //endforeach; ?>
+                </table>
             </div>
         </div>
         <?php  

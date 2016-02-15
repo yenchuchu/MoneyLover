@@ -5,7 +5,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index-user.html">
+                <a class="navbar-brand page-scroll" href="../MoneyLover/Wallets/index">
                     <i class="fa fa-play-circle"></i>  <span class="light">Money</span> Lover
                 </a>
             </div>
@@ -78,12 +78,10 @@
     <section id="wallet" class="content-section text-center">
         <span style="    position: relative;
     top: -50px;">
-            <h1 style="color: white;top: 37px;
-    position: relative;">My Wallets</h1>          
-            <!--<button type="button" style="position: relative; top: -39px; right: -250px ;" data-toggle="modal" data-target="#add-wallet" > Add Wallet </button>-->
-        </span>
-        <?php //echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?>
-         <a href="#add-category" style="position: relative;
+            <h1 style="color: black;top: 37px;
+     position: relative;">My Wallets</h1> 
+         </span>
+         <a href="#add-wallet" style="position: relative;
     top: -79px;
     right: -250px;
     border: none;
@@ -92,7 +90,7 @@
     border-radius: 5px;
     background-color: rebeccapurple;
     color: white;
-    "> Add Category</a> 
+    "> Add Wallet</a>  
         <div class="row" style="margin-right:0px">
             <?php foreach ($wallets as $wallet): ?>
                 <?php //echo h($users[$wallet['Wallet']['user_id']]);  ?>
@@ -130,100 +128,78 @@
                     </tr>
                 </table>
 
-                <p style=" margin-bottom: 10px; margin-top: 15px;"><a href="#update-info-wallet" style=" color: #CEE9FF;">Update Wallet Info</a></p>
-                <p style=" margin-bottom: 20px;color: #AB3035;"><a href="#update-info-wallet"  style=" color: #CEE9FF;">Update Current Money</a></p>
-                <button type="button" data-toggle="modal" data-target="#add-transfer" > Add Transfer </button>
+               <div class="action-wallet" style="    margin-top: 55px; border-top: 1px solid;">
+                  
+                 <a href="#add-transfer" style="float: left;    padding: 9px 12px; width: 30%;margin-top: 20px;    background-color: #7049A2;
+     color: white;
+     border-radius: 5px;
+     font-size: 16px;
+     "> Add Transfer</a> 
+                 <!-- <button type="button" style="    position: relative;
+                 top: -72px;
+                 right: -250px;
+                 border: none;
+                 padding: 7px 24px;
+                 font-size: 17px;
+                 border-radius: 5px;
+                 background-color: rebeccapurple;
+                 " > <a href="#edit-category" style="color: white;">Edit Wallet</a> </button> -->
+ <button class="edit-wallet"> <?php echo $this->Html->link('Edit', array('action' => 'edit', $wallet['Wallet']['id']), array('id' => 'edit-wallet', 'style' => 'width:10%')); ?> </button>
+                 <button class="delete-wallet"><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']),array('style' => 'color: white'), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']))); ?></button>
+ </div>
             </div>
             <?php endforeach; ?>
         </div>
-    </section>
-                        <div id="update-info-wallet" class="modalDialog">      
-                            <div class="login-panel panel panel-default">
-                                <div class="panel-heading">
-                                    <!-- <a href="#close" title="Close" class="close">X</a> -->
-                                    <h3 class="panel-title">Update Wallet Info</h3>
-                                </div>
-                                <div class="panel-body" style="color: black;">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Info Wallet..." name="info-wallet" rows="7" value=""></textarea>
-                                </div>
-                                    <div class="submit-wallet">
-                                        <a href="#" class="btn wallet-save">Save</a>
-                                        <a href="#close" class="btn wallet-cancel">Cancel</a>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-               
-                <div id="update-current-money" class="modalDialog ">      
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-heading">
-                            <!-- <a href="#close" title="Close" class="close">X</a> -->
-                            <h3 class="panel-title">Current Money</h3>
-                        </div>
-                        <div class="panel-body" style="color: black;">
-                            <p> Now, you having <span> $money </span>. </p>
-                            <div class="form-group">
-                            <label>Update Current Money:</label>
-                            <input class="form-control" placeholder="Enter Money" name="current-money" type="number" value="">
-                            </div>
-                            <div class="submit-wallet">
-                                <a href="#" class="btn wallet-save">Save</a>
-                                <a href="#close" class="btn wallet-cancel">Cancel</a>
-                            </div>
+    </section> 
+                     <div id="add-wallet" class="modalDialog">      
+                         <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
+                             <div class="panel-heading">
+                                 <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Wallet</h3>
+                             </div> 
+                             <div class="panel-body" style="color: black;">
+                                 <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                 <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                                   <div class="form-group">
+                                   <label class="control-label" for="CategoryName" style="    padding-right: 0;">Wallet Name:</label>
+                                         <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">
 
-                        </div>
-                    </div>
-                </div> 
-                <!-- /#current-money -->
-               
-                 <div id="add-transfer" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-
-                    <div class="modal-content" style="width: 80%; height: 290px;">
-                        <div class="modal-header">
-                            <h4 class="modal-title" >Add Transfer</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <fieldset>
-                                    <div class="form-group">
-                                       <label style=" text-align: left; color: black; font-size: 15px;">Select Wallet:</label>
-                                        <select name="cars" style=" border:1px solid rgba(132, 12, 29, 0.82);
-    border-radius: 5px;">
-                                            <option value="volvo">one wallet</option>
-                                            <option value="saab">two wallet</option>
-                                            <option value="fiat">three wallet</option>
-                                            <option value="audi">four wallet</option>
-                                        </select>
                                     </div>
                                      <div class="form-group">
-                                        <input class="form-control" placeholder="Enter Money Transfer" name="money-transfer" type="number" value="">
+                                        <label class="control-label" for="CategoryName" style="    padding-right: 0;">Current Money:</label>
+                                         <input name="data[Wallet][money_current]" step="any" type="number" class="form-control" placeholder="Wallet Name" id="WalletMoneyCurrent" required="required">
+                                     
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Enter Password" name="password" type="password" value="">
+                                       <label class="control-label" for="CategoryName" style="    padding-right: 0;">Info Wallet:</label>
+                                         <input name="data[Wallet][info]"  class="form-control" placeholder="Wallet Name" maxlength="500" type="text" id="WalletInfo">
+                                     
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                        <div class="modal-footer-transfer" style="margin: 0 15px;">
-                            <button type="button" class="btn btn-default transfer-save" data-dismiss="modal">Add</button>
-                            <button type="button" class="btn btn-default transfer-cancel" data-dismiss="modal">Cancel</button>
-                        </div> 
-                    </div>
+                                 <div class="form-group"> 
+                                     <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+     width: 100%;
+     margin-left: -10px">
+     <button type="submit" class="btn wallet-save " style="float: left;
+     margin-right: -13px;
+ "><a href="#close" style="color: white;
+     text-decoration: none;">Cancel</a></button>
+                                         <button type="submit" class="btn wallet-save" style="float: right;
+     margin-right: -13px;
+ ">Add</button>
+                                     </div>
+                                   </div>
+                                 </form>
+                             </div>
+                          </div>
+                        
 
-                  </div>
-                </div>
-                <!-- /#transfer-money -->
-
-                <div id="add-category" class="modalDialog">      
+                <div id="" class="modalDialog">      
                         <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
                             <div class="panel-heading">
                                 <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Wallet</h3>
                             </div> 
                             <div class="panel-body" style="color: black;">
-                                <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
-                                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                               <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                 <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
                                   <div class="form-group">
                                   <label class="control-label" for="CategoryName" style="    padding-right: 0;">Wallet Name:</label>
                                         <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">
