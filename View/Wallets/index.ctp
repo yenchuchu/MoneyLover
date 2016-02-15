@@ -16,6 +16,9 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li>
                     <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
+                    </li> 
+                    <li>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
                     </li>
                     <li>
                         <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
@@ -100,41 +103,22 @@
                 </h2>
                
                 <span class="wallet-info"><i class="fa fa-smile-o"></i> Wallet Info:</span>
-                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i><?php echo h($wallet['Wallet']['info']); ?> <br>
-                    Create:    &nbsp; <?php echo h($wallet['Wallet']['created']); ?><br>
-                    Modified:  &nbsp;  <?php echo h($wallet['Wallet']['modified']); ?><br>
+                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i><?php echo h($wallet['Wallet']['info']); ?> <br> 
                 </i></p>
                 <span class="wallet-current-money"><i class="fa fa-smile-o"></i> Current money: </span>
                 <p style="text-align: left;"> <?php echo h($wallet['Wallet']['money_current']); ?></p>
-                <span class="wallet-transfer"><i class="fa fa-smile-o"></i> Transfer:  </span><br><br>
-                <table>
-                    <tr>
-                        <td>recive/send</td>
-                        <td>transfer wallet</td>
-                        <td>money</td>
-                        <td>date</td>
-                    </tr>
-                    <tr>
-                    <?php array('controller' => 'transactions', 'action' => 'index') ?>
-                        <td>recive</td>
-                        <td>wallet 01</td>
-                        <td>50.000</td>
-                        <td>15/3/2015</td>
-                    </tr>
-                    <tr>
-                        <td>send</td>
-                        <td>wallet 02</td>
-                        <td> 2.000.000</td>
-                        <td>19/6/2015</td>
-                    </tr>
-                </table>
-                <div class="action-wallet" style="    margin-top: 55px; border-top: 1px solid;">
+                 <span style="float: left; margin-bottom: 20px;">
+                     <i> Create:    &nbsp; <?php echo h($wallet['Wallet']['created']); ?><br>
+                    Modified:  &nbsp;  <?php echo h($wallet['Wallet']['modified']); ?><br>
+                    </i>
+                 </span>
+                <div class="action-wallet" style="    margin-top: 80px; border-top: 1px solid;">
                  
-                <a href="#add-transfer" style="float: left;    padding: 9px 12px; width: 30%;margin-top: 20px;    background-color: #7049A2;
+               <!--  <a href="#add-transfer" style="float: left;    padding: 9px 12px; width: 30%;margin-top: 20px;    background-color: #7049A2;
     color: white;
     border-radius: 5px;
     font-size: 16px;
-    "> Add Transfer</a> 
+    "> Add Transfer</a>  -->
                 <!-- <button type="button" style="    position: relative;
                 top: -72px;
                 right: -250px;
@@ -144,8 +128,8 @@
                 border-radius: 5px;
                 background-color: rebeccapurple;
                 " > <a href="#edit-category" style="color: white;">Edit Wallet</a> </button> -->
-<button class="edit-wallet"> <?php echo $this->Html->link('Edit', array('action' => 'edit', $wallet['Wallet']['id']), array('id' => 'edit-wallet', 'style' => 'width:10%')); ?> </button>
-                <button class="delete-wallet"><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']),array('style' => 'color: white'), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']))); ?></button>
+<button class="edit-wallet" style=" float: left;    width: 40%;"> <?php echo $this->Html->link('Edit', array('action' => 'edit', $wallet['Wallet']['id']), array('id' => 'edit-wallet', 'style' => 'width:10%')); ?> </button>
+                <button class="delete-wallet"  style="  width: 40%;"><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']),array('style' => 'color: white'), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']))); ?></button>
 </div>
                 
             </div>

@@ -693,6 +693,7 @@ footer {
 #transaction {
     background-color: rgb(237, 249, 244);
     color: #151313;
+    margin-top: 53px;
 }
 
 #transaction h1 {
@@ -881,7 +882,7 @@ input {
 }
 
 #search {
-    top: 145px;
+    top: 202px;
     position: relative;
     margin-left: 228px;
 }
@@ -1070,7 +1071,7 @@ border:solid 1px #0e509e
 .delete-wallet {
     width: 30%;
     float: left;
-    margin-left: 21px;  
+    margin-left: 34px;  
     margin-top: 20px;
 }
 

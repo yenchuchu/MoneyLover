@@ -18,6 +18,9 @@
                     <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
+                    </li>
+                    <li>
                         <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
                     </li>
                     <li>
@@ -114,7 +117,7 @@
     border-radius: 5px;
     background-color: rebeccapurple;
     color: white;
-    "> Add Category</a>
+    "> Add Transaction</a>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-10 col-lg-offset-1">

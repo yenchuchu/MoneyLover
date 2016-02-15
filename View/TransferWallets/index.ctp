@@ -16,6 +16,9 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li>
                     <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
+                    </li> 
+                    <li>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
                     </li>
                     <li>
                         <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
@@ -37,6 +40,7 @@
                         </li>
                     </ul>
                        </li> 
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -98,21 +102,18 @@
     <section id="transaction" class="content-section text-center">
         <span >
             <h1>Transfer Wallet</h1>
-
-<!--            <button type="button" style="position: relative;     top: -130px;
-    right: -282px;" data-toggle="modal" data-target="#add-Transfer Wallet" > Add Transactions </button> -->
-        </span> 
-<?php echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
- <a href="#add-category" style="position: relative;
+ 
+        </span>  
+ <a href="#add-transfer" style="position: relative;
     top: -82px;
-    right: -250px;
+    right: -281px;
     border: none;
     padding: 7px 24px;
     font-size: 17px;
     border-radius: 5px;
     background-color: rebeccapurple;
     color: white;
-    "> Add Category</a>
+    "> Add Transfer</a>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-10 col-lg-offset-1">
@@ -184,24 +185,27 @@
                 <!-- /#delete-transaction -->
 
 
-                                <div id="add-category" class="modalDialog">      
+                <div id="add-transfer" class="modalDialog">      
                         <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
                             <div class="panel-heading">
-                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Transaction</h3>
+                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Wallet</h3>
                             </div> 
                             <div class="panel-body" style="color: black;">
-                                <?php echo $this->Form->create('Transaction',array('action' => 'add')); ?>
-                                <div class="form-group" style="    width: 100%;
-    text-align: left;"> 
-                                    <?php echo $this->Form->input('wallet_id'); ?>
-                                </div>
-                                <div class="form-group" style="text-align: left;  width: 100%;">
-                                        <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
-                                </div>
-                                <div class="form-group" style="text-align: left;  width: 100%;">
-                                        <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
-                                </div>
-                                      
+                                <form action="/MoneyLover/transferWallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                                <?php $this->Form->input('id');  ?>
+                                  <div class="form-group">
+                                  <label class="control-label" for="CategoryName" style="    padding-right: 0; float: left;">Wallet sent:</label>
+                                    <?php echo $this->Form->input('sent_wallet_id', array('label'=>false,'placeholder'=>'Wallet Name sent','id'=>'WalletName', 'class'=>'form-control')); ?> 
+                                    </div>
+                                    <div class="form-group">
+                                  <label class="control-label" for="CategoryName" style="    padding-right: 0;float: left;">Wallet receive:</label>
+                                  <?php echo $this->Form->input('receive_wallet_id', array('label'=>false,'placeholder'=>'Wallet Name receive','id'=>'WalletName', 'class'=>'form-control')); ?> 
+                                    </div>
+                                     <div class="form-group">
+                                     <label class="control-label" for="CategoryName" style="    padding-right: 0;float: left;">Money:</label>
+                                     <?php echo $this->Form->input('transfer_money', array('label'=>false,'id'=>'WalletMoneyCurrent', 'class'=>'form-control','placeholder'=>'Transfer Money')); ?> 
+                                    </div> 
                                   <div class="form-group"> 
                                     <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
     width: 100%;
@@ -219,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /#add-category -->
+                    <!-- /#add-transfer-Wallet --> 
             </div>
         </div>
     </div>

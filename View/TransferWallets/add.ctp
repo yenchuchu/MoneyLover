@@ -14,15 +14,20 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                   <li>
+                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
+                    </li>  
                     <li>
-                        <a class="page-scroll" href="wallet.html">My Wallets </a>
-                    </li>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="transaction.html">Transactions</a>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
                     </li>
                     <li>
-                        <a class="page-scroll" href="report-month.html">Report Month</a>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
+                    </li>
+                    <li>
+                    <?php echo $this->Html->link(__('Report Month'), array('controller' => 'Report', 'action' => 'index')); ?>
                     </li>
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -37,8 +42,7 @@
                         <li><a class="page-scroll" href="main.html">Log Out</a>
                         </li>
                     </ul>
-                        
-                    
+                       </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
