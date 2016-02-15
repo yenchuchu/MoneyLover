@@ -1,64 +1,3 @@
-<!-- <div class="wallets index">
-	<h2><?php echo __('Wallets'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('info'); ?></th>
-			<th><?php echo $this->Paginator->sort('money_current'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($wallets as $wallet): ?>
-	<tr>
-		<td><?php echo h($wallet['Wallet']['id']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($wallet['User']['name'], array('controller' => 'users', 'action' => 'view', $wallet['User']['id'])); ?>
-		</td>
-		<td><?php echo h($wallet['Wallet']['name']); ?>&nbsp;</td>
-		<td><?php echo h($wallet['Wallet']['info']); ?>&nbsp;</td>
-		<td><?php echo h($wallet['Wallet']['money_current']); ?>&nbsp;</td>
-		<td><?php echo h($wallet['Wallet']['created']); ?>&nbsp;</td>
-		<td><?php echo h($wallet['Wallet']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $wallet['Wallet']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $wallet['Wallet']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $wallet['Wallet']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $wallet['Wallet']['id']))); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Transactions'), array('controller' => 'transactions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Transaction'), array('controller' => 'transactions', 'action' => 'add')); ?> </li>
-	</ul>
-</div> -->
-<!--  .............................  -->
 <!-- Navigation -->
     <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000 !important; margin-bottom: 0px;">
         <div class="container">
@@ -76,13 +15,13 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li>
-                       <a class=" page-scroll"  href="wallet.html">My Wallets  </a>
+                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
-                        <a class="page-scroll" href="transaction.html">Transactions</a>
+                        <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
                     </li>
                     <li>
-                        <a class="page-scroll" href="report-month.html">Report Month</a>
+                    <?php echo $this->Html->link(__('Report Month'), array('controller' => 'Report', 'action' => 'index')); ?>
                     </li>
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -135,51 +74,39 @@
     </div> 
     <!-- /#change-password -->
 
-                <form id="search" role="form" action="#" method="GET" class="form-inline form-search-top">
-            <select name="category" class="select-style select2-offscreen" tabindex="-1" style="background-color: rgba(251, 248, 248, 0.95)">
-                <option value="income" style="color: red;">Income</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-                <option value="expense" style="color: red;">Expense</option>
-                <option value="">Award</option>
-                <option value="10">Bán hàng</option>
-                <option value="">Interest Money</option>
-                <option value="">Salary</option>
-                <option value="">Gifts</option>
-                <option value="">Selling</option>
-            </select>
-            <select name="money" class="select-style select2-offscreen" tabindex="-1" title="Chonj tien"  >
-             <option value="">-- Select Money--</option>
-                <option value="">10000</option>
-                <option value="10">50000</option>
-                <option value="">100000</option>
-                <option value="">200000</option>
-                <option value="">500000</option>
-                <option value="">>500000</option>
-            </select>
-                <input type="date" >
-                <button class="btn btn-default" type="button" style="    color: rgba(255,255,255,.5); background: rgba(0,0,0,.13); border: 1px solid rgba(0,0,0,.13);     border: none;" title="search">
-                    <i class="fa fa-search"></i>
-                </button>
-                   </form>  
     <!-- Contact Section -->
     <section id="wallet" class="content-section text-center">
         <span style="    position: relative;
     top: -50px;">
-            <h1 style="margin-bottom: 0;">My Wallets</h1>          
-            <button type="button" style="position: relative; top: -39px; right: -250px ;" data-toggle="modal" data-target="#add-wallet" > Add Wallet </button>
+            <h1 style="color: white;top: 37px;
+    position: relative;">My Wallets</h1>          
+            <!--<button type="button" style="position: relative; top: -39px; right: -250px ;" data-toggle="modal" data-target="#add-wallet" > Add Wallet </button>-->
         </span>
+        <?php //echo $this->Html->link(__('New Wallet'), array('action' => 'add')); ?>
+         <a href="#add-category" style="position: relative;
+    top: -79px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+    "> Add Category</a> 
         <div class="row" style="margin-right:0px">
+            <?php foreach ($wallets as $wallet): ?>
+                <?php //echo h($users[$wallet['Wallet']['user_id']]);  ?>
             <div class="col-lg-5 " style=" ">
-                <h2 style="border-bottom: 1px solid;  padding-top: 8px;">one wallet</h2>
+                <h2 style="border-bottom: 1px solid;  padding-top: 8px;">
+                <?php echo h($wallet['Wallet']['name']); ?>
+                </h2>
                 <span class="wallet-info"><i class="fa fa-smile-o"></i> Wallet Info:</span>
-                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i>aaaa</i></p>
+                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i><?php echo h($wallet['Wallet']['info']); ?> <br>
+                    Create:    &nbsp; <?php echo h($wallet['Wallet']['created']); ?><br>
+                    Modified:  &nbsp;  <?php echo h($wallet['Wallet']['modified']); ?><br>
+                </i></p>
                 <span class="wallet-current-money"><i class="fa fa-smile-o"></i> Current money: </span>
-                <p style="text-align: left;"> 50.000.000</p>
+                <p style="text-align: left;"> <?php echo h($wallet['Wallet']['money_current']); ?></p>
                 <span class="wallet-transfer"><i class="fa fa-smile-o"></i> Transfer:  </span><br><br>
                 <table>
                     <tr>
@@ -205,74 +132,9 @@
 
                 <p style=" margin-bottom: 10px; margin-top: 15px;"><a href="#update-info-wallet" style=" color: #CEE9FF;">Update Wallet Info</a></p>
                 <p style=" margin-bottom: 20px;color: #AB3035;"><a href="#update-info-wallet"  style=" color: #CEE9FF;">Update Current Money</a></p>
-                <button type="button" data-toggle="modal" data-target="#add-transfer"> Add Transfer </button>
+                <button type="button" data-toggle="modal" data-target="#add-transfer" > Add Transfer </button>
             </div>
-
-            <div class="col-lg-5 " style=" ">
-                <h2 style="border-bottom: 1px solid;  padding-top: 8px;">two wallet</h2>
-                <span class="wallet-info"><i class="fa fa-smile-o"></i> Wallet Info:</span>
-                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i>aaaa</i></p>
-                <span class="wallet-current-money"><i class="fa fa-smile-o"></i> Current money: </span>
-                <p style="text-align: left;"> 50.000.000</p>
-                <span class="wallet-transfer"><i class="fa fa-smile-o"></i> Transfer:  </span><br><br>
-                <table>
-                    <tr>
-                        <td>recive/send</td>
-                        <td>transfer wallet</td>
-                        <td>money</td>
-                        <td>date</td>
-                    </tr>
-                    <tr>
-                        <td>recive</td>
-                        <td>wallet 01</td>
-                        <td>50.000</td>
-                        <td>15/3/2015</td>
-                    </tr>
-                    <tr>
-                        <td>send</td>
-                        <td>wallet 02</td>
-                        <td> 2.000.000</td>
-                        <td>19/6/2015</td>
-                    </tr>
-                </table>
-
-                <p style=" margin-bottom: 10px; margin-top: 15px;"><a href="#update-info-wallet" style=" color: #CEE9FF;">Update Wallet Info</a></p>
-                <p style=" margin-bottom: 20px;color: #AB3035;"><a href="#update-info-wallet"  style=" color: #CEE9FF;">Update Current Money</a></p>
-                <button type="button" data-toggle="modal" data-target="#add-transfer"> Add Transfer </button>
-            </div>
-
-            <div class="col-lg-5 " style=" ">
-                <h2 style="border-bottom: 1px solid;  padding-top: 8px;">three wallet</h2>
-                <span class="wallet-info"><i class="fa fa-smile-o"></i> Wallet Info:</span>
-                <p style="text-align: left; font-size: 16px; padding-top: 3px;"><i>aaaa</i></p>
-                <span class="wallet-current-money"><i class="fa fa-smile-o"></i> Current money: </span>
-                <p style="text-align: left;"> 50.000.000</p>
-                <span class="wallet-transfer"><i class="fa fa-smile-o"></i> Transfer:  </span><br><br>
-                <table>
-                    <tr>
-                        <td>recive/send</td>
-                        <td>transfer wallet</td>
-                        <td>money</td>
-                        <td>date</td>
-                    </tr>
-                    <tr>
-                        <td>recive</td>
-                        <td>wallet 01</td>
-                        <td>50.000</td>
-                        <td>15/3/2015</td>
-                    </tr>
-                    <tr>
-                        <td>send</td>
-                        <td>wallet 02</td>
-                        <td> 2.000.000</td>
-                        <td>19/6/2015</td>
-                    </tr>
-                </table>
-
-                <p style=" margin-bottom: 10px; margin-top: 15px;"><a href="#update-info-wallet" style=" color: #CEE9FF;">Update Wallet Info</a></p>
-                <p style=" margin-bottom: 20px;color: #AB3035;"><a href="#update-current-money"  style=" color: #CEE9FF;">Update Current Money</a></p>
-                <button type="button" data-toggle="modal" data-target="#add-transfer"> Add Transfer </button>
-            </div>
+            <?php endforeach; ?>
         </div>
     </section>
                         <div id="update-info-wallet" class="modalDialog">      
@@ -353,38 +215,42 @@
                   </div>
                 </div>
                 <!-- /#transfer-money -->
-                
-                <div id="add-wallet" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
 
-                    <div class="modal-content" style="width: 80%; height: 375px;">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add Wallet</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form role="form">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Wallet Name" name="wallet-name" type="text" value="">
+                <div id="add-category" class="modalDialog">      
+                        <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Wallet</h3>
+                            </div> 
+                            <div class="panel-body" style="color: black;">
+                                <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
+                                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                                  <div class="form-group">
+                                  <label class="control-label" for="CategoryName" style="    padding-right: 0;">Wallet Name:</label>
+                                        <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">
                                     </div>
                                      <div class="form-group">
-                                        <input class="form-control" placeholder="Current Money" name="current-money" type="number" value="">
+                                     <label class="control-label" for="CategoryName" style="    padding-right: 0;">Current Money:</label>
+                                        <input name="data[Wallet][money_current]" step="any" type="number" class="form-control" placeholder="Wallet Name" id="WalletMoneyCurrent" required="required">
                                     </div>
                                       <div class="form-group">
-                                        <textarea class="form-control" placeholder="Info Wallet" name="info-wallet" rows="5" value=""></textarea>
+                                      <label class="control-label" for="CategoryName" style="    padding-right: 0;">Info Wallet:</label>
+                                        <input name="data[Wallet][info]"  class="form-control" placeholder="Wallet Name" maxlength="500" type="text" id="WalletInfo">
                                     </div>
-                                    <!-- <a href="#" class="">Forgotten your password? </a> -->
-                                    <!-- Change this to a button or input when using this as a form -->
-                                    
-                                </fieldset>
-                            </form>
+                                  <div class="form-group"> 
+                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+    width: 100%;
+    margin-left: -10px">
+    <button type="submit" class="btn wallet-save " style="float: left;
+    margin-right: -13px;
+"><a href="#close" style="color: white;
+    text-decoration: none;">Cancel</a></button>
+                                        <button type="submit" class="btn wallet-save" style="float: right;
+    margin-right: -13px;
+">Add</button>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="modal-footer-wallet" style="margin: 0 15px;">
-                            <button type="button" class="btn btn-default add-wallet-save" data-dismiss="modal">Add</button>
-                            <button type="button" class="btn btn-default add-wallet-cancel" data-dismiss="modal">Cancel</button>
-                        </div> 
                     </div>
-
-                  </div>
-                </div>
-                <!-- /#add-wallet -->
+                    <!-- /#add-category -->
