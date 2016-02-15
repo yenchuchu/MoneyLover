@@ -446,10 +446,30 @@ body {
 
 #categories h1 {
     text-align: center;
+    color: rgba(0, 0, 0, 0.73);
 }
 
 #categories .title {
     color: black;
+}
+
+#edit-category h1 {
+    text-align: center;
+     color: rgba(0, 0, 0, 0.73);
+}
+
+#edit-category { 
+     background-color: rgb(237, 249, 244);
+     color: #151313;
+ }
+ 
+ #edit-category .table > tbody > tr > td {
+     padding-bottom: 0px;
+ }
+ 
+ td#edit-category-type {
+     position: relative;
+     top: -10px;
 }
 
 #navbar-default {
@@ -467,14 +487,7 @@ body {
     padding-left: 11px;
     margin-bottom: 8px;
 }
-
-#edit-category h1 {
-    /*margin-bottom: 0;*/
-}
-
-#edit-category {
-    background-color: #36465D;
-}
+ 
 
 @media(min-width:767px) {
     .content-section {
@@ -498,12 +511,12 @@ footer {
 
 #wallet {
     /*background-color: rgba(65, 184, 220, 0.98);*/
-    background-color: #4ACAB4;
+    background-color: rgb(204, 239, 233);
 }
 
 #wallet>.row>.col-lg-5 {
     /*background-color: rgba(9, 175, 83, 0.75);*/
-    background-color: #878BB6;
+    background-color: rgba(135, 139, 182, 0.38);
     border-radius: 5px; 
     padding: 15px;
     padding-left: 24px;
@@ -682,14 +695,15 @@ footer {
 
 /* transaction */
 #transaction {
-    background-color: rgb(216, 247, 234);
+   background-color: rgb(237, 249, 244);
+   color: #151313;
 }
 
 #transaction h1 {
     position: relative;
-    top: -54px;
+    top: -15px;
     font-weight: bold;
-
+color: black;
 }
 
 #transaction-month>.panel-title {
@@ -702,7 +716,7 @@ footer {
 }
 
 #transaction-month>.panel-body {
-    background-color: rgba(255, 255, 255, 0.23);;
+    /*background-color: rgba(255, 255, 255, 0.23);;*/
     min-height: 270px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -871,7 +885,7 @@ input {
 }
 
 #search {
-    top: 110px;
+    top: 145px;
     position: relative;
     margin-left: 228px;
 }
@@ -940,6 +954,9 @@ table th {
     text-align: center;
 }
 
+table > thead > tr > th {
+     text-align: center;
+  }
 
 /* report month */
 
@@ -1049,4 +1066,79 @@ table th {
 }
 .navbar a:focus {
     color: rgba(255,255,255,.8);
+}
+
+.modalDialog > div {
+     width: 450px;
+ }
+ 
+ .edit-wallet a {
+     color: white;
+     text-decoration: none;
+ 
+ }
+ 
+ .edit-wallet,
+ .delete-wallet {
+     width: 30%;
+     float: left;
+     margin-left: 21px;  
+     margin-top: 20px;
+ }
+ 
+ #wallet a:hover {
+     text-decoration: none;
+     color: black !important;    
+ }
+ 
+ #wallet button:hover {
+     color: black;
+ }
+ 
+ #TransactionAddForm label {
+      width: 30%;
+     text-align: center;
+ }
+ 
+ #TransactionAddForm select  {
+     min-width: 45%;
+     padding-left: 6px;
+     border-radius: 5px;
+ }
+ 
+ input#TransactionTransactionMoney {
+     border-radius: 5px !important;
+     width: 45%;
+ }
+ 
+ /* edit wallet */
+ #edit-wallet-detail {
+      background-color: rgb(204, 239, 233);
+      color: black !important;
+ }
+  
+ #edit-wallet-detail h1,
+ #edit-wallet-detail p {
+     color: black !important;
+ }
+ 
+ #edit-wallet-detail label,
+ #edit-wallet-detail select,
+ #edit-wallet-detail input {
+     color: black !important;
+ }
+
+/* transfer wallet */
+
+#transfer-wallet  {
+   background-color: rgb(237, 249, 244);
+   color: #151313;
+       margin-top: 52px;
+}
+
+#transfer-wallet h1 {
+    position: relative;
+    top: -15px;
+    font-weight: bold;
+color: black;
 }

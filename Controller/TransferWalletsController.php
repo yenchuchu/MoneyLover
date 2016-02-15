@@ -21,8 +21,12 @@ class TransferWalletsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->TransferWallet->recursive = 0;
-		$this->set('transferWallets', $this->Paginator->paginate());
+		$this->TransferWallet->recursive = 0; 
+		$this->set('transferWallets', $this->Paginator->paginate()); 
+ 
+ 		$sentWallets = $this->TransferWallet->SentWallet->find('list');
+ 		$receiveWallets = $this->TransferWallet->ReceiveWallet->find('list');
+ 		$this->set(compact('sentWallets', 'receiveWallets'));
 	}
 
 /**
