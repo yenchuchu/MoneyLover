@@ -18,6 +18,9 @@
                     <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
+                    </li>
+                    <li>
                         <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
                     </li>
                     <li>
@@ -71,65 +74,51 @@
                         </div>
                     </div>
                 </div> 
-                <!-- /#change-password -->
-   
-                <form id="search" role="form" action="#" method="GET" class="form-inline form-search-top">
-            <?php  echo $this->Form->input('categorie_id', array('options' => $categories, 'class' => 'select-style select2-offscreen', 'style' => 'background-color: rgba(251, 248, 248, 0.95)', 'label' => false, 'div' => false ));  ?>
-            <select name="money" class="select-style select2-offscreen" tabindex="-1">
-                <option value="">10000</option>
-                <option value="10">50000</option>
-                <option value="">100000</option>
-                <option value="">200000</option>
-                <option value="">500000</option>
-                <option value="">>500000</option>
-            </select>
-                <input type="date" >
-                <button class="btn btn-default" type="button" style="    color: rgba(255,255,255,.5); background: rgba(0,0,0,.13); border: 1px solid rgba(0,0,0,.13);     border: none;" title="search">
-                    <i class="fa fa-search"></i>
-                </button>
-                   </form>  
+                <!-- /#change-password --> 
 
     <!-- Contact Section -->
     <section id="transaction" class="content-section text-center">
-        <h1><?php echo __('Edit Transactions'); ?></h1>
-        <div class="row" style="margin-right:0px; margin-bottom: 10px">
-            <div class="col-lg-8 col-lg-offset-2">
-                <table style="    width: 100%;" class="table table-striped table-hover">
-                                            <thead>
-                                                <th><?php echo $this->Paginator->sort('Category'); ?></th>
-                                                <th><?php echo $this->Paginator->sort('Wallet'); ?></th>
-                                                <th><?php echo $this->Paginator->sort('Money'); ?></th>
-                                            </thead>
-                                            <?php //foreach ($categories as $category): ?>
-                                            <?php echo $this->Form->create('Transaction'); ?>
-                    <tr>
-                        <?php echo $this->Form->input('id'); ?>
-                        <td><?php echo $this->Form->input('categorie_id', array('label'=>false,'style'=>'    padding-left: 10px;
-                    border: 1px solid gray;
-                    border-radius: 5px;    position: relative;
-                    top: 5px;color: black;')); ?>&nbsp;</td>
-                    <td><?php echo $this->Form->input('wallet_id', array('label'=>false,'style'=>'    padding-left: 10px;
-                    border: 1px solid gray;
-                    border-radius: 5px;    position: relative;
-                    top: 5px;color: black;')); ?>&nbsp;</td>
-                    <td><?php echo $this->Form->input('transaction_money', array('label'=>false,'placeholder'=>'enter money', 'style'=>'    padding-left: 10px;
-                    border: 1px solid gray;
-                    border-radius: 5px;    position: relative;
-                    top: 5px;color: black;')); ?>&nbsp;</td>
-
-                    </tr>
-                <?php //endforeach; ?>
-                </table>
-            </div>
-        </div>
+         <div class="categories-section">
+            <div class="container">
+            <div class="panel-heading" style="background-color: transparent !important;  padding-bottom: 0;">
+            <h1><?php echo __('Edit Transactions'); ?></h1>
+        <div class="panel-body"> 
+                        <div class="col-lg-8 col-lg-offset-2 categories-income"> 
+    <table style="    width: 100%;" class="table table-striped table-hover">
+                            <thead>
+                                <th><?php echo $this->Paginator->sort('Category'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Wallet'); ?></th> 
+                                <th><?php echo $this->Paginator->sort('Money'); ?></th>            
+                            </thead>
+                            <?php //foreach ($categories as $category): ?>
+                            <?php echo $this->Form->create('Transaction'); ?>
+    <tr> 
+        <?php echo $this->Form->input('id'); ?>
+        <td><?php echo $this->Form->input('categorie_id', array('label'=>false,'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td> 
+    <td><?php echo $this->Form->input('wallet_id', array('label'=>false,'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td>
+    <td><?php echo $this->Form->input('transaction_money', array('label'=>false,'placeholder'=>'enter money', 'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td>
+        
+    </tr>
+<?php //endforeach; ?>
+</table> 
         <?php  
         $sumbit = array(
-            'class' => 'btn wallet-save',
-            'div' => array(
-                'class' => 'submit-wallet',
-                'style' => 'margin-top:30px; margin-left: 225px;'
-                )
-            );
-            echo $this->Form->end($sumbit);
+                'class' => 'btn wallet-save',
+                'div' => array(
+                    'class' => 'submit-wallet',
+                    'style' => 'margin-top:30px;'
+                    )
+                );
+                echo $this->Form->end($sumbit); 
         ?>
+        </div></div></div></div></div>
     </section>

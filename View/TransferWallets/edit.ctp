@@ -14,11 +14,8 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                   <li>
-                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
-                    </li>  
                     <li>
-                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
+                    <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
                     <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
@@ -42,7 +39,8 @@
                         <li><a class="page-scroll" href="main.html">Log Out</a>
                         </li>
                     </ul>
-                       </li> 
+                        
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -77,46 +75,50 @@
                     </div>
                 </div> 
                 <!-- /#change-password --> 
+
     <!-- Contact Section -->
     <section id="transaction" class="content-section text-center">
-        <h1><?php echo __('Add Transactions'); ?></h1>
-        <div class="row" style="margin-right:0px; margin-bottom: 10px">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div id="transaction-month" class="transaction-wrapper"> 
-                    <div class="panel-body" style="position: relative; min-height: 60px;">    
-                        <ul>
-                           <li>
-                                <div class="transaction-detail-wrapper">
-                                    <div style="padding-bottom: 15px; padding-top: 5px;">
-                                        <div class="transactions form">
-                                            <?php echo $this->Form->create('TransferWallet'); ?>
-                                        	<fieldset> 
-                                        	  <div class="form-group" style="float: left;    margin-left: 30px;"><?php echo $this->Form->input('id');  ?>
-                                              </div>
-                                              <div class="form-group" style="float: left;    margin-left: 30px;"> <?php echo $this->Form->input('sent_wallet_id'); ?>
-                                              </div>
-                                              <div class="form-group" style="float: left;    margin-left: 30px;"> <?php echo $this->Form->input('receive_wallet_id'); ?>
-                                              </div>
-                                              <div class="form-group" style="float: left; margin-left: 30px;"> <?php echo $this->Form->input('transfer_money'); ?>
-                                              </div>
-                                        	</fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+         <div class="categories-section">
+            <div class="container">
+            <div class="panel-heading" style="background-color: transparent !important;  padding-bottom: 0;">
+            <h1><?php echo __('Edit Transfer Wallet'); ?></h1>
+        <div class="panel-body"> 
+                        <div class="col-lg-8 col-lg-offset-2 categories-income"> 
+    <table style="    width: 100%;" class="table table-striped table-hover">
+                            <thead>
+                                <th><?php echo $this->Paginator->sort('Sent to'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Receive '); ?></th> 
+                                <th><?php echo $this->Paginator->sort('TransferMoney'); ?></th>            
+                            </thead>
+                            <?php //foreach ($categories as $category): ?>
+                            <?php echo $this->Form->create('TransferWallet'); ?>
+    <tr> 
+        <?php echo $this->Form->input('id'); ?>
+        <td><?php echo $this->Form->input('sent_wallet_id', array('label'=>false,'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td> 
+    <td><?php echo $this->Form->input('receive_wallet_id', array('label'=>false,'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td>
+    <td><?php echo $this->Form->input('transfer_money', array('label'=>false,'placeholder'=>'enter money', 'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td>
+        
+    </tr>
+<?php //endforeach; ?>
+</table> 
         <?php  
         $sumbit = array(
-            'class' => 'btn wallet-save',
-            'div' => array(
-                'class' => 'submit-wallet',
-                'style' => 'margin-top:30px; margin-left: 225px;'
-                )
-            );
-            echo $this->Form->end($sumbit);
+                'class' => 'btn wallet-save',
+                'div' => array(
+                    'class' => 'submit-wallet',
+                    'style' => 'margin-top:30px;'
+                    )
+                );
+                echo $this->Form->end($sumbit); 
         ?>
+        </div></div></div></div></div>
     </section>

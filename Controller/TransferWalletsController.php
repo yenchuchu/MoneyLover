@@ -21,12 +21,12 @@ class TransferWalletsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->TransferWallet->recursive = 0; 
+		$this->TransferWallet->recursive = 0;
 		$this->set('transferWallets', $this->Paginator->paginate()); 
- 
- 		$sentWallets = $this->TransferWallet->SentWallet->find('list');
- 		$receiveWallets = $this->TransferWallet->ReceiveWallet->find('list');
- 		$this->set(compact('sentWallets', 'receiveWallets'));
+
+		$sentWallets = $this->TransferWallet->SentWallet->find('list');
+		$receiveWallets = $this->TransferWallet->ReceiveWallet->find('list');
+		$this->set(compact('sentWallets', 'receiveWallets'));
 	}
 
 /**
@@ -74,7 +74,9 @@ class TransferWalletsController extends AppController {
 	public function edit($id = null) {
 		if (!$this->TransferWallet->exists($id)) {
 			throw new NotFoundException(__('Invalid transfer wallet'));
-		}
+		} 
+		// debug($this->request->is(array('post', 'put')));
+		// die();
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->TransferWallet->save($this->request->data)) {
 				$this->Flash->success(__('The transfer wallet has been saved.'));
@@ -83,7 +85,8 @@ class TransferWalletsController extends AppController {
 				$this->Flash->error(__('The transfer wallet could not be saved. Please, try again.'));
 			}
 		} else {
-			$options = array('conditions' => array('TransferWallet.' . $this->TransferWallet->primaryKey => $id));
+//                    debug($this->TransferWallet->primaryKey);die;
+			$options = array('conditions' => array('id' => $id), 'recursive' => 0);
 			$this->request->data = $this->TransferWallet->find('first', $options);
 		}
 		$sentWallets = $this->TransferWallet->SentWallet->find('list');
@@ -104,9 +107,14 @@ class TransferWalletsController extends AppController {
 			throw new NotFoundException(__('Invalid transfer wallet'));
 		}
 		$this->request->allowMethod('post', 'delete');
+		$options = array('conditions' => array('id' => $id), 'recursive' => 0);
+		$this->request->data = $this->TransferWallet->find('first', $options);
 		if ($this->TransferWallet->delete()) {
+
 			$this->Flash->success(__('The transfer wallet has been deleted.'));
 		} else {
+			// $options = array('conditions' => array('id' => $id), 'recursive' => 0);
+			// $this->request->data = $this->TransferWallet->find('first', $options);
 			$this->Flash->error(__('The transfer wallet could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));

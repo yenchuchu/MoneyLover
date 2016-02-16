@@ -9,7 +9,7 @@ body {
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
-    background-color: #000 !important;
+    background-color: white !important;
 }
 
 html {
@@ -449,29 +449,6 @@ body {
     color: rgba(0, 0, 0, 0.73);
 }
 
-#categories .title {
-    color: black;
-}
-
-#edit-category h1 {
-    text-align: center;
-     color: rgba(0, 0, 0, 0.73);
-}
-
-#edit-category { 
-     background-color: rgb(237, 249, 244);
-     color: #151313;
- }
- 
- #edit-category .table > tbody > tr > td {
-     padding-bottom: 0px;
- }
- 
- td#edit-category-type {
-     position: relative;
-     top: -10px;
-}
-
 #navbar-default {
     background-color: #E3F4F9;
 }
@@ -487,7 +464,25 @@ body {
     padding-left: 11px;
     margin-bottom: 8px;
 }
- 
+
+#edit-category h1 {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.73);
+}
+
+#edit-category {
+    background-color: rgb(237, 249, 244);
+    color: #151313;
+}
+
+#edit-category .table > tbody > tr > td {
+    padding-bottom: 0px;
+}
+
+td#edit-category-type {
+    position: relative;
+    top: -10px;
+}
 
 @media(min-width:767px) {
     .content-section {
@@ -501,6 +496,7 @@ body {
 #accounts {
     background-color: rgb(237, 249, 244);
     color: #151313;
+    /*text-shadow: 4px 3px 0px #1d9d74, 9px 8px 0px rgba(0, 0, 0, 0.15);*/
 }
 
 /* wallet - user */
@@ -697,13 +693,14 @@ footer {
 #transaction {
    background-color: rgb(237, 249, 244);
    color: #151313;
+    margin-top: 53px;
 }
 
 #transaction h1 {
     position: relative;
-    top: -15px;
-    font-weight: bold;
-color: black;
+    top: -15px; 
+    font-weight: bold; 
+    color: black;
 }
 
 #transaction-month>.panel-title {
@@ -884,8 +881,8 @@ input {
     background-color: rgba(251, 248, 248, 0.95);
 }
 
-#search {
-    top: 145px;
+#search { 
+    color: black; 
     position: relative;
     margin-left: 228px;
 }
@@ -902,14 +899,14 @@ margin-right:2px;
 }
  
 #pagination-digg a{
-border:solid 1px #9aafe5
+border:solid 1px #9aafe5;
 margin-right:2px;
 }
  
 #pagination-digg .previous-off,
 #pagination-digg .next-off{
-border:solid 1px #DEDEDE
-color:#888888
+border:solid 1px #DEDEDE;
+color:#888888;
 display:block;
 float:left;
 font-weight:bold;
@@ -933,7 +930,7 @@ padding:4px 6px;
  
 #pagination-digg a:link,
 #pagination-digg a:visited{
-color:#0e509e
+color:#0e509e;
 display:block;
 float:left;
 padding:3px 6px;
@@ -941,20 +938,12 @@ text-decoration:none;
 }
  
 #pagination-digg a:hover{
-border:solid 1px #0e509e
+border:solid 1px #0e509e;
 }
 
 /*   table - account   */
-
-table td {
-    padding-top: 15px !important;
-}
-
-table th {
-    text-align: center;
-}
-
-table > thead > tr > th {
+ 
+.table > thead > tr > th {
      text-align: center;
   }
 
@@ -1069,76 +1058,61 @@ table > thead > tr > th {
 }
 
 .modalDialog > div {
-     width: 450px;
- }
- 
- .edit-wallet a {
-     color: white;
-     text-decoration: none;
- 
- }
- 
- .edit-wallet,
- .delete-wallet {
-     width: 30%;
-     float: left;
-     margin-left: 21px;  
-     margin-top: 20px;
- }
- 
- #wallet a:hover {
-     text-decoration: none;
-     color: black !important;    
- }
- 
- #wallet button:hover {
-     color: black;
- }
- 
- #TransactionAddForm label {
-      width: 30%;
-     text-align: center;
- }
- 
- #TransactionAddForm select  {
-     min-width: 45%;
-     padding-left: 6px;
-     border-radius: 5px;
- }
- 
- input#TransactionTransactionMoney {
-     border-radius: 5px !important;
-     width: 45%;
- }
- 
- /* edit wallet */
- #edit-wallet-detail {
-      background-color: rgb(204, 239, 233);
-      color: black !important;
- }
-  
- #edit-wallet-detail h1,
- #edit-wallet-detail p {
-     color: black !important;
- }
- 
- #edit-wallet-detail label,
- #edit-wallet-detail select,
- #edit-wallet-detail input {
-     color: black !important;
- }
-
-/* transfer wallet */
-
-#transfer-wallet  {
-   background-color: rgb(237, 249, 244);
-   color: #151313;
-       margin-top: 52px;
+    width: 450px;
 }
 
-#transfer-wallet h1 {
-    position: relative;
-    top: -15px;
-    font-weight: bold;
-color: black;
+.edit-wallet a {
+    color: white;
+    text-decoration: none;
+
+}
+
+.edit-wallet,
+.delete-wallet {
+    width: 30%;
+    float: left;
+    margin-left: 34px;  
+    margin-top: 20px;
+}
+
+#wallet a:hover {
+    text-decoration: none;
+    color: black !important;    
+}
+
+#wallet button:hover {
+    color: black;
+}
+
+#TransactionAddForm label {
+     width: 30%;
+    text-align: center;
+}
+
+#TransactionAddForm select  {
+    min-width: 45%;
+    padding-left: 6px;
+    border-radius: 5px;
+}
+
+input#TransactionTransactionMoney {
+    border-radius: 5px !important;
+    width: 45%;
+}
+
+/* edit wallet */
+#edit-wallet-detail {
+     background-color: rgb(204, 239, 233);
+     color: black !important;
+}
+ 
+#edit-wallet-detail h1,
+#edit-wallet-detail p {
+    color: black !important;
+}
+
+#edit-wallet-detail label,
+#edit-wallet-detail select,
+#edit-wallet-detail input {
+    color: black !important;
 }

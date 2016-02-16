@@ -1,11 +1,11 @@
 <!-- Navigation -->
-    <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000; margin-bottom: 0;">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="padding:0px 0px; background-color: #000;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index-user.html">
+                <a class="navbar-brand page-scroll" href="../MoneyLover/Wallets/index">
                     <i class="fa fa-play-circle"></i>  <span class="light">Money</span> Lover
                 </a>
             </div>
@@ -18,6 +18,9 @@
                     <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>
                     <li>
+                    <?php echo $this->Html->link(__('Transfer Wallet'), array('controller' => 'TransferWallets', 'action' => 'index')); ?>
+                    </li>
+                    <li>
                         <?php echo $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>
                     </li>
                     <li>
@@ -28,22 +31,15 @@
                         <img src="../startbootstrap-grayscale-edit/img/noel.jpg" style="width:20px; height:20px">  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Update Avatar</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>  Update Avatar</a>
                         </li>
                         <li><a href="#change-password"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
-                        <li>
-                        <?php echo $this->Html->link(__('Log Out'), array('action' => 'logout')); ?>
-                        <a class="page-scroll" href="main.html">Log Out</a>
-
+                        <li><a class="page-scroll" href="main.html">Log Out</a>
                         </li>
                     </ul>
-                      </li>  
-                    <li>
-                        <?php echo $this->Html->link(__('Log Out'), array('action'=>'logout'));
-?>
-                        </li>
+                       </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -103,7 +99,11 @@
                     // search ~~
                  ?>
                    </form>  
+<?php  
 
+                // debug($categories);
+                // die();
+                 ?>
     <!-- Contact Section -->
     <section id="transaction" class="content-section text-center">
         <span >
@@ -113,7 +113,7 @@
         </span> 
 <?php //echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
  <a href="#add-category" style="position: relative;
-    top: -79px;
+    top: -82px;
     right: -250px;
     border: none;
     padding: 7px 24px;
@@ -121,7 +121,7 @@
     border-radius: 5px;
     background-color: rebeccapurple;
     color: white;
-    "> Add Category</a>
+    "> Add Transaction</a>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-10 col-lg-offset-1">
@@ -142,7 +142,7 @@
                             <?php foreach ($transactions as $transaction): ?>
                             <tr>
                                 <td> <input type="checkbox" name="vehicle" value="Bike" style="float: left"></td>
-                                <td><?php echo h($categories[$transaction['Transaction']['categorie_id']]);  ?>&nbsp;</td>
+                                <td style="width: 10%;"><?php echo h($categories[$transaction['Transaction']['categorie_id']]);  ?>&nbsp;</td>
                                 <td><?php echo h($wallets[$transaction['Transaction']['wallet_id']]); ?>&nbsp;</td>
                                 <td><?php echo h($transaction['Transaction']['transaction_money']);; ?>&nbsp;</td>
                                 <td><?php echo h($transaction['Transaction']['created']);; ?>&nbsp;</td>
@@ -206,7 +206,7 @@
                                         <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
                                 </div>
                                 <div class="form-group" style="text-align: left;  width: 100%;">
-                                    <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
+                                        <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
                                 </div>
                                       
                                   <div class="form-group"> 
@@ -221,10 +221,11 @@
     margin-right: -13px;
 ">Add</button>
                                     </div>
-                                  </div> 
+                                  </div>
+                                </form>
                             </div>
                         </div>
-                    </div></div>
+                    </div>
                     <!-- /#add-category -->
             </div>
         </div>

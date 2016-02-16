@@ -44,8 +44,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 CREATE TABLE IF NOT EXISTS `transactions` (
 `id` int(10) NOT NULL,
   `categorie_id` int(10) NOT NULL,
-  `wallet_id` int(10) NOT NULL,
-  `transaction_date` datetime NOT NULL,
+  `wallet_id` int(10) NOT NULL, 
   `transaction_money` float NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
@@ -59,8 +58,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 
 CREATE TABLE IF NOT EXISTS `transfer_wallets` (
 `id` int(10) NOT NULL,
-  `transfer_money` float NOT NULL DEFAULT '0',
-  `transfer_date` datetime NOT NULL,
+  `transfer_money` float NOT NULL DEFAULT '0', 
   `sent_wallet_id` int(10) NOT NULL,
   `receive_wallet_id` int(10) NOT NULL,
   `created` datetime NOT NULL,
