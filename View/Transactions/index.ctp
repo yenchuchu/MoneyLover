@@ -99,7 +99,11 @@
                     // search ~~
                  ?>
                    </form>  
+<?php  
 
+                // debug($categories);
+                // die();
+                 ?>
     <!-- Contact Section -->
     <section id="transaction" class="content-section text-center">
         <span >
