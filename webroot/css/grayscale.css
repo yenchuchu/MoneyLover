@@ -691,15 +691,15 @@ footer {
 
 /* transaction */
 #transaction {
-    background-color: rgb(237, 249, 244);
-    color: #151313;
+   background-color: rgb(237, 249, 244);
+   color: #151313;
     margin-top: 53px;
 }
 
 #transaction h1 {
     position: relative;
     top: -15px; 
-    font-weight: bold;
+    font-weight: bold; 
     color: black;
 }
 
@@ -750,7 +750,7 @@ footer {
     border-radius: 5px;
     width: 100%;
     padding-left: 11px;
-    height: 50px;
+    min-height: 50px;
     padding-top: 5px;
 }
 
@@ -881,8 +881,8 @@ input {
     background-color: rgba(251, 248, 248, 0.95);
 }
 
-#search {
-    top: 202px;
+#search { 
+    color: black; 
     position: relative;
     margin-left: 228px;
 }
@@ -899,14 +899,14 @@ margin-right:2px;
 }
  
 #pagination-digg a{
-border:solid 1px #9aafe5
+border:solid 1px #9aafe5;
 margin-right:2px;
 }
  
 #pagination-digg .previous-off,
 #pagination-digg .next-off{
-border:solid 1px #DEDEDE
-color:#888888
+border:solid 1px #DEDEDE;
+color:#888888;
 display:block;
 float:left;
 font-weight:bold;
@@ -930,7 +930,7 @@ padding:4px 6px;
  
 #pagination-digg a:link,
 #pagination-digg a:visited{
-color:#0e509e
+color:#0e509e;
 display:block;
 float:left;
 padding:3px 6px;
@@ -938,14 +938,14 @@ text-decoration:none;
 }
  
 #pagination-digg a:hover{
-border:solid 1px #0e509e
+border:solid 1px #0e509e;
 }
 
 /*   table - account   */
-
+ 
 .table > thead > tr > th {
-    text-align: center;
-}
+     text-align: center;
+  }
 
 /* report month */
 

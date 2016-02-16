@@ -369,7 +369,7 @@ img::-moz-selection {
 }
 
 body {
-    webkit-tap-highlight-color: rgba(255,255,255,.2);
+    webkit-tap-highlight-color: rgba(255,255,255,0.2);
 }
 
 .nav>li {
@@ -876,14 +876,14 @@ margin-right:2px;
 }
  
 #pagination-digg a{
-border:solid 1px #9aafe5
+border:solid 1px #9aafe5;
 margin-right:2px;
 }
  
 #pagination-digg .previous-off,
 #pagination-digg .next-off{
-border:solid 1px #DEDEDE
-color:#888888
+border:solid 1px #DEDEDE;
+color:#888888;
 display:block;
 float:left;
 font-weight:bold;
@@ -907,7 +907,7 @@ padding:4px 6px;
  
 #pagination-digg a:link,
 #pagination-digg a:visited{
-color:#0e509e
+color:#0e509e;
 display:block;
 float:left;
 padding:3px 6px;
@@ -915,7 +915,7 @@ text-decoration:none;
 }
  
 #pagination-digg a:hover{
-border:solid 1px #0e509e
+border:solid 1px #0e509e;
 }
 
 /*   table - account   */
