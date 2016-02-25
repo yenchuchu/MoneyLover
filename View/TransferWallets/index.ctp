@@ -99,13 +99,15 @@
                    </form>   -->
 
     <!-- Contact Section -->
-    <section id="transaction" class="content-section text-center">
+    <section id="transfer-wallet" class="content-section text-center" style="    background-color: rgb(237, 249, 244);
+    color: #151313;">
         <span >
-            <h1>Transfer Wallet</h1>
+            <h1 style="    position: relative;
+    top: 16px;">Transfer Wallet</h1>
  
         </span>  
  <a href="#add-transfer" style="position: relative;
-    top: -82px;
+    top: -51px;
     right: -281px;
     border: none;
     padding: 7px 24px;
@@ -126,7 +128,7 @@
                                 <th></th>
                                 <th><?php echo $this->Paginator->sort('id'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Sent to'); ?></th>
-                                <th><?php echo $this->Paginator->sort('receive to'); ?></th>
+                                <th><?php echo $this->Paginator->sort('receive from'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Transfer Money'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Created'); ?></th>
                                 <th><?php echo $this->Paginator->sort('Modified'); ?></th>
@@ -151,12 +153,13 @@
                         </table>
                         <!-- phan trang -->
 
-<div class="page" style="    position: absolute;
-    bottom: 5px;    width: 100%;">
+<div class="page" style="   position: relative;
+    bottom: -30px;
+    width: 100%;">
      <span style="    float: left;
-    margin-left: 30px;
+    margin-left: 9px;
     width: 50%;">
-    <input type="checkbox" name="vehicle" value="Bike" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
+    <input type="checkbox" name="checkAll" value="checkAll"  id="checkAll"  style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
     <a href="edit-transaction.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
     <a href="#delete-transaction" title="delete" class="delete-transaction"  style=" color: black;"><i class="fa fa-trash"></i>Delete</a>
     </span>
@@ -232,3 +235,18 @@
         </div>
     </section>
  
+ <script type = "text/javascript" src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript">
+         $("#checkAll").change(function () {
+             $("input:checkbox").prop('checked', $(this).prop("checked"));
+         });
+
+        $("input:checkbox[name=aaa]").live("click", function () {
+            $("input:checkbox[name=aaa]:checked").each(function () { 
+                //alert("Id: " + $(this).attr("id")); 
+                // alert( " Value: " + $(this).val()); 
+                //  $query = "delete  from users where id = $(this).val()";
+                // $data = $this->users->query($query);
+            });
+        });
+    </script>

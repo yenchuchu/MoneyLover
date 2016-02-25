@@ -27,7 +27,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery.easing.min');
 		echo $this->Html->script('bootstrap.min');
-		echo $this->Html->script('api');
+		echo $this->Html->script('common');
 		echo $this->Html->script('grayscale');
 
 		echo $this->fetch('meta');
@@ -47,6 +47,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	        <p>Copyright &copy; Your Website 2014</p>
 	    </div>
     </footer>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>

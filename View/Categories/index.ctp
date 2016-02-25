@@ -102,26 +102,28 @@
             endif; ?></td>
         <td><?php echo h($category['Category']['created']); ?>&nbsp;</td>
         <td><?php echo h($category['Category']['modified']); ?>&nbsp;</td>
-        <td class="actions">
-            <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']), array( 'class' =>'delete-transaction')); ?>
-            <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array( 'class' =>'delete-transaction' ), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>
-        </td>
+        <!-- <td class="actions"> -->
+            <td>
+                
+                                        
+      <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']), array( 'class' =>'delete-transaction')); ?><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array( 'class' =>'delete-transaction' ), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>  
+      </td>
     </tr>
 <?php endforeach; ?>
 </table>
 </div>
 
-        <span style="    float: left; margin-left: 30px; width: 50%;">
-        <input type="checkbox" name="vehicle" value="Bike" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
-        <a href="edit-category.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
-        <a href="#delete-transaction" title="delete" class="delete-transaction" style=""><i class="fa fa-trash"></i>Delete</a>
-        <p>
-        <?php
-        // echo $this->Paginator->counter(array(
-        //     'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-        // ));
-        ?>  </p>
-        <div class="paging">
+       <div class="page" style="   position: relative;
+    bottom: -30px;
+    width: 100%;">
+     <span style="    float: left;
+    margin-left: 23px;
+    width: 50%;">
+    <input type="checkbox" name="checkAll" value="checkAll"  id="checkAll" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
+    <a href="edit-transaction.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
+    <a href="#delete-transaction" title="delete" class="delete-transaction"  style=" color: black;"><i class="fa fa-trash"></i>Delete</a>
+    </span>
+       <div class="paging">
         <?php
             echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
             echo $this->Paginator->numbers(array('separator' => ''));
@@ -129,6 +131,7 @@
         ?>
         </div>
 
+</div>
 
          <div id="add-category" class="modalDialog">      
                         <div class="login-panel panel panel-default">
@@ -194,3 +197,18 @@
         </div>
     </div>
 </section>
+<script type = "text/javascript" src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript">
+         $("#checkAll").change(function () {
+             $("input:checkbox").prop('checked', $(this).prop("checked"));
+         });
+
+        $("input:checkbox[name=aaa]").live("click", function () {
+            $("input:checkbox[name=aaa]:checked").each(function () { 
+                //alert("Id: " + $(this).attr("id")); 
+                // alert( " Value: " + $(this).val()); 
+                //  $query = "delete  from users where id = $(this).val()";
+                // $data = $this->users->query($query);
+            });
+        });
+    </script>

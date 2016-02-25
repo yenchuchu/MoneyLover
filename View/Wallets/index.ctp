@@ -1,3 +1,4 @@
+<?php echo $this->Flash->render('positive') ?>
 <!--Navigation -->
     <nav class="navbar navbar-custom" role="navigation" style="padding:0px 0px; background-color: #000 !important; margin-bottom: 0px;">
         <div class="container">
@@ -183,6 +184,9 @@
                             <div class="panel-body" style="color: black;">
                                 <form action="/MoneyLover/wallets/add" id="CategoryAddForm" method="post" accept-charset="utf-8">
                                 <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                                <?php //echo $this->Form->input('User_id',array('conditions'=> array('User.id' => AuthComponent::user('id')))); ?>
+                                <?php //debug($this->data['user_id']);
+                                //debug(AuthComponent::user('id'));die; ?>
                                   <div class="form-group">
                                   <label class="control-label" for="CategoryName" style="    padding-right: 0;">Wallet Name:</label>
                                         <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">

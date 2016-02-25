@@ -18,8 +18,12 @@
                         <a class=" dropdown-toggle page-scroll" data-toggle="dropdown">Accounts 
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="account-active.html">account active</a></li>
-                          <li><a href="account-request.html">account request</a></li>
+                          <li>
+                                <?php echo $this->Html->link(__('account request'), array('controller' => 'users', 'action' => 'index')); ?> 
+                            </li>
+                            <li>
+                                <?php echo $this->Html->link(__('account request'), array('controller' => 'users', 'action' => 'index')); ?>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -80,26 +84,25 @@
     <section id="edit-category" class="content-section text-center" style="background-color: rgb(237, 249, 244)">
         <h1><?php echo __('Edit Category'); ?></h1>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
-
+ 
             <div class="col-lg-6 col-lg-offset-3">
             <div id="transaction-month" class="transaction-wrapper">
                    
                     <div class="panel-body" style="position: relative; min-height: 60px;">
-                        
-               <ul>
-                   <li>
-                   <div class="categories-edit-wrapper">
-                        <?php echo $this->Form->create('Category'); ?> 
-  <div class="form-group">
-    <label class="control-label col-sm-3" for="CategoryName">Category Name:</label>
-    <div class="col-sm-8">
-        <?php echo $this->Form->input('name', array('label'=>false, 'class'=>'col-sm-8', 'style'=>'border-radius: 5px;')); ?>
-    </div>
-  </div>
-  <div class="form-group"> 
-    <label class="control-label col-sm-3" style="    margin-top: 17px;">Type:</label>
-    <div class="col-sm-8" style="text-align: left;">
-        <label class="radio-inline"><input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked" style="    position: relative;
+                  <table style="    width: 100%;" class="table table-striped table-hover">
+                            <thead>
+                                <th><?php echo $this->Paginator->sort('Category Name'); ?></th>
+                                <th><?php echo $this->Paginator->sort('Type'); ?></th>  
+                            </thead>
+                            <?php //foreach ($categories as $category): ?>
+                            <?php echo $this->Form->create('Category'); ?>
+    <tr> 
+        <?php echo $this->Form->input('id'); ?>
+        <td><?php echo $this->Form->input('name', array('label'=>false,'style'=>'    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    position: relative;
+    top: 5px;color: black;')); ?>&nbsp;</td> 
+   <td> <label class="radio-inline"><input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked" style="    position: relative;
     top: 11px;
     margin-right: 8px;
 ">Income</label>
@@ -107,12 +110,11 @@
     top: 11px;
     margin-right: 8px;
 ">Expense</label>
-       
-    </div>
-  </div>  
-                    </div>
-                </li>
-                </ul>
+       </td> 
+    </tr>
+<?php //endforeach; ?>
+</table>       
+                
             </div>
             <?php 
                 $sumbit = array(

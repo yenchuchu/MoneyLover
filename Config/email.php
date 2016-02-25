@@ -28,7 +28,7 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
+		'transport' => 'smtp',
 		'from' => 'you@localhost',
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
@@ -36,12 +36,26 @@ class EmailConfig {
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
+		'from' => array('ChuThuyHien1995@gmail.com' => 'MoneyLover'),
+		'host' => 'ssl://smtp.gmail.com',
+		'port' => 465,
 		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
+		'username' => 'ChuThuyHien1995@gmail.com',
+		'password' => 'chungoclan95phuonghien',
+		'client' => null,
+		'log' => false,
+		//'charset' => 'utf-8',
+		//'headerCharset' => 'utf-8',
+	);
+
+	public $gmail = array(
+		'transport' => 'Smtp',
+		'from' => array('ChuThuyHien1995@gmail.com' => 'MoneyLover'),
+		'host' => 'ssl://smtp.gmail.com',
+		'port' => 465,
+		'timeout' => 30,
+		'username' => 'ChuThuyHien1995@gmail.com',
+		'password' => 'chungoclan95phuonghien',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',
@@ -79,4 +93,7 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 
+ 	public function __construct() {
+        // Do conditional assignments here.
+    }
 }

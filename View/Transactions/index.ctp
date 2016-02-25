@@ -76,7 +76,7 @@
                 </div> 
                 <!-- /#change-password -->
    
-                <form id="search" role="form" action="#" method="GET" class="form-inline form-search-top">
+                <form id="search" role="form" action="<?php $this->Html->link(__('Transactions'), array('controller' => 'Transactions', 'action' => 'index')); ?>" method="GET" class="form-inline form-search-top">
            <?php  echo $this->Form->input('categorie_id', array('options' => $categories,
                                                                 'class' => 'select-style select2-offscreen',
                                                                 'style' => 'background-color: rgba(251, 248, 248, 0.95)',
@@ -92,36 +92,27 @@
                 <option value="">>500000</option>
             </select>
                 <input type="date" >
-                <button class="btn btn-default" type="button" style="    color: rgba(255,255,255,.5); background: rgba(0,0,0,.13); border: 1px solid rgba(0,0,0,.13);     border: none;" title="search">
+                <button class="btn btn-default" type="sumbit" style="    color: rgba(255,255,255,.5); background: rgba(0,0,0,.13); border: 1px solid rgba(0,0,0,.13);     border: none;" title="search">
                     <i class="fa fa-search"></i>
                 </button>
-                <?php 
-                    // search ~~
-                 ?>
-                   </form>  
-<?php  
-
-                // debug($categories);
-                // die();
-                 ?>
-    <!-- Contact Section -->
+                
+                <?php //foreach ($transactions as $transaction): 
+                // debug($this->request->data['categories']['categorie_id']);die;
+                    // if ($this->request->data['categories']['categorie_id'] == $categories['categorie_id']) {
+                        ?> 
+                       <!--  <td style="width: 10%;"><?php echo h($categories[$transaction['Transaction']['categorie_id']]);  ?>&nbsp;</td>
+                                <td><?php echo h($wallets[$transaction['Transaction']['wallet_id']]); ?>&nbsp;</td>
+                                <td><?php echo h($transaction['Transaction']['transaction_money']);; ?>&nbsp;</td>
+                                <td><?php echo h($transaction['Transaction']['created']);; ?>&nbsp;</td>
+                                 <td><?php echo h($transaction['Transaction']['modified']);; ?>&nbsp;</td>
+                    <?php //} ?>--> 
+                   </form>   
+    <!-- Contact Section --> 
     <section id="transaction" class="content-section text-center">
         <span >
-            <h1>Transactions</h1>
-<!--            <button type="button" style="position: relative;     top: -130px;
-    right: -282px;" data-toggle="modal" data-target="#add-transaction" > Add Transactions </button> -->
-        </span> 
-<?php //echo $this->Html->link(__('New Transaction'), array('action' => 'add')); ?>
- <a href="#add-category" style="position: relative;
-    top: -82px;
-    right: -250px;
-    border: none;
-    padding: 7px 24px;
-    font-size: 17px;
-    border-radius: 5px;
-    background-color: rebeccapurple;
-    color: white;
-    "> Add Transaction</a>
+            <h1>Transactions</h1> 
+        </span>  
+    <a href="#add-transaction" id="a-add-transaction"> Add Transaction</a>
         <div class="row" style="margin-right:0px; margin-bottom: 10px">
 
             <div class="col-lg-10 col-lg-offset-1">
@@ -129,7 +120,7 @@
                 <div id="transaction-month" class="transaction-wrapper">
                    
                     <div class="panel-body" style="position: relative;">
-                        <table style="    width: 100%;"  class="table table-striped table-hover">
+                        <table style="width: 100%;"  class="table table-striped table-hover">
                             <thead>
                                 <th></th>
                                 <th><?php echo $this->Paginator->sort('Category'); ?></th>
@@ -157,25 +148,22 @@
                         </table>
                         <!-- phan trang -->
 
-<div class="page" style="    position: absolute;
-    bottom: 5px;    width: 100%;">
-     <span style="    float: left;
-    margin-left: 30px;
-    width: 50%;">
-    <input type="checkbox" name="vehicle" value="Bike" style="float: left"><span style="width:20%; float: left; font-size: 17px; padding-top: 4px; color: black;">Select All</span>
-    <a href="edit-transaction.html" title="edit" class="edit-transaction" style=" color: black;"><i class="fa fa-pencil"></i>Edit</a>
-    <a href="#delete-transaction" title="delete" class="delete-transaction"  style=" color: black;"><i class="fa fa-trash"></i>Delete</a>
-    </span>
-       <div class="paging">
-        <?php
-            echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-            echo $this->Paginator->numbers(array('separator' => ''));
-            echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-        ?>
-        </div>
+                        <div class="page">
+                            <span id="page-select-all" >
+                                <input type="checkbox" name="checkAll" value="checkAll"  id="input-checkAll">
+                                <span id="span-checkAll">Select All</span>
+                                <a href="edit-transaction.html" title="edit" id="edits" class="edit-transaction"><i class="fa fa-pencil"></i>Edit</a>
+                                <a href="#delete-transaction" title="delete" id="deletes" class="delete-transaction"><i class="fa fa-trash"></i>Delete</a>
+                            </span>
+                           <div class="paging">
+                            <?php
+                                echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+                                echo $this->Paginator->numbers(array('separator' => ''));
+                                echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+                            ?>
+                            </div>
 
-</div>
-
+                        </div>
          
                 <div id="delete-transaction" class="modalDialog">      
                     <div class="login-panel panel panel-default">
@@ -191,41 +179,39 @@
                 <!-- /#delete-transaction -->
 
 
-                                <div id="add-category" class="modalDialog">      
-                        <div class="login-panel panel panel-default" style="margin-top: 6% !important; ">
-                            <div class="panel-heading">
-                                <h3 class="panel-title" style="    margin-bottom: 15px !important; padding-top: 15px;">Add Transaction</h3>
-                            </div> 
-                            <div class="panel-body" style="color: black;">
-                                <?php echo $this->Form->create('Transaction',array('action' => 'add')); ?>
-                                <div class="form-group" style="    width: 100%;
-    text-align: left;"> 
-                                    <?php echo $this->Form->input('wallet_id'); ?>
-                                </div>
-                                <div class="form-group" style="text-align: left;  width: 100%;">
-                                        <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
-                                </div>
-                                <div class="form-group" style="text-align: left;  width: 100%;">
-                                        <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
-                                </div>
-                                      
-                                  <div class="form-group"> 
-                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
-    width: 100%;
-    margin-left: -10px">
-    <button type="submit" class="btn wallet-save " style="float: left;
-    margin-right: -13px;
-"><a href="#close" style="color: white;
-    text-decoration: none;">Cancel</a></button>
-                                        <button type="submit" class="btn wallet-save" style="float: right;
-    margin-right: -13px;
-">Add</button>
-                                    </div>
-                                  </div>
-                                </form>
+                <div id="add-transaction" class="modalDialog">      
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Add Transaction</h3>
+                        </div> 
+                        <div class="panel-body">
+                            <?php echo $this->Form->create('Transaction',array('action' => 'add')); ?>
+                            <div class="form-group wallet-id"> 
+                                <?php echo $this->Form->input('wallet_id'); ?>
                             </div>
+                            <div class="form-group categorie-id" >
+                                <?php echo $this->Form->input('categorie_id', array('options' => $categories));  ?>
+                            </div>
+                            <div class="form-group transaction-money">
+                                <?php echo $this->Form->input('transaction_money', array('placeholder'=>'enter money', 'style'=>'padding-left: 8px')); ?>
+                            </div>  
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-2 col-sm-10 submit-wallet" style = "margin-top: 16px;
+width: 100%;
+margin-left: -10px">
+<button type="submit" class="btn wallet-save " style="float: left;
+margin-right: -13px;
+"><a href="#close" style="color: white;
+text-decoration: none;">Cancel</a></button>
+                                    <button type="submit" class="btn wallet-save" style="float: right;
+margin-right: -13px;
+">Add</button>
+                                </div>
+                              </div>
+                            </form>
                         </div>
                     </div>
+                </div>
                     <!-- /#add-category -->
             </div>
         </div>
@@ -234,4 +220,18 @@
             <!-- /.col-lg-5 -->
         </div>
     </section>
- 
+ <script type = "text/javascript" src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript">
+         $("#checkAll").change(function () {
+             $("input:checkbox").prop('checked', $(this).prop("checked"));
+         });
+
+        $("input:checkbox[name=aaa]").live("click", function () {
+            $("input:checkbox[name=aaa]:checked").each(function () { 
+                //alert("Id: " + $(this).attr("id")); 
+                // alert( " Value: " + $(this).val()); 
+                //  $query = "delete  from users where id = $(this).val()";
+                // $data = $this->users->query($query);
+            });
+        });
+    </script>

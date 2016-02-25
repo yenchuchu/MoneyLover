@@ -63,13 +63,10 @@
                                 <div class="form-group">
                                     <?php echo $this->Form->input('email', array('class'=>'form-control','label' => false, 'placeholder' => 'enter email')); ?>
                                 </div>
-                                <div class="form-group">
-                                    <?php echo $this->Form->input('password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
+                                 <div class="form-group">
+                                    <?php //echo $this->Form->input('password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
                                 </div>
-                                <div class="form-group">
-                                    <?php echo $this->Form->input('confirm_password', array('class'=>'form-control','label' => false, 'placeholder' => 'Confirm-password')); ?>
-                                </div>
-                                
+                               
                                 <!-- Change this to a button or input when using this as a form -->
                                 <?php 
                                 $signup = array(
@@ -96,22 +93,17 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body" style="background-color: rgba(255, 255, 255, 0.35);">
-                        <form role="form" class="form" method="post" action="#">
+                        <form role="form" class="form" method="post" >
                             <fieldset>
                              <div class="form-group">
                                     <!-- <input class="form-control" placeholder="Username" name="username" type="text" autofocus> -->
-                                    <?php echo $this->Form->input('username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
+                                    <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <?php echo $this->Form->input('email', array('class'=>'form-control','label' => false)); ?>
-                                </div> -->
-                                <div class="form-group">
-                                    <!-- <input class="form-control" placeholder="Password" name="password" type="password" value=""> -->
-                                    <?php echo $this->Form->input('password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
+                                    <?php echo $this->Form->input('User.password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="User.remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->

@@ -75,11 +75,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 `id` int(10) NOT NULL,
   `username` varchar(32) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `password` varchar(64) NOT NULL,
-  `confirm_password` varchar(64) DEFAULT NULL,
+  `active` int(1) DEFAULT 0 COMMENT '0-Thu, 1-Chi',
   `created` datetime NOT NULL,
-  `modified` datetime NOT NULL
+  `modified` datetime NOT NULL,
+  `level` int(1) DEFAULT 0,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
