@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('CakeNumber', 'Utility');
 
 /**
  * Transactions Controller
@@ -24,16 +25,23 @@ class TransactionsController extends AppController {
      */
     public function index() {
         $this->Transaction->recursive = 0;
-        $this->paginate = array('conditions' => array('Wallet.id is not null', 'Categorie.id is not null'));
+
+        $id_auth = $this->Auth->user('id');
+        $tests = $this->Transaction->query(
+                "select wallets.user_id, wallets.id from wallets 
+            inner join users on users.id = wallets.user_id where users.id = '$id_auth'");
+        $result = Set::classicExtract($tests, '{n}.wallets.id');
+        // debug( $result);die;
+        $this->paginate = array(
+            'conditions' => array('Wallet.id is not null',
+                'Categorie.id is not null',
+                'Transaction.wallet_id' => $result));
 
         $this->set('transactions', $this->Paginator->paginate());
 
         $categories = $this->Transaction->Categorie->find('list');
-        $wallets = $this->Transaction->Wallet->find('list');
+        $wallets = $this->Transaction->Wallet->find('list', array('conditions' => array('id' => $result)));
         $this->set(compact('categories', 'wallets'));
-        // if ($this->request->data['categories']['categorie_id'] == $categories['categorie_id']) {
-        // 		echo h($categories['categorie_id']);
-        // 	}
     }
 
     /**
@@ -59,7 +67,9 @@ class TransactionsController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->Transaction->create();
-            if ($this->Transaction->save($this->request->data)) {
+            $data = $this->request->data;
+
+            if ($this->Transaction->save($data)) {
                 $this->Flash->success(__('The transaction has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
@@ -98,6 +108,24 @@ class TransactionsController extends AppController {
         $this->set(compact('categories', 'wallets'));
     }
 
+    public function editAll() {
+        $this->request->allowMethod('post');
+
+        $ids = $this->request->data['ids'];
+        $this->Transaction->belongsTo = false;
+        if ($this->request->is(array('post', 'put'))) {
+            if ($this->Transaction->save(array('id' => $ids))) {
+                $this->Flash->success(__('The transaction has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
+            $this->request->data = $this->Transaction->find('first', $options);
+        }
+    }
+
     /**
      * delete method
      *
@@ -119,9 +147,18 @@ class TransactionsController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
-    public function logout() {
-        // return $this->redirect(array('Controller'=>'users', 'action'=>'main'));
-        $this->render('users', 'main');
+    public function deleteAll() {
+        $this->request->allowMethod('post');
+
+        $ids = $this->request->data['ids'];
+        $this->Transaction->belongsTo = false;
+        if ($this->Transaction->deleteAll(array('id' => $ids), true)) {
+            echo json_encode(['status' => 0, 'message' => 'OK']);
+            exit;
+        }
+
+        echo json_encode(['status' => 1, 'message' => 'Save not success']);
+        exit;
     }
 
 }

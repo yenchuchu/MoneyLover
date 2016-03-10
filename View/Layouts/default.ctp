@@ -23,12 +23,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->css ('/font-awesome/css/font-awesome');
 		// echo $this->Html->css('grayscale');
 		
-
+		echo $this->Html->script('jquery-1.6.1.min');
 		echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery.easing.min');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('common');
 		echo $this->Html->script('grayscale');
+		echo $this->Html->script('Chart.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

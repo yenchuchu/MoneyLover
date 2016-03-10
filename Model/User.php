@@ -15,6 +15,11 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  */
 class User extends AppModel {
 
+    const USER_ACTIVE = 1;
+    const USER_REQUEST = 0;
+    const ROLE_ADMIN = 1;
+    const ROLE_USER = 0;
+
     /**
      * Validation rules
      *
@@ -137,6 +142,16 @@ class User extends AppModel {
         $hashed_confirm = AuthComponent::password($check['confirm_password']);
         $hashed_new = AuthComponent::password($check['new_password']);
         return $hashed_new === $hashed_confirm;
+    }
+
+    public function createRandomString($num) {
+        // Create password random
+        $chars = array('a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        $max_chars = count($chars) - 1;
+        for ($i = 0; $i < $num; $i++) {
+            $code = ( $i == 0 ) ? $chars[rand(0, $max_chars)] : $code . $chars[rand(0, $max_chars)];
+        }
+        return $code;
     }
 
 }

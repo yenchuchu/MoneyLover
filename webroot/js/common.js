@@ -16,3 +16,19 @@ function deleteAll (url,ids) {
       }
   });
 }
+
+function editAll (url,ids) {
+   
+  $.ajax({
+      type: "POST",
+      url: url,
+      dataType: 'json',
+      data: {ids: ids},
+      success: function (res) {
+          alert(res.message);
+          if (res.status === 0) {
+              location.reload();
+          } 
+      }
+  });
+}

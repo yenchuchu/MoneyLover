@@ -484,6 +484,23 @@ td#edit-category-type {
     top: -10px;
 }
 
+#a-add-category {
+    position: relative;
+    top: -72px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#a-add-category:hover {
+    text-decoration: none;
+    background-color: rgba(102, 51, 153, 0.79);
+}
+
 @media(min-width:767px) {
     .content-section {
         padding-top: 70px !important;
@@ -697,14 +714,15 @@ footer {
 
 #transaction h1 {
     position: relative;
-    top: -15px; 
+    top: 20px;
     font-weight: bold; 
     color: black;
 }
 
-#transaction>#a-add-transaction {
+#transaction>#a-add-transaction,
+a#add-admin-other {
     position: relative;
-    top: -82px;
+    top: -49px;
     right: -250px;
     border: none;
     padding: 7px 24px;
@@ -713,6 +731,17 @@ footer {
     background-color: rebeccapurple;
     color: white;
 }
+
+a#add-admin-other {
+    top: -67px;
+    right: -275px;
+}
+
+a#add-admin-other:hover {
+    text-decoration: none;
+    color: rgba(248, 251, 249, 0.73) !important;
+}
+
 
 #transaction>.page {
      position: relative;
@@ -879,19 +908,23 @@ footer {
 
 /* show-a-transaction transaction */
 
+#transaction>#a-add-transaction:hover {
+    text-decoration: none;
+    color: rgba(248, 251, 249, 0.73) !important;    
+}
+
 #show-a-transaction i {
     font-size: 25px;
 }
 
-a.edit-transaction {
-    float: left;
-    width: 45px;
+a.edit-transaction { 
     height: 30px;
+    width:10%;
     padding-top: 6px;
     border-radius: 5px;
     margin-left: 20px;
-    color: #11A059;
-    text-decoration: underline;
+    color: #983543;
+    text-decoration: none;
     font-size: 16px;
 }
 
@@ -900,13 +933,14 @@ a.edit-transaction i {
 }
 
 a.delete-transaction {
+    width:10%;
     border-radius: 5px; 
     padding: 7px 17px;
     padding-bottom: 6px;
     top: 6px;
     position: relative;
-    color: #77182E;
-    text-decoration: underline;
+    color: #983543;
+    text-decoration: none;
     font-size: 16px;
 }
 
@@ -914,9 +948,23 @@ a.delete-transaction i {
     padding-right: 1px;
 }
 
+#deleteAll,
+#EditAll {
+    color: #983543;
+    float: left;
+    width: 10%;
+    font-size: 17px;
+    position: relative;
+    top: 3px;
+} 
+
 a:hover.edit-transaction,
-a:hover.delete-transaction {
-    color: #983543
+a:hover.delete-transaction,
+#deleteAll:hover,
+#EditAll:hover {
+    color: #11A059;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a.cancel-transaction {
@@ -1144,7 +1192,7 @@ border:solid 1px #0e509e;
 
 #wallet a:hover {
     text-decoration: none;
-    color: black !important;    
+    color: rgba(248, 251, 249, 0.73) !important;    
 }
 
 #wallet button:hover {
@@ -1152,8 +1200,9 @@ border:solid 1px #0e509e;
 }
 
 #TransactionAddForm label {
-     width: 30%;
+    width: 30%;
     text-align: center;
+        margin-right: 10px;
 }
 
 #TransactionAddForm select  {
@@ -1269,3 +1318,121 @@ input#TransactionTransactionMoney {
     padding-top: 15px;
 }
 
+.type-money {
+    position: relative;
+    top: -26px;
+    left: 32%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* transfer */
+
+#transfer-wallet {
+    background-color: rgb(237, 249, 244);
+    color: #151313;
+}
+
+a#a-add-transfer {
+    position: relative;
+    top: -51px;
+    right: -281px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#transfer-wallet h1 {
+    position: relative;
+    top: 16px;
+}
+
+#transfer-wallet #a-add-transfer:hover {
+    text-decoration: none;
+    color: rgba(248, 251, 249, 0.73) !important;    
+}
+
+#row-transfer {
+    margin-right:0px; 
+    margin-bottom: 10px
+}
+
+#transfer-wallet table {
+    width: 100%;
+}
+
+input .checkbox-transfer {
+    float: left;
+    position: relative;
+    top: -6px;
+}
+
+.page {
+    position: relative;
+    bottom: -5px; 
+    width: 100%;
+}
+
+.wrap-select-all {
+    float: left;
+    margin-left: 9px;
+    width: 50%;
+}
+
+.with-selected {
+    float: left;
+    width: 20%;
+    text-align: center;
+    position: relative;
+    top: 3px;
+    font-size: 17px;
+}
+
+#checkAll {
+    float: left;
+}
+
+.label-select-all {
+    width:20%; 
+    float: left; 
+    font-size: 17px; 
+    padding-top: 4px;
+    font-weight: normal;
+}
+
+/* day transaction */
+
+select#TransactionDayTransactionMonth {
+    width: 27% !important;
+        min-width: 27% !important;
+}
+
+select#TransactionDayTransactionDay {
+    width: 14% !important;
+     min-width: 14% !important;
+
+}
+
+select#TransactionDayTransactionYear {
+    min-width: 17% !important;
+
+}
+
+/* report month */
+
+#report-month {
+    /*margin-top: 15px;*/
+        padding-bottom: 10%;
+}
+
+.nav .open > a, .nav .open > a:hover {
+    background-color: rgba(212, 193, 193, 0.17) !important;
+}
+
+.navbar-custom .nav .dropdown-menu li a:hover {
+    color: black;
+    background-color: rgba(167, 139, 139, 0.78);
+}

@@ -1,4 +1,7 @@
 <?php
+App::uses('AppHelper', 'View/Helper');
+
+
 class CommonHelper extends AppHelper {
  
  function create_random_string($num) {

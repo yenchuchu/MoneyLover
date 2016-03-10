@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('CakeNumber', 'Utility');
+// echo CakeNumber::currency('1234.56', 'FOO');
 
 /**
  * Wallets Controller
@@ -28,19 +30,6 @@ class WalletsController extends AppController {
         );
         $this->Wallet->recursive = 0;
         $this->set('wallets', $this->Paginator->paginate());
-        //debug($this->Auth->user());
-        // $count = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
-        //       debug(array('User.id' => AuthComponent::user('id'))); die;
-    }
-
-// debug($this->Paginator->paginate());
-// die();
-    // $users = $this->Wallets->User->find(); 
-    // $this->set(compact('users'));
-
-
-    public function logout() {
-        return $this->redirect(array('Controller' => 'users', 'action' => 'main'));
     }
 
     /**
@@ -70,7 +59,7 @@ class WalletsController extends AppController {
             $data = $this->request->data;
             $data['Wallet']['user_id'] = $this->Auth->user('id');
             if ($this->Wallet->save($data)) {
-                $this->Flash->success(__('The wallet has been saved.'));
+                // $this->Flash->success(__('The wallet has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
@@ -93,7 +82,7 @@ class WalletsController extends AppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Wallet->save($this->request->data)) {
-                $this->Flash->success(__('The wallet has been saved.'));
+                // $this->Flash->success(__('The wallet has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
@@ -120,7 +109,7 @@ class WalletsController extends AppController {
         }
         $this->request->allowMethod('post', 'delete');
         if ($this->Wallet->delete()) {
-            $this->Flash->success(__('The wallet has been deleted.'));
+            // $this->Flash->success(__('The wallet has been deleted.'));
         } else {
             $this->Flash->error(__('The wallet could not be deleted. Please, try again.'));
         }

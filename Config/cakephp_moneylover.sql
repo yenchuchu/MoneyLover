@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `categorie_id` int(10) NOT NULL,
   `wallet_id` int(10) NOT NULL, 
   `transaction_money` float NOT NULL DEFAULT '0',
+  `day_transaction` date NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` int(1) DEFAULT 0 COMMENT '0-Thu, 1-Chi',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `level` int(1) DEFAULT 0,
+  `role` int(1) DEFAULT 0,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
