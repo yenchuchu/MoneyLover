@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application level Controller
  *
@@ -9,9 +10,8 @@
  * @package       app.Controller
  * @since         CakePHP(tm) v 0.2.9
  */
-
 App::uses('Controller', 'Controller');
-
+App::uses('CakeTime', 'Utility');
 /**
  * Application Controller
  *
@@ -22,24 +22,25 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array(
-			'Flash',
-			'Auth' => array(
-				'loginRedirect' => array(
-					'controller' => 'transactions',
-					'action' => 'index'
-					),
-				'logoutRedirect' => array(
-					'controller' => 'pages',
-					'action' => 'display',
-					'home'
-					)
-				),
-			
-		);
 
-	public function beforeFilter() {
-		$this->Auth->allow('index', 'view', 'edit', 'main');
-	}
-	
+    public $components = array(
+        'Flash',
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'wallets',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'users',
+                'action' => 'main'
+            )
+        ),
+        'DebugKit.Toolbar'
+    );
+    public $helpers = array('Common');
+
+    public function beforeFilter() {
+        $this->Auth->allow('main');
+    }
+
 }
