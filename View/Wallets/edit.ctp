@@ -5,9 +5,8 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="../MoneyLover/Wallets/index">
-                <i class="fa fa-play-circle"></i>  <span class="light">Money</span> Lover
-            </a>
+            <i class="fa fa-play-circle" id="icon-banner"></i>
+            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'wallets', 'action' => 'index'), array('id' => 'banner')); ?> 
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
