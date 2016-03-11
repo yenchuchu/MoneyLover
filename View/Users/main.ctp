@@ -38,7 +38,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="brand-heading">Money Lover</h2>
                     <p class="intro-text">Money Lover is a great powerful tool to track your personal finance: incomes, expenses, debts, savings, etc</p>
-                    <a href="#about" class="btn btn-circle page-scroll" style="    background-color: rgba(255, 255, 255, 0.3);     font-size: 44px;;    color: #fff;" title="about">
+                    <a href="#about" class="btn btn-circle page-scroll main-about"  title="about">
                         <i class="fa fa-angle-double-down animated"></i>
                     </a>
                 </div>
@@ -54,7 +54,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Please Sign Up</h3>
             </div>
-            <div class="panel-body" style="background-color: rgba(255, 255, 255, 0.35);">
+            <div class="panel-body" >
                 <form role="form" method="POST">
                     <fieldset>
                         <div class="form-group">
@@ -89,23 +89,24 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
-                <div class="panel-body" style="background-color: rgba(255, 255, 255, 0.35);">
+                <div class="panel-body">
                     <form role="form" class="form" method="post" >
                         <fieldset>
-                            <div class="form-group">
-                                   <!-- <input class="form-control" placeholder="Username" name="username" type="text" autofocus> -->
+                            <div class="form-group"> 
                                     <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
                             </div>
                                     <?php echo $this->Form->input('User.password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
                             </div>
-                            <div class="checkbox">
+                            <div class="checkbox" >
                                 <label>
-                                    <input name="User.remember" type="checkbox" value="Remember Me">Remember Me
+                                    <input name="User.remember" type="checkbox" value="Remember Me" >Remember Me
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                                 <?php 
                                 $signin = array(
+                                    'style'=>'    border-top-left-radius: 0px;
+                                    border-top-right-radius: 0px;',
                                 'label' => 'Sign-in',
                                 'name' => 'signin',
                                 'id' => 'sign-in',

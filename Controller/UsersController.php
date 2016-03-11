@@ -21,7 +21,7 @@ class UsersController extends AppController {
      *
      * @var array
      */
-    public $components = array('Paginator', 'Email');
+    public $components = array('Paginator', 'Email', 'Session');
     public $uses = array('User');
     public $helpers = array('Common');
 
@@ -37,18 +37,13 @@ class UsersController extends AppController {
 
 
     public function index() {
+        
         $type = $this->request->query('type');
-        if ($type == 'active' || $type == null) {
-            // debug($this->Common->create_random_string(10));die;
-            // $result = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
-            // debug(AuthComponent::user('id'));
-            // debug(AuthComponent::user('role'));
-            // debug(AuthComponent::user('password'));
-            // debug(AuthComponent::user('active'));
-            // debug(AuthComponent::user('avatar'));die;
+        if ($type == 'active' || $type == null) { 
 
             $this->Paginator->settings = array(
-                'conditions' => array('User.active' => 1)
+                'conditions' => array('User.active' => 1),
+            'limit'=>20
             );
             $this->User->recursive = 0;
             $this->set('users', $this->Paginator->paginate());
@@ -57,8 +52,7 @@ class UsersController extends AppController {
             $this->Paginator->settings = array(
                 'conditions' => array('User.active' => 0)
             );
-            $this->User->recursive = 0;
-            //debug($this->Paginator->paginate());die;
+            $this->User->recursive = 0; 
             $this->set('users', $this->Paginator->paginate());
             $this->set('typeLabel', strtoupper('request'));
         }
@@ -208,7 +202,7 @@ class UsersController extends AppController {
                 $count = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
 
                 if ($count['User']['role'] == 0) {
-                    if ($count['User']['active'] == USER_REQUEST) {
+                    if ($count['User']['active'] == User::USER_REQUEST) {
                         $this->redirect(array('controller' => 'Users', 'action' => 'change_password', AuthComponent::user('id')));
 
                         if (isset($this->request->data)) {
@@ -253,6 +247,7 @@ class UsersController extends AppController {
                                     ->to($this->request->data['email'])
                                     ->subject('Confirm Account')
                                     ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
+                             return $this->redirect(array('controller' => 'Users','action' => 'confirmEmail'));        
                         else:
                             $this->Flash->error(__('Cant save account. Please, try again.'));
                         endif;
@@ -279,8 +274,7 @@ class UsersController extends AppController {
                 if ($this->Auth->login()) {
                     $count = $this->User->find('first', array(
                         'conditions' => array('User.id' => AuthComponent::user('id'))
-                    ));
-
+                    )); 
                     if ($count['User']['active'] == User::USER_REQUEST) {
                         $this->redirect(array('controller' => 'Users',
                             'action' => 'change_password', AuthComponent::user('id')));
@@ -289,10 +283,8 @@ class UsersController extends AppController {
                         //     $this->User->updateAll(array('User.active' => User::USER_ACTIVE), 
                         //         array('User.id' => AuthComponent::user('id')));
                         // }
-                    }
-
-
-                    if ($count['User']['role'] == ROLE_USER) {
+                    } 
+                    if ($count['User']['role'] == User::ROLE_USER) {
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
                         return $this->redirect(array('controller' => 'users', 'action' => 'index'));
@@ -307,7 +299,8 @@ class UsersController extends AppController {
         $this->set('showLayoutContent', true);
     }
 
-    public function change_password($id = null) {
+    public function change_password($id = null) { 
+
         if (!$id) {
             throw new NotFoundException(__('Invalid User'));
         }
@@ -316,6 +309,7 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid User'));
         }
         if ($this->request->is(array('put', 'post'))) {
+
             $this->User->id = $id;
             $changable = $this->request->data['User'];
 
@@ -326,22 +320,25 @@ class UsersController extends AppController {
                 $this->Flash->error(__('The confirm password not match with the new password'));
             } else {
                 if ($this->User->save(['password' => $changable['new_password']])) {
-                    $result['User']['active'] = USER_ACTIVE;
+                    $result['User']['active'] = User::USER_ACTIVE;
                     $this->User->updateAll(array('User.active' => $result['User']['active']), array('User.id' => AuthComponent::user('id')));
-
-                    if ($result['User']['role'] == ROLE_ADMIN) {
-                        return $this->redirect(array('controller' => 'users', 'action' => 'index'));
-                    } else {
-                        return $this->redirect($this->Auth->redirectUrl());
-                    }
+                    $this->Session->write('Auth.User.active', $result['User']['active']);
+                    return $this->redirect($this->referer());
+                   
                 } else {
                     $this->Flash->error(__('The password could not be saved'));
                 }
-            }
+            }            
+        }
+        if(AuthComponent::user('active') == User::USER_ACTIVE) {
+            $this->render('change_password');
+        } else {
+            $this->render();
         }
     }
 
     public function UploadImage($id = null) {
+        $backUrl = $this->referer();
         if (!$id) {
             throw new NotFoundException(__('Invalid User'));
         }
@@ -395,7 +392,9 @@ class UsersController extends AppController {
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
                     $this->User->save(['avatar' => basename($_FILES["fileToUpload"]["name"])]);
-                    return $this->redirect(array('controller' => 'users', 'action' => 'index'));
+                    $this->Session->write('Auth.User.avatar', basename($_FILES["fileToUpload"]["name"]));
+                    echo "<p>Upload avatar success!</p>";
+                    return $this->redirect($backUrl);
                 } else {
                     echo "Sorry, there was an error uploading your file.";
                 }

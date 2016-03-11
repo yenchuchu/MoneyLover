@@ -35,7 +35,8 @@ class TransactionsController extends AppController {
         $this->paginate = array(
             'conditions' => array('Wallet.id is not null',
                 'Categorie.id is not null',
-                'Transaction.wallet_id' => $result));
+                'Transaction.wallet_id' => $result),
+            'limit'=>20);
 
         $this->set('transactions', $this->Paginator->paginate());
 

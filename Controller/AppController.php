@@ -40,7 +40,7 @@ class AppController extends Controller {
     public $helpers = array('Common');
 
     public function beforeFilter() {
-        $this->Auth->allow('main');
+        $this->Auth->allow('main','confirmEmail');
     }
 
 }

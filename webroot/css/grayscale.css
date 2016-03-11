@@ -395,6 +395,21 @@ body {
     padding: 0;
 }
 
+#categories .panel-heading {
+    background-color: transparent !important;  
+    padding-bottom: 0;
+}
+
+#categories table {
+    width: 100%;
+}
+
+#categories .category-checkbox {
+    float: left;
+    position: relative;
+    top: -6px;
+}
+
 #categories ul {
     list-style:  none;
 }
@@ -465,6 +480,121 @@ body {
     margin-bottom: 8px;
 }
 
+#categories .page {
+    position: relative;
+    bottom: -5px; 
+    width: 100%;
+}
+
+#categories #span-check-all {
+    float: left;
+    margin-left: 9px;
+    width: 50%;
+}
+
+#categories #checkAll {
+    float: left;
+}
+
+#span-check-all>label {
+    width:20%; 
+    float: left; 
+    font-size: 17px; 
+    padding-top: 4px;
+    font-weight: normal;
+}
+
+#span-check-all>span {
+    float: left;
+    width: 20%;
+    text-align: center;
+    position: relative;
+    top: 3px;
+    font-size: 17px;
+}
+
+#categories #deleteAll {
+    right: 31%;
+    top: 7px;
+}   
+
+#add-category .panel-title {
+    margin-bottom: 15px !important;
+    padding-top: 15px;
+}
+
+#lable-type-category {
+    margin-top: 17px;
+    text-align: right;    
+    padding-right: 0;
+}
+
+#lable-name-category {
+    padding-right: 0;
+}
+
+#categories #CategoryType {
+    position: relative;
+    top: 11px;
+    margin-right: 8px;
+}
+
+.submit-add-category {
+    margin-top: 16px;
+    width: 100%;
+    margin-left: -10px
+}
+
+.submit-add-category>a {
+    float: left;
+    margin-right: -13px;
+    color: white; 
+}
+
+.submit-add-category>button {
+    float: right;
+    margin-right: -13px;
+}
+
+/* edit category */
+
+#edit-category {
+    background-color: rgb(237, 249, 244);
+}
+
+#edit-category .row {
+    margin-right:0px; 
+    margin-bottom: 10px
+}
+
+#edit-category .panel-body {
+    position: relative; 
+    min-height: 60px;
+}
+
+#edit-category table {
+    width: 100%;
+}
+
+#edit-category .edit-name-category {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: 5px;
+    color: black;
+}
+
+#edit-category #CategoryType {
+    position: relative;
+    top: 11px;
+    margin-right: 8px;
+}
+
+.edit-input-expense {
+    top: 11px;
+}
+
 #edit-category h1 {
     text-align: center;
     color: rgba(0, 0, 0, 0.73);
@@ -516,15 +646,65 @@ td#edit-category-type {
     /*text-shadow: 4px 3px 0px #1d9d74, 9px 8px 0px rgba(0, 0, 0, 0.15);*/
 }
 
+#accounts table {
+    width: 100%; 
+    text-align: center;
+}
+
+#checkbox-account {
+    float: left;
+    position: relative; 
+    top: -6px;
+}
+
+.submit-accounts {
+    margin-top: 16px;
+    width: 100%;
+    margin-left: -10px
+}
+
+.submit-accounts>a {
+    float: left;
+    margin-right: -13px;
+    color: white;
+}
+
+.submit-accounts>button {
+    float: right;
+    margin-right: -13px;
+}
+
+
 /* wallet - user */
 
 footer {
-     padding: 0; 
+    padding: 0; 
 }
 
 #wallet {
     /*background-color: rgba(65, 184, 220, 0.98);*/
     background-color: rgb(204, 239, 233);
+}
+
+#a-add-wallet {
+    position: relative;
+    top: -53px;
+    right: -250px;
+    border: none;
+    padding: 7px 24px;
+    font-size: 17px;
+    border-radius: 5px;
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#add-wallet .panel-title {
+    margin-bottom: 15px !important; 
+    padding-top: 15px;
+}
+
+#add-wallet label {
+    padding-right: 0;
 }
 
 #wallet>.row>.col-lg-5 {
@@ -542,10 +722,29 @@ footer {
     color: #761628;
 }
 
+#wallet #title-h1 {
+    position: relative;
+    top: 18px;
+}
+
+#wallet .row {
+    margin-right:0px
+}
+
+.name-wallet {
+    border-bottom: 1px solid;  
+    padding-top: 8px;
+}
+
 #wallet ul {
     list-style: none;
     text-align: left;
     padding-left: 20px;
+}
+
+.wallet-info>i {
+    padding-right: 4px;
+    margin-left: 2px;
 }
 
 #wallet .wallet-info,
@@ -556,6 +755,69 @@ footer {
     padding-right: 15px;
     font-weight: bold;
 
+}
+
+.content-wallet-info {
+    text-align: left; 
+    font-size: 16px; 
+    padding-top: 3px;
+}
+
+.time-active-wallet {
+    float: left; 
+    margin-bottom: 20px;
+}
+
+.time-create-wallet{
+    padding-left: 15px;
+}
+
+.time-modified-wallet {
+    padding-left: 25px;
+}
+
+.action-wallet {
+    margin-top: 80px; 
+    border-top: 1px solid;
+}
+
+.action-wallet>.edit-wallet {
+    float: left;
+    width: 40%;
+    background-color: #7049A2;
+    height: 39px;
+    border-radius: 5px;
+    color: white;
+    padding-top: 8px;
+    font-size: 17px;
+}
+
+.action-wallet>.delete-wallet {
+    width: 40%;
+    background-color: #7049A2;
+    height: 39px;
+    border-radius: 5px;
+    color: white;
+    padding-top: 8px;
+    font-size: 17px;
+}
+
+#add-wallet .submit-wallet {
+    margin-top: 16px;
+    width: 100%;
+    margin-left: -10px
+}
+
+.submit-wallet>a.wallet-save {
+    color: white;
+    text-decoration: none;
+    float: left;
+    margin-right: -13px;
+}
+
+.submit-wallet>button.wallet-save {
+    float: right; 
+    margin-right: -13px;
 }
 
 #wallet button,
@@ -569,13 +831,33 @@ footer {
     color: white;
 }
 
+/* edit wallet */
+
+.edit-wallet-info {
+    position: relative;
+    width: 64% !important;
+}
+
+.edit-money-current { 
+    width: 43% !important;
+    position: relative;
+    right: 1%; 
+}
+
+.edit-name-wallet {
+    text-align: center;  
+    margin-bottom: 15px;    
+    width: 85% !important;
+    margin-left: 37px;
+}
+
 .modal-dialog h4 {
     color:white; 
     text-align: center;
 }
 
 .modal-dialog  .modal-header {
-     background-color: #9A3745;
+    background-color: #9A3745;
 }
 
 /* modal */
@@ -708,8 +990,8 @@ footer {
 
 /* transaction */
 #transaction {
-   background-color: rgb(237, 249, 244);
-   color: #151313; 
+    background-color: rgb(237, 249, 244);
+    color: #151313; 
 }
 
 #transaction h1 {
@@ -717,6 +999,27 @@ footer {
     top: 20px;
     font-weight: bold; 
     color: black;
+}
+
+#transaction .row {
+    margin-right:0px; 
+    margin-bottom: 10px
+}
+
+#transaction table {
+    width: 100%;
+}
+
+.transaction-checkbox {
+    float: left;
+    position: relative;
+    top: -6px;
+}
+
+#transaction .page {
+    position: relative;
+    bottom: -5px; 
+    width: 100%;
 }
 
 #transaction>#a-add-transaction,
@@ -744,7 +1047,7 @@ a#add-admin-other:hover {
 
 
 #transaction>.page {
-     position: relative;
+    position: relative;
     bottom: -30px;
     width: 100%;
 }
@@ -874,7 +1177,70 @@ a#add-admin-other:hover {
     width: 100%;
     margin-left: -10px
 }
- 
+
+.submit-transaction>a {
+    color: white;
+    text-decoration: none;float: left;
+    margin-right: -13px;
+}
+
+.submit-transaction>button {
+    float: right; 
+    margin-right: -13px;
+}
+
+/* transfer wallet */
+
+#add-transfer .panel-title {
+    margin-bottom: 15px !important; 
+    padding-top: 15px;
+}
+
+#add-transfer label {
+    padding-right: 0; 
+    float: left;
+}
+
+#submit-add-transfer {
+    margin-top: 16px;
+    width: 100%;
+    margin-left: -10px
+}
+
+#submit-add-transfer>a {
+    color: white;
+    text-decoration: none;float: left;
+    margin-right: -13px;
+}
+
+#submit-add-transfer>button {
+    float: right; 
+    margin-right: -13px;
+}
+
+/* edit transfer wallet */
+
+.edit-detail-transfer-wallet .panel-heading {
+    background-color: transparent !important;  
+    padding-bottom: 0;
+}
+
+.edit-sent-wallet,
+.edit-receive-wallet,
+.edit-transfer-money {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: 5px;
+    color: black;
+}
+
+.edit-detail-transfer-wallet .type-money {
+    top: 80px;
+    left: 45%;    
+    color: black;
+}
 /* admin-accounts */
 #accounts ul {
     text-align: left;
@@ -1002,65 +1368,87 @@ input {
     top: 152px;
 }
 
+/* edit transaction */
+
+.edit-transaction-sigle .panel-heading {
+    background-color: transparent !important;  
+    padding-bottom: 0;
+}
+
+.edit-transaction-sigle table {
+    width: 100%;
+}
+
+#edit-transaction-category,
+#edit-transaction-wallet,
+#edit-transaction-money {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: 5px;
+    color: black;
+}
+
 /*phantrang*/
 
 ul{border:0; margin:0; padding:0;}
- 
+
 #pagination-digg li{
-border:0; margin:0; padding:0;
-font-size:11px;
-list-style:none;
-margin-right:2px;
+    border:0; margin:0; padding:0;
+    font-size:11px;
+    list-style:none;
+    margin-right:2px;
 }
- 
+
 #pagination-digg a{
-border:solid 1px #9aafe5;
-margin-right:2px;
+    border:solid 1px #9aafe5;
+    margin-right:2px;
 }
- 
+
 #pagination-digg .previous-off,
 #pagination-digg .next-off{
-border:solid 1px #DEDEDE;
-color:#888888;
-display:block;
-float:left;
-font-weight:bold;
-margin-right:2px;
-padding:3px 4px;
+    border:solid 1px #DEDEDE;
+    color:#888888;
+    display:block;
+    float:left;
+    font-weight:bold;
+    margin-right:2px;
+    padding:3px 4px;
 }
- 
+
 #pagination-digg .next a,
 #pagination-digg .previous a{
-font-weight:bold;
+    font-weight:bold;
 }
- 
+
 #pagination-digg .active{
-background:#2e6ab1;
-color:#FFFFFF;
-font-weight:bold;
-display:block;
-float:left;
-padding:4px 6px;
+    background:#2e6ab1;
+    color:#FFFFFF;
+    font-weight:bold;
+    display:block;
+    float:left;
+    padding:4px 6px;
 }
- 
+
 #pagination-digg a:link,
 #pagination-digg a:visited{
-color:#0e509e;
-display:block;
-float:left;
-padding:3px 6px;
-text-decoration:none;
+    color:#0e509e;
+    display:block;
+    float:left;
+    padding:3px 6px;
+    text-decoration:none;
 }
- 
+
 #pagination-digg a:hover{
-border:solid 1px #0e509e;
+    border:solid 1px #0e509e;
 }
 
 /*   table - account   */
- 
-.table > thead > tr > th {
-     text-align: center;
-  }
+
+th {
+    text-align: center !important;
+}
 
 /* report month */
 
@@ -1068,90 +1456,132 @@ border:solid 1px #0e509e;
     background-color: #36465D;
 }
 
-#report-month  h1 {
+#report-month  #title-report {
+    top: 25px;
     position: relative;
-    top: -55px;
 }
 
+#report-month .row {
+    margin-right:0px; 
+    margin-bottom: 10px;    
+    margin-top: 10%;
+}
+
+#report-month .row-10-report {
+    margin-bottom: 30px; 
+    top:-51px
+}
+
+#report-month .panel-body {
+    margin-bottom: 4%;
+    border: 1px solid #83202E; 
+    background-color: rgba(255, 255, 255, 0.23)
+}
+
+#report-month .title-month {
+    font-size: 20px; 
+    font-weight: bold;   
+    padding-left: 5px;
+}
+
+#report-month .panel-heading {
+    text-align: left;
+}
+
+#report-month .panel-heading i {
+    font-size: 24px;
+    float: left;
+}
+
+#report-month  .type,
+#report-month .type-category {
+    float: left; 
+    width: 50%;
+}
+
+canvas {
+    position: relative;
+    left: -47px;
+}
 .pieContainer {
-          height: 100px;
-     }
-     .pieBackground {
-          background-color: grey;
-          position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-          -moz-box-shadow: -1px 1px 3px #000;
-          -webkit-box-shadow: -1px 1px 3px #000;
-          -o-box-shadow: -1px 1px 3px #000;
-          box-shadow: -1px 1px 3px #000;
-     } 
-     .pie {
-          position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-          clip: rect(0px, 50px, 100px, 0px);
-     }
-     .hold {
-          position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-          clip: rect(0px, 100px, 100px, 50px);
-     }
-     #pieSlice1 .pie {
-          background-color: #1b458b;
-          -webkit-transform:rotate(50deg);
-          -moz-transform:rotate(50deg);
-          -o-transform:rotate(50deg);
-          transform:rotate(50deg);
-     }
-     /* ----------- */
-      #pieSliceBlue .pie {
-          background-color: #1b458b;
-          -webkit-transform:rotate(180deg);
-          -moz-transform:rotate(180deg);
-          -o-transform:rotate(180deg);
-          transform:rotate(180deg);
-     }
-     #pieSliceBlue2 {
-          -webkit-transform:rotate(180deg);
-          -moz-transform:rotate(180deg);
-          -o-transform:rotate(180deg);
-          transform:rotate(180deg);
-     }
-     #pieSliceBlue2 .pie {
-          background-color: #1b458b;
-          -webkit-transform:rotate(40deg);
-          -moz-transform:rotate(40deg);
-          -o-transform:rotate(40deg);
-          transform:rotate(40deg);
-     }
-     #pieSliceRed {
-        background-color: black;
-          -webkit-transform:rotate(220deg);
-          -moz-transform:rotate(220deg);
-          -o-transform:rotate(220deg);
-          transform:rotate(220deg);
-     }
-     #pieSliceRed .pie {
-          background-color: #cc0000;
-          -webkit-transform:rotate(140deg);
-          -moz-transform:rotate(140deg);
-          -o-transform:rotate(140deg);
-          transform:rotate(140deg);
-     }
+    height: 100px;
+}
+.pieBackground {
+    background-color: grey;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+    -moz-box-shadow: -1px 1px 3px #000;
+    -webkit-box-shadow: -1px 1px 3px #000;
+    -o-box-shadow: -1px 1px 3px #000;
+    box-shadow: -1px 1px 3px #000;
+} 
+.pie {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+    clip: rect(0px, 50px, 100px, 0px);
+}
+.hold {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px;
+    clip: rect(0px, 100px, 100px, 50px);
+}
+#pieSlice1 .pie {
+    background-color: #1b458b;
+    -webkit-transform:rotate(50deg);
+    -moz-transform:rotate(50deg);
+    -o-transform:rotate(50deg);
+    transform:rotate(50deg);
+}
+/* ----------- */
+#pieSliceBlue .pie {
+    background-color: #1b458b;
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+#pieSliceBlue2 {
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+#pieSliceBlue2 .pie {
+    background-color: #1b458b;
+    -webkit-transform:rotate(40deg);
+    -moz-transform:rotate(40deg);
+    -o-transform:rotate(40deg);
+    transform:rotate(40deg);
+}
+#pieSliceRed {
+    background-color: black;
+    -webkit-transform:rotate(220deg);
+    -moz-transform:rotate(220deg);
+    -o-transform:rotate(220deg);
+    transform:rotate(220deg);
+}
+#pieSliceRed .pie {
+    background-color: #cc0000;
+    -webkit-transform:rotate(140deg);
+    -moz-transform:rotate(140deg);
+    -o-transform:rotate(140deg);
+    transform:rotate(140deg);
+}
 
 /* main  */
 
@@ -1161,6 +1591,35 @@ border:solid 1px #0e509e;
     color: white;
     width: 100%;
     height: 45px;
+}
+
+#main-sign-up .panel-body {
+    background-color: rgba(255, 255, 255, 0.35);    
+    border: 1px solid #7E1B29;
+}
+
+#main-sign-in .panel-body {
+    background-color: rgba(255, 255, 255, 0.35); 
+    padding-bottom: 0px;
+}
+
+#main-sign-in .checkbox {
+    background-color: rgba(255, 255, 255, 0.35);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 12px; 
+}
+
+#main-sign-in .checkbox input {
+    position: relative;
+    top: 10px;
+    right: 8px;
+}
+
+.main-about {
+    background-color: rgba(255, 255, 255, 0.3);     
+    font-size: 44px !important;   
+    color: #fff;
 }
 
 /*  baner */
@@ -1202,7 +1661,7 @@ border:solid 1px #0e509e;
 #TransactionAddForm label {
     width: 30%;
     text-align: center;
-        margin-right: 10px;
+    margin-right: 10px;
 }
 
 #TransactionAddForm select  {
@@ -1216,28 +1675,12 @@ input#TransactionTransactionMoney {
     width: 45%;
 }
 
-/* edit wallet */
-#edit-wallet-detail {
-     background-color: rgb(204, 239, 233);
-     color: black !important;
-}
- 
-#edit-wallet-detail h1,
-#edit-wallet-detail p {
-    color: black !important;
-}
-
-#edit-wallet-detail label,
-#edit-wallet-detail select,
-#edit-wallet-detail input {
-    color: black !important;
-}
 
 /* Report Month */
 
 #report-month {
-   background-color: rgb(237, 249, 244);
-   color: #151313; 
+    background-color: rgb(237, 249, 244);
+    color: #151313; 
 }
 
 #report-month h1 {
@@ -1254,8 +1697,8 @@ input#TransactionTransactionMoney {
     color: white;
     padding: 6px 11px;
     border-radius: 5px; 
-     margin-right: 3px;
-     margin-left: 5px;
+    margin-right: 3px;
+    margin-left: 5px;
 }
 
 .number-page > a:hover {
@@ -1310,8 +1753,8 @@ input#TransactionTransactionMoney {
 }
 
 #avatar {
-    width:20px; 
-    height:20px
+    width: 32px;
+    height: 30px;
 }
 
 .accounts-active {
@@ -1319,11 +1762,12 @@ input#TransactionTransactionMoney {
 }
 
 .type-money {
-    position: relative;
-    top: -26px;
-    left: 32%;
+    position: relative; 
     font-size: 18px;
     font-weight: bold;
+    top: 80px;
+    left: 43%;   
+    color: black;
 }
 
 /* transfer */
@@ -1407,12 +1851,12 @@ input .checkbox-transfer {
 
 select#TransactionDayTransactionMonth {
     width: 27% !important;
-        min-width: 27% !important;
+    min-width: 27% !important;
 }
 
 select#TransactionDayTransactionDay {
     width: 14% !important;
-     min-width: 14% !important;
+    min-width: 14% !important;
 
 }
 
@@ -1425,7 +1869,7 @@ select#TransactionDayTransactionYear {
 
 #report-month {
     /*margin-top: 15px;*/
-        padding-bottom: 10%;
+    padding-bottom: 10%;
 }
 
 .nav .open > a, .nav .open > a:hover {
@@ -1435,4 +1879,126 @@ select#TransactionDayTransactionYear {
 .navbar-custom .nav .dropdown-menu li a:hover {
     color: black;
     background-color: rgba(167, 139, 139, 0.78);
+}
+
+li.dropdown img {
+    position: relative;
+    top: -5px;
+}
+
+#check-mail {
+    background-color: rgba(87, 174, 208, 0.83);
+    width: 30%;
+    height: 150px;
+    text-align: center;
+    color: white;
+    margin: auto;
+    position: relative;
+    top: 130px;
+    font-size: 19px;
+    border-radius: 5px;
+    padding-top: 4%;
+}
+
+footer {
+    display: none !important;
+}
+
+/* change password */
+
+#change-password-col-6{
+    border: 1px #973643 solid;
+    padding-top: 25px;
+}
+
+#change-password {
+    background-color: rgb(237, 249, 244);
+    color: #151313;
+}
+
+#old_password {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: -10px;
+    color: black;
+    margin-left: -50%;
+    margin-bottom: 15px;
+}
+
+#label-old-password {
+    width: 40%;
+    float: left;margin-bottom: 15px;
+}
+
+#new_password {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: -10px;
+    color: black;
+    margin-left: -50%;
+    margin-bottom: 15px;
+}
+
+#label-new-password {
+    width: 40%; 
+    float: left;
+    margin-bottom: 15px;
+}
+
+#confirm_password {
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;    
+    position: relative;
+    top: -10px;
+    color: black;
+    margin-left: -50%;
+    margin-bottom: 15px;
+}
+
+#label_confirm_password {
+    width: 40%;
+    float: left;
+    margin-bottom: 15px;
+}
+
+#save-change-password {
+    background-color: #973643;
+    margin-bottom: 24px;
+    float: left;
+    width: 40%;
+    margin-left: 11%;
+    color: white;    
+    height: 39px;
+}
+
+/* upload image */
+
+#upload-avatar {
+    background-color: rgb(237, 249, 244);
+    color: #151313;
+}
+
+#fileToUpload{
+    margin: auto;
+    margin-top: 21px;
+    margin-bottom: 15px;
+}
+
+#save-upload-avatar {
+    margin-bottom: 15px;
+    width: 30%;
+    background-color: #973643;
+    color: white;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 17px;
+}
+
+#note-upload-avatar {
+    color: red;
 }

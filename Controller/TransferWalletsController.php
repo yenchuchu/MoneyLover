@@ -50,7 +50,8 @@ class TransferWalletsController extends AppController {
                 'TransferWallet.sent_wallet_id is not null',
                 'TransferWallet.receive_wallet_id is not null',
                 'TransferWallet.sent_wallet_id' => $result_wallet_selected,
-                'TransferWallet.receive_wallet_id' => $result_wallet_selected));
+                'TransferWallet.receive_wallet_id' => $result_wallet_selected),
+            'limit'=>20);
 
         $this->set('transferWallets', $this->Paginator->paginate());
 

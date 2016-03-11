@@ -127,13 +127,20 @@ class Transaction extends AppModel {
 
         $i = 0;
         $percentMonth = array();
+        $toalMoney = array();
         foreach ($months as $month) {
-            $percentExpense[$month] = ($outputExpense[$month] * 100) / ($outputExpense[$month] + $outputIncome[$month]);
-            $percentIncome[$month] = ($outputIncome[$month] * 100) / ($outputExpense[$month] + $outputIncome[$month]);
-            $percentMonth[$month] = [
-                ['value' => round($percentExpense[$month], 2), 'color' => '#FF8153', 'label' => 'Expense'],
-                ['value' => round($percentIncome[$month], 2), 'color' => '#4ACAB4', 'label' => 'Income']
-            ];
+            $toalMoney = $outputExpense[$month] + $outputIncome[$month];
+            if($toalMoney == 0) {
+                return false;
+            }
+            else {
+                $percentExpense[$month] = ($outputExpense[$month] * 100) / $toalMoney;
+                $percentIncome[$month] = ($outputIncome[$month] * 100) / $toalMoney;
+                $percentMonth[$month] = [
+                    ['value' => round($percentExpense[$month], 2), 'color' => '#FF8153', 'label' => 'Expense'],
+                    ['value' => round($percentIncome[$month], 2), 'color' => '#4ACAB4', 'label' => 'Income']
+                ];
+            } 
         }
         return $percentMonth;
     }
@@ -218,23 +225,28 @@ class Transaction extends AppModel {
         $percentMonthCategory = array();
         $percentCategory = array();
         rsort($months);
+        $color = array( '#B1B92C', '#E8BF4F','#22D065', '#A058E9',  '#FB9734', '#EAEDEA',
+                        '#DEC3D5', '#A8A749', '#E7209C', '#E4A8AF',  '#7E2960', '#BEEE20',
+                        '#660040', '#84FAD0','#B96271', '#84F749', '#FBDBCA', '#B82754') ;
+
         foreach ($months as $month) {
             $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 
             for ($i = 0; $i < $countCategoryMonth[$month]; $i++) {
-                $percentMonthCategory[$month][$categoriesMonths[$month][$i]] = ( $sumMoneyMonths[$month][$categoriesMonths[$month][$i]] * 100) / $sumTotalMonths[$month];
-
-                // $percentMonthCategory[$month][$categoriesMonths[$month][$i]]  = $this->Number->format($percentMonthCategory[$month][$categoriesMonths[$month][$i]]  , array(
-                // 								'places' => 2));
-                // echo $percentMonthCategory[$month][$categoriesMonths[$month][$i]];
-                if (!isset($percentCategory[$month][$i])) {
-                    $percentCategory[$month][$i] = ['value' => round($percentMonthCategory[$month][$categoriesMonths[$month][$i]], 2),
-                                'color' => '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)],
-                                'label' => $nameCategoryId[$categoriesMonths[$month][$i]]];
-                }
+                if($sumTotalMonths[$month] == 0) {
+                    return false;
+                } else {
+                    $percentMonthCategory[$month][$categoriesMonths[$month][$i]] = ( $sumMoneyMonths[$month][$categoriesMonths[$month][$i]] * 100) / $sumTotalMonths[$month];
+                    if (!isset($percentCategory[$month][$i])) {
+                        $percentCategory[$month][$i] = ['value' => round($percentMonthCategory[$month][$categoriesMonths[$month][$i]], 2),
+                                    'color' => $color[$i],
+                                    'label' => $nameCategoryId[$categoriesMonths[$month][$i]]];
+                    }
+                } 
             }
         }
         return $percentCategory;
     }
 
 }
+// '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)]

@@ -23,6 +23,7 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function index() {
+        $this->Paginator->settings = array('limit'=>20);
         $this->Category->recursive = 0;
         $this->set('categories', $this->Paginator->paginate());
     }
