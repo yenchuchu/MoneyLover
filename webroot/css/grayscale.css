@@ -396,8 +396,9 @@ body {
 }
 
 #categories .panel-heading {
-    background-color: transparent !important;  
+    /*background-color: transparent !important;*/  
     padding-bottom: 0;
+    color: white;
 }
 
 #categories table {
@@ -521,6 +522,32 @@ body {
 #add-category .panel-title {
     margin-bottom: 15px !important;
     padding-top: 15px;
+}
+
+.add-category-cancel {
+    background-color: #973442;
+    width: 50%;
+    padding: 8px;
+    margin-left: -3px !important;
+}   
+
+.add-category-save {
+    background-color: #973442;
+    width: 50%;
+    padding: 8px;
+    margin-right: -31% !important;
+    color: white;
+}
+
+#lable-edit-input-expense {
+    position: relative;
+    top: 2px;    
+}
+
+input#edit-input-expense {
+    position: relative;
+    top: 10px;
+    margin-right: 5px;
 }
 
 #lable-type-category {
@@ -674,6 +701,21 @@ td#edit-category-type {
     margin-right: -13px;
 }
 
+/*add-admin*/
+.add-admin-cancel {
+    background-color: #973442;
+    width: 50%;
+    padding: 8px;
+    margin-left: -3px !important;
+}   
+
+.add-admin-save {
+    background-color: #973442;
+    width: 50%;
+    padding: 8px;
+    margin-right: -31% !important;
+    color: white;
+}
 
 /* wallet - user */
 
@@ -1159,10 +1201,26 @@ a#add-admin-other:hover {
 #add-transaction h3 {
     margin-bottom: 15px !important; 
     padding-top: 15px;
+    color: white;
 }
 
 #add-transaction>.panel-body{
     color: black;
+}
+
+#add-transaction .transaction-cancel {
+    background-color: #973442;
+    width: 50%;
+    padding: 8px;
+    margin-left: -3px !important;
+} 
+
+#add-transaction .transaction-save {
+    background-color: #973442;
+    width: 50% !important;
+    padding: 8px;
+    margin-right: -31% !important;
+    color: white;
 }
 
 #TransactionAddForm>.wallet-id,
@@ -1765,8 +1823,8 @@ input#TransactionTransactionMoney {
     position: relative; 
     font-size: 18px;
     font-weight: bold;
-    top: 80px;
-    left: 43%;   
+    top: -27px;
+    left: 33%;   
     color: black;
 }
 

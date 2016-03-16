@@ -153,5 +153,11 @@ class User extends AppModel {
         }
         return $code;
     }
-
+    
+    public function findWalletAuth($idAuth) {
+        $walletAuth = $this->query(
+                "select wallets.user_id, wallets.id from wallets 
+            inner join users on users.id = wallets.user_id where users.id = '$idAuth'");
+        return $walletAuth;
+    }
 }

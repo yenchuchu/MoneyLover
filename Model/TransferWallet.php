@@ -85,5 +85,26 @@ class TransferWallet extends AppModel {
             'order' => ''
         )
     );
-
+    
+    public function getListWalletSent($walletId) {
+        $sentWallets = $this->SentWallet->find('list', array(
+            'conditions' => array('id' => $walletId)));
+        return $sentWallets;
+    }
+    
+    public function getListWalletReceive($walletId) {
+        $receiveWallets = $this->ReceiveWallet->find('list', array(
+            'conditions' => array('id' => $walletId)));
+        return $receiveWallets;
+    }
+    
+     public function findListWalletSent() {
+        $listWalletSent =  $this->SentWallet->find('list');
+        return $listWalletSent;
+    }
+    
+     public function findListWalletReceive() {
+        $listWalletReceive =  $this->ReceiveWallet->find('list');
+        return $listWalletReceive;
+    }
 }

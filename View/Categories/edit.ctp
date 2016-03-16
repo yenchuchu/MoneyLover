@@ -22,7 +22,7 @@
                             <td> 
                                 <label class="radio-inline">
                                     <input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked">Income</label>
-                                <label class="radio-inline">
+                                <label class="radio-inline" id="lable-edit-input-expense">
                                     <input type="radio"  name="data[Category][type]" value="0" id="CategoryType edit-input-expense" checked="checked">Expense</label>
                             </td> 
                         </tr>
@@ -35,7 +35,7 @@
                     'class' => 'btn wallet-save',
                     'div' => array(
                         'class' => 'submit-wallet',
-                        'style' => ' margin-top: 12px;
+                        'style' => ' margin-top: -18%;
                                     margin-left: 16px;' ));
                 echo $this->Form->end($sumbit);
                 ?>

@@ -2,11 +2,9 @@
 
 <section id="categories" class="content-section text-center">
     <div class="categories-section">
-        <div class="container">
-            <div class="panel-heading" >
+        <div class="container"> 
                 <h1 class="title"><?php echo __('Categories'); ?></h1> 
                 <a href="#add-category" id="a-add-category"> Add Category</a>  
-            </div>
             <div class="panel-body">
                 <div class="col-lg-12 categories-income"> 
                     <table class="table table-striped table-hover">
@@ -108,9 +106,9 @@
                                 </div>
                             </div>
                             <div class="form-group"> 
-                                <div class="col-sm-offset-2 col-sm-10 submit-wallet submit-add-category">
-                                    <a href="#close" type="submit" class="btn wallet-save " >Cancel</a>
-                                    <button type="submit" class="btn wallet-save" >Add</button>
+                                <div class="col-sm-10 submit-wallet submit-add-category">
+                                    <a href="#close" type="submit" class="btn add-category-cancel " >Cancel</a>
+                                    <button type="submit" class="btn add-category-save" >Add</button>
                                 </div>
                             </div>
 <?php $this->Form->end(); ?>

@@ -108,9 +108,9 @@
                                     ?>
                                 </div>
                                 <div class="form-group"> 
-                                    <div class="col-sm-offset-2 col-sm-10 submit-wallet submit-transaction"> 
-                                        <a href="#close" class="btn wallet-save ">Cancel</a> 
-                                        <button type="submit" class="btn wallet-save" >Add</button>
+                                    <div class=" col-sm-10 submit-wallet submit-transaction"> 
+                                        <a href="#close" class="btn transaction-cancel ">Cancel</a> 
+                                        <button type="submit" class="btn transaction-save" >Add</button>
                                     </div>
                                 </div>
                                 </form>

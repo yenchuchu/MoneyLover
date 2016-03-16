@@ -24,40 +24,26 @@ class TransactionsController extends AppController {
      * @return void
      */
     public function index() {
+        $this->loadModel('User'); 
+        
         $this->Transaction->recursive = 0;
 
-        $id_auth = $this->Auth->user('id');
-        $tests = $this->Transaction->query(
-                "select wallets.user_id, wallets.id from wallets 
-            inner join users on users.id = wallets.user_id where users.id = '$id_auth'");
-        $result = Set::classicExtract($tests, '{n}.wallets.id');
-        // debug( $result);die;
+        $id_auth = $this->Auth->user('id'); 
+        $findWallet = $this->User->findWalletAuth($id_auth); 
+        
+        $result_wallet_id = Set::classicExtract($findWallet, '{n}.wallets.id'); 
+        
         $this->paginate = array(
             'conditions' => array('Wallet.id is not null',
                 'Categorie.id is not null',
-                'Transaction.wallet_id' => $result),
+                'Transaction.wallet_id' => $result_wallet_id),
             'limit'=>20);
 
         $this->set('transactions', $this->Paginator->paginate());
 
-        $categories = $this->Transaction->Categorie->find('list');
-        $wallets = $this->Transaction->Wallet->find('list', array('conditions' => array('id' => $result)));
+        $categories = $this->Transaction->findListCategory();  
+        $wallets = $this->Transaction->findIdWalletAuth($result_wallet_id); 
         $this->set(compact('categories', 'wallets'));
-    }
-
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null) {
-        if (!$this->Transaction->exists($id)) {
-            throw new NotFoundException(__('Invalid transaction'));
-        }
-        $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
-        $this->set('transaction', $this->Transaction->find('first', $options));
     }
 
     /**
@@ -77,8 +63,8 @@ class TransactionsController extends AppController {
                 $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
             }
         }
-        $categories = $this->Transaction->Categorie->find('list');
-        $wallets = $this->Transaction->Wallet->find('list');
+        $categories = $this->Transaction->findListCategory();  
+        $wallets = $this->Transaction->findListWallet();
         $this->set(compact('categories', 'wallets'));
     }
 
@@ -89,7 +75,7 @@ class TransactionsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null) { 
         if (!$this->Transaction->exists($id)) {
             throw new NotFoundException(__('Invalid transaction'));
         }
@@ -104,27 +90,9 @@ class TransactionsController extends AppController {
             $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
             $this->request->data = $this->Transaction->find('first', $options);
         }
-        $categories = $this->Transaction->Categorie->find('list');
-        $wallets = $this->Transaction->Wallet->find('list');
+        $categories = $this->Transaction->findListCategory();  
+        $wallets = $this->Transaction->findListWallet();
         $this->set(compact('categories', 'wallets'));
-    }
-
-    public function editAll() {
-        $this->request->allowMethod('post');
-
-        $ids = $this->request->data['ids'];
-        $this->Transaction->belongsTo = false;
-        if ($this->request->is(array('post', 'put'))) {
-            if ($this->Transaction->save(array('id' => $ids))) {
-                $this->Flash->success(__('The transaction has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
-            }
-        } else {
-            $options = array('conditions' => array('Transaction.' . $this->Transaction->primaryKey => $id));
-            $this->request->data = $this->Transaction->find('first', $options);
-        }
     }
 
     /**

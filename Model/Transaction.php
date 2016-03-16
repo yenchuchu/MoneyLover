@@ -247,6 +247,63 @@ class Transaction extends AppModel {
         }
         return $percentCategory;
     }
+    
+    public function getMoneyGroupByCategories($walletId, $categoryId) {
+        $moneyGroupByCategories = $this->find('all', array('conditions' => array('wallet_id' => $walletId,
+                    'categorie_id' => $categoryId),
+                'fields' => array('sum(Transaction.transaction_money) as total_money',
+                    'month(Transaction.day_transaction) as month',
+                    'Transaction.categorie_id'),
+                'order' => array('month(Transaction.day_transaction)' => 'asc'),
+                'group' => array('Transaction.categorie_id')));
+        return $moneyGroupByCategories;
+    }
+    
+    public function getMonthTransaction ($walletId) {
+        $transactions = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
+        $outputMonthTransactions = array();
+        $i = 0;
+        if(!empty($transactions)){
+            foreach ($transactions as $key => $transaction) {
+                if (!isset($outputMonthTransactions[$i])) {
+                    $outputMonthTransactions[$i] = date('Y-m', strtotime($transaction['Transaction']['day_transaction']));
+                }
+                $i++;
+            }
+        }
+        
+        return $monthTransaction;
+    }
+    
+    public function findAllTransactionsAuth($walletId) {
+        $allTransactionsAuth = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
+        return $allTransactionsAuth;
+    }
+    
+    public function findAllCategory() {
+        $allCategories = $this->Categorie->find('all');
+        return $allCategories;
+    }
+    
+     public function findListCategory() {
+        $listCategories =  $this->Categorie->find('list');
+        return $listCategories;
+    }
+    
+    public function findIdCategory($categoryId) {
+        $idCategories = $this->Categorie->find('list', array('conditions' => array('id' => $categoryId)));
+        return $idCategories;
+    }
+    
+     public function findListWallet() {
+        $listWallet =  $this->Wallet->find('list');
+        return $listWallet;
+    }
+    
+    public function findIdWalletAuth($walletId) {
+       $wallets = $this->Wallet->find('list', array('conditions' => array('id' => $walletId)));
+       return $wallets;
+    }
 
 }
 // '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)]

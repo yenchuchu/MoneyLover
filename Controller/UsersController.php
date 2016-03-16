@@ -61,43 +61,6 @@ class UsersController extends AppController {
     }
 
     /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null) {
-        $path = func_get_args();
-
-        $count = count($path);
-        if (!$count) {
-            return $this->redirect('/');
-        }
-        $page = $subpage = $title_for_layout = null;
-
-        if (!empty($path[0])) {
-            $page = $path[0];
-        }
-        if (!empty($path[1])) {
-            $subpage = $path[1];
-        }
-        if (!empty($path[$count - 1])) {
-            $title_for_layout = Inflector::humanize($path[$count - 1]);
-        }
-        $this->set(compact('user', 'subpage', 'title_for_layout'));
-
-        try {
-            $this->render(implode('/', $path));
-        } catch (MissingViewException $e) {
-            if (Configure::read('debug')) {
-                throw $e;
-            }
-            throw new NotFoundException();
-        }
-    }
-
-    /**
      * add method
      *
      * @return void
@@ -195,29 +158,29 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('main');
     }
-
-    public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                $count = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
-
-                if ($count['User']['role'] == 0) {
-                    if ($count['User']['active'] == User::USER_REQUEST) {
-                        $this->redirect(array('controller' => 'Users', 'action' => 'change_password', AuthComponent::user('id')));
-
-                        if (isset($this->request->data)) {
-                            $this->User->updateAll(array('User.active' => ++$count['User']['active']), array('User.id' => AuthComponent::user('id')));
-                        }
-                    } else {
-                        return $this->redirect($this->Auth->redirectUrl());
-                    }
-                } else {
-                    return $this->redirect(array('controller' => 'Users', 'action' => 'index'));
-                }
-            }
-            $this->Flash->error(__('Invalid username or password, try again'));
-        }
-    }
+//
+//    public function login() {
+//        if ($this->request->is('post')) {
+//            if ($this->Auth->login()) {
+//                $count = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
+//
+//                if ($count['User']['role'] == 0) {
+//                    if ($count['User']['active'] == User::USER_REQUEST) {
+//                        $this->redirect(array('controller' => 'Users', 'action' => 'change_password', AuthComponent::user('id')));
+//
+//                        if (isset($this->request->data)) {
+//                            $this->User->updateAll(array('User.active' => ++$count['User']['active']), array('User.id' => AuthComponent::user('id')));
+//                        }
+//                    } else {
+//                        return $this->redirect($this->Auth->redirectUrl());
+//                    }
+//                } else {
+//                    return $this->redirect(array('controller' => 'Users', 'action' => 'index'));
+//                }
+//            }
+//            $this->Flash->error(__('Invalid username or password, try again'));
+//        }
+//    }
 
     public function logout() {
         return $this->redirect($this->Auth->logout());
@@ -278,11 +241,6 @@ class UsersController extends AppController {
                     if ($count['User']['active'] == User::USER_REQUEST) {
                         $this->redirect(array('controller' => 'Users',
                             'action' => 'change_password', AuthComponent::user('id')));
-
-                        // if (isset($this->request->data)) {
-                        //     $this->User->updateAll(array('User.active' => User::USER_ACTIVE), 
-                        //         array('User.id' => AuthComponent::user('id')));
-                        // }
                     } 
                     if ($count['User']['role'] == User::ROLE_USER) {
                         return $this->redirect($this->Auth->redirectUrl());

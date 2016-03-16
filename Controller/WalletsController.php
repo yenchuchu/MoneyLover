@@ -30,23 +30,8 @@ class WalletsController extends AppController {
         );
         $this->Wallet->recursive = 0;
         $this->set('wallets', $this->Paginator->paginate());
-    }
-
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null) {
-        if (!$this->Wallet->exists($id)) {
-            throw new NotFoundException(__('Invalid wallet'));
-        }
-        $options = array('conditions' => array('Wallet.' . $this->Wallet->primaryKey => $id));
-        $this->set('wallet', $this->Wallet->find('first', $options));
-    }
-
+    } 
+    
     /**
      * add method
      *
@@ -58,8 +43,7 @@ class WalletsController extends AppController {
             $this->Wallet->create();
             $data = $this->request->data;
             $data['Wallet']['user_id'] = $this->Auth->user('id');
-            if ($this->Wallet->save($data)) {
-                // $this->Flash->success(__('The wallet has been saved.'));
+            if ($this->Wallet->save($data)) { 
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));

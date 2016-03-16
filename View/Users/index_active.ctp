@@ -99,9 +99,9 @@ else {
                                     <?php echo $this->Form->input('email', array('class'=>'form-control','label' => false, 'placeholder' => 'enter email')); ?>
                             </div>   
                             <div class="form-group"> 
-                                <div class="col-sm-offset-2 col-sm-10 submit-wallet submit-accounts" >
-                                    <a href="#" class="btn wallet-save" > Cancel </a> 
-                                    <button type="submit" class="btn wallet-save" >Add</button>
+                                <div class="col-sm-10 submit-wallet submit-accounts" >
+                                    <a href="#" class="btn add-admin-cancel" > Cancel </a> 
+                                    <button type="submit" class="btn add-admin-save" >Add</button>
                                 </div>
                             </div>
                             </form>
