@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::import('Model', 'Wallet');
+App::import('Model', 'User');
 
 /**
  * TransferWallet Model
@@ -100,6 +102,7 @@ class TransferWallet extends AppModel {
     
      public function findListWalletSent() {
         $listWalletSent =  $this->SentWallet->find('list');
+//                , array( 'conditions'=>array( 'Wallet.id' => $authId)) );
         return $listWalletSent;
     }
     
@@ -107,4 +110,29 @@ class TransferWallet extends AppModel {
         $listWalletReceive =  $this->ReceiveWallet->find('list');
         return $listWalletReceive;
     }
+    
+    public function getWalletSent($walletIdSent) {
+        $result_sent = $walletModel->find('first', array(
+                        'conditions' => array(
+                                'Wallet.id' => $walletIdSent)));
+        return $result_sent;
+    }
+
+    public function getWalletRecieve($walletIdRecieve) {
+        $result_recieve = $walletModel->find('first', array(
+                        'conditions' => array(
+                                'Wallet.id' => $walletIdRecieve)));
+        return $result_recieve;
+    }
+    
+    public function getTransferWalletById($transferWalletId) {
+         $return_transfer = $this->query(" select * from transfer_wallets where id = $transferWalletId");
+         return $return_transfer;
+    }
+    
+//    public function afterDelete() {
+//        $walletModel = new Wallet();
+//        parent::afterDelete();
+//        debug($this->data);die;
+//    }
 }

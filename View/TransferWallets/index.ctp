@@ -1,16 +1,135 @@
 <?php echo $this->element('menu_user'); ?>
-<!-- tk theo vi,.... -->
-
+ 
 <!-- Contact Section -->
 <section id="transfer-wallet" class="content-section text-center">
     <span >
         <h1>Transfer Wallet</h1> 
     </span>  
+    
+    <span id="form-search-transfer">
+        <?php
+        echo $this->Form->create(array(
+            'type' => 'get',
+            'id' => 'search',
+            'class' => 'form-inline form-search-top'));
+        ?>
+        <?php
+        echo $this->Form->input('sent_wallet_id', array(
+            'options' => $sentWallets,
+            'empty' => '--choose sent wallet --',
+            'class' => 'select-style select2-offscreen',
+            'id' => 'search-category-transaction',
+            'label' => false,
+            'div' => false,
+            'required' => false));
+        ?>
+        <?php
+        echo $this->Form->input('receive_wallet_id', array(
+            'options' => $receiveWallets, 
+            'empty' => '--choose recieve wallet --',
+            'class' => 'select-style select2-offscreen',
+            'id' => 'search-wallet-transaction',
+            'label' => false,
+            'div' => false,
+            'required' => false));
+        ?>
+        <?php
+        echo $this->Form->input('transfer_money', array(
+            'label' => false,
+            'type' => 'number',
+            'placeholder' => 'enter money',
+            'id' => 'search-money-transfer',
+            'required' => false
+        ));
+        ?>
+        <span id="search-time-transfer " style="position: relative !important;
+    left: 11% !important;">
+ 
+             <?php
+        echo $this->Form->input('day_start', array(
+            'options'=>array(
+                1=>'1',
+                2 =>'2',
+                3=>'3' ,
+                4=>'4',
+                5=>'5' ,
+                6=>'6' ,
+                7=>'7' ,
+                8=>'8' ,
+                9=>'9' ,
+                10=>'10' ,
+                11=>'11' ,
+                12=>'12',
+                13=>'13',
+                14=>'14',
+                15=>'15',
+                16=>'16',
+                17=>'17',
+                18=>'18',
+                19=>'19',
+                20=>'10',
+                21=>'21',
+                22=>'22',
+                23=>'23',
+                24=>'24',
+                25=>'25',
+                26=>'26',
+                27=>'27',
+                28=>'28',
+                29=>'29',
+                30=>'30',
+                31=>'31'
+                
+            ),
+            'label' => false, 
+            'empty' => '-- day--',
+            'id' => 'search-day-transfer',
+            'required' => false
+        ));
+        ?>    
+  <?php
+        echo $this->Form->input('month_start', array(
+            'options'=>array(
+                01=>'January',
+                02 =>'February',
+                03=>'March' ,
+                04=>'April',
+                05=>'May' ,
+                06=>'June' ,
+                07=>'July' ,
+                08=>'August' ,
+                09=>'September' ,
+                10=>'October' ,
+                11=>'November' ,
+                12=>'December' 
+            ),
+            'label' => false, 
+            'empty' => '-- month--',
+            'id' => 'search-month-transfer',
+            'required' => false
+        ));
+        ?>    
+  <?php
+        echo $this->Form->input('year_start', array(
+            'label' => false,
+            'type' => 'number',
+            'placeholder' => 'enter year',
+            'id' => 'search-year-transfer',
+            'required' => false
+        ));
+        ?>
+   </span>
+        <button class="btn btn-default " id="button-search" type="submit" title="search">
+            <i class="fa fa-search"></i>
+        </button> 
+    <?php echo $this->Form->end(); ?> 
+    </span>
+    
     <a href="#add-transfer" id="a-add-transfer"> Add Transfer</a>
     <div class="row" id="row-transfer">
         <div class="col-lg-10 col-lg-offset-1">
             <div id="transaction-month" class="transaction-wrapper">
-                <div class="panel-body" style="position: relative;">
+                <div class="panel-body" style="position: relative;    top: 23px;">
                     <table class="table table-striped table-hover">
                         <thead>
                         <th></th>

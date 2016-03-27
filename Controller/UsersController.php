@@ -296,7 +296,7 @@ class UsersController extends AppController {
     }
 
     public function UploadImage($id = null) {
-        $backUrl = $this->referer();
+        
         if (!$id) {
             throw new NotFoundException(__('Invalid User'));
         }
@@ -352,11 +352,14 @@ class UsersController extends AppController {
                     $this->User->save(['avatar' => basename($_FILES["fileToUpload"]["name"])]);
                     $this->Session->write('Auth.User.avatar', basename($_FILES["fileToUpload"]["name"]));
                     echo "<p>Upload avatar success!</p>";
-                    return $this->redirect($backUrl);
+                    $this->redirect($this->request->data['backUrl']);
                 } else {
                     echo "Sorry, there was an error uploading your file.";
                 }
             }
+        }else {
+            $backUrl = $this->referer();
+            $this->set('backUrl' , $backUrl);
         }
     }
 

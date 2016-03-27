@@ -21,4 +21,14 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    public function getCurrentUser() { 
+        // for CakePHP 2.x:
+        App::uses('CakeSession', 'Model/Datasource');
+        $Session = new CakeSession();
+
+
+        $user = $Session->read('Auth.User');
+
+        return $user;
+      }
 }

@@ -23,6 +23,7 @@ if ($active == 1) {
            	 	<span id="note-upload-avatar">Only JPG, JPEG, PNG, GIF files are allowed!</span> <br>
            	 	<p>Select image to upload: </p>
 			    <input type="file" name="fileToUpload" id="fileToUpload" >
+                            <input type="hidden" name="backUrl" value="<?php echo $backUrl; ?>"/>
 			    <input type="submit" value="Upload Image" name="submit" id="save-upload-avatar">
 			</form>
         </div> 

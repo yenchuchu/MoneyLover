@@ -6,7 +6,30 @@
     <span>
         <h1 id="title-report">Report Month</h1>  
     </span>
-
+    <!--<span id="form-search">-->
+        <?php
+        echo $this->Form->create(array(
+            'type' => 'get',
+            'id' => 'search',
+            'class' => 'form-inline form-search-top'));
+        ?>
+        <form action="/MoneyLover/ReportMonths"  class="form-inline form-search-top" method="get" accept-charset="utf-8">
+     <?php
+        echo $this->Form->input('year_start', array(
+            'label' => false,
+            'type' => 'number',
+            'placeholder' => 'enter year',
+            'id' => 'search-year-reportmonth',
+            'required' => false
+        ));
+        ?>
+        <button class="btn btn-default " id="button-search" type="submit" title="search">
+            <i class="fa fa-search"></i>
+        </button>  
+    <?php // echo $this->Form->end(); ?> 
+        </form>
+    <!--</span>-->
+    
     <div class="row" >
         <div class="col-lg-10 col-lg-offset-1 row-10-report">
         <?php if(empty($months)){

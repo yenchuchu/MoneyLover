@@ -730,7 +730,7 @@ footer {
 
 #a-add-wallet {
     position: relative;
-    top: -53px;
+    top: -112px;
     right: -250px;
     border: none;
     padding: 7px 24px;
@@ -1038,7 +1038,7 @@ footer {
 
 #transaction h1 {
     position: relative;
-    top: 20px;
+    top: -53px;
     font-weight: bold; 
     color: black;
 }
@@ -1067,8 +1067,8 @@ footer {
 #transaction>#a-add-transaction,
 a#add-admin-other {
     position: relative;
-    top: -49px;
-    right: -250px;
+    top: -123px;
+    right: -19%;
     border: none;
     padding: 7px 24px;
     font-size: 17px;
@@ -1422,8 +1422,9 @@ input {
 #search { 
     color: black; 
     position: relative;
-    margin-left: 228px;
-    top: 152px;
+    /*margin-left: 228px;*/
+    left: 7px;
+    top: 130px;
 }
 
 /* edit transaction */
@@ -1837,7 +1838,7 @@ input#TransactionTransactionMoney {
 
 a#a-add-transfer {
     position: relative;
-    top: -51px;
+    top: -134px;
     right: -281px;
     border: none;
     padding: 7px 24px;
@@ -1849,7 +1850,7 @@ a#a-add-transfer {
 
 #transfer-wallet h1 {
     position: relative;
-    top: 16px;
+    top: 25px;
 }
 
 #transfer-wallet #a-add-transfer:hover {
@@ -2059,4 +2060,186 @@ footer {
 
 #note-upload-avatar {
     color: red;
+}
+
+/* form search */
+
+#form-search {
+    position: relative;
+    top: -17px;;
+    left: -30%;
+}
+
+#search-time {
+    position: relative;
+        top: -30px;
+    left:24%;
+}
+
+#button-search {
+    position: relative;
+    top: -31px;
+    left: 32%;
+    padding: 4px 25px !important;
+    color: white;
+    background: rgba(102, 51, 153, 0.62); 
+    border: none;
+}   
+
+#transaction #button-search {
+        left: 48% !important;
+    top: -32px !important;    
+}
+
+#search-category-transaction {
+    background-color: rgba(251, 248, 248, 0.95);  
+    float: left;
+    position: relative;
+    left: 39%;
+}
+
+#search-wallet-transaction {
+    background-color: rgba(251, 248, 248, 0.95);
+    float: left;
+    position: relative;
+    left: 40%;
+}
+
+#search-money-transaction {
+    position: relative;     
+    left: 6%;
+    width: 10%;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/*search transfer*/
+
+#form-search-transfer {
+    position: relative;
+    top: -126px;
+    left: -30%;
+
+}
+
+#form-search-transfer>#search{
+    position: relative;
+    top: 173px;
+}
+
+#form-search-transfer button {
+    font-size: 17px;
+        top: -62px;
+    left: 60%;
+    padding: 4px 25px !important;
+    background-color: rgba(102, 51, 153, 0.85);
+}
+
+#search-money-transfer {
+    float: left;
+    position: relative;
+    left: 41%;  
+    width: 10%;
+    padding-left: 10px;
+        border: 1px solid;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+span#search-time-transfer  {
+    position: relative !important;
+    left: 16.8% !important;
+}
+
+#button-search-transfer {
+    position: relative;
+    top: -31px;
+    left: 27%;
+    padding: 5px 25px !important;
+    color: white;
+    background: rgba(102, 51, 153, 0.84);
+    border: none;
+}
+
+span.current.number-page {
+    padding: 4px 10px;
+    background-color: #045A3B;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    margin-left: 6px;
+}
+
+#search-year-transaction {
+    float: right;
+           right: 27.9%;
+    position: relative;
+    width: 10%;
+    padding-left: 10px;
+        border: 1px solid;
+    border-radius: 5px;
+}
+
+#search-year-transfer {
+        float: right;
+    right: 9.2%;
+    top: -60px;
+    position: relative;
+    width: 10%;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+#search-year-reportmonth {
+    float: left;
+    right: -40%;
+    top: 30px;
+    position: relative;
+    width: 10%;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+#report-month #button-search {
+    position: relative;
+    font-size: 17px;
+    top: 29px;
+    left: -2%;
+    padding: 4px 25px !important;
+    color: white;
+    background: rgba(102, 51, 153, 0.85);
+    border: none;
+}
+
+select {
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+#search-month-transaction {
+        position: relative !important;
+       top: -7px !important;
+    left: 12.6% !important;
+}
+
+#search-month-transfer {
+    position: relative !important;
+    top: -30px !important;
+    left: 26.4% !important;
+}
+
+#search-day-transfer {
+    position: relative !important; 
+    left: 0.9% !important;
+}
+
+#search-day-transaction {
+    top: -7px;
+    position: relative;
+    left: 12%;
 }

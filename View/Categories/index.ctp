@@ -4,7 +4,54 @@
     <div class="categories-section">
         <div class="container"> 
                 <h1 class="title"><?php echo __('Categories'); ?></h1> 
-                <a href="#add-category" id="a-add-category"> Add Category</a>  
+                <a href="#add-category" id="a-add-category"> Add Category</a>
+             
+                <!--<span id="form-search-transfer">-->
+        <?php
+//        echo $this->Form->create(array(
+//            'type' => 'get',
+//            'id' => 'search',
+//            'class' => 'form-inline form-search-top'));
+        ?>
+        <?php
+//        echo $this->Form->input('name', array(
+//            'options' => $name,
+//            'empty' => '--choose name --',
+//            'class' => 'select-style select2-offscreen',
+//            'id' => 'search-category-transaction',
+//            'label' => false,
+//            'div' => false,
+//            'required' => false));
+        ?>
+        <?php
+//        echo $this->Form->input('type', array(
+//            'options' => array(0=>'income' , 1=>'expense'), 
+//            'empty' => '--choose type --',
+//            'class' => 'select-style select2-offscreen',
+//            'id' => 'search-wallet-transaction',
+//            'label' => false,
+//            'div' => false,
+//            'required' => false));
+        ?>
+        
+<!--        <span id="search-time-transfer " style="position: relative !important;
+    left: 20% !important;">
+            <?php
+//            echo $this->Form->dateTime('Contact.date', 'DMY', array(
+//                'empty' => array(
+//                    'day' => 'Day', 
+//                    'month' => 'MONTH', 
+//                    'year' => 'YEAR' ),
+//                'required' => false ));
+            ?>
+        
+                </span>
+        <button class="btn btn-default " id="button-search" type="submit" title="search">
+            <i class="fa fa-search"></i>
+        </button> -->
+    <?php // echo $this->Form->end(); ?> 
+    <!--</span>-->
+    
             <div class="panel-body">
                 <div class="col-lg-12 categories-income"> 
                     <table class="table table-striped table-hover">

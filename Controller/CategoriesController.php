@@ -23,8 +23,36 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function index() {
-        $this->Paginator->settings = array('limit'=>20);
+        
         $this->Category->recursive = 0;
+        
+//        $name = $this->request->query('name');
+//        $type = $this->request->query('type');
+//        debug($name);
+////        debug($type);die;
+//        $conditions = array();
+//        
+//        if(!empty($name)) {
+//            $conditions['Categories.name'] = $name;
+//        }
+//        
+//        if(!empty($type)) { 
+//            $conditions['Categories.type'] = $type;
+//        }
+        $this->Paginator->settings = array('limit'=>20);
+        
+//        $categoryName = $this->Category->query("select name from categories group by name"); 
+//        $name = Set::classicExtract($categoryName, '{n}.categories.name');
+////          debug($name);die;
+////        $categoryType = $this->Category->query("select type from categories group by type");
+////        $types = Set::classicExtract($categoryType, '{n}.categories.type');
+////         
+////         debug($this->Paginator->paginate());
+////       debug($type);
+////       die;
+//        
+//        $this->set('name', $categoryName);
+//         $this->set('type', $type);
         $this->set('categories', $this->Paginator->paginate());
     }
 

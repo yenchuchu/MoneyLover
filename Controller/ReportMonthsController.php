@@ -36,7 +36,10 @@ class ReportMonthsController extends AppController {
 
         $findWallet = $this->User->findWalletAuth($id_auth);
         $result_wallet_id = Set::classicExtract($findWallet, '{n}.wallets.id');
-
+        
+        $year = $this->request->query('year_start');
+//        debug($year);die;
+        
         $wallets = $this->Transaction->findIdWalletAuth($result_wallet_id); 
         if(!empty($wallets)){
             $categories = $this->Transaction->findIdCategory($result_categorie_id);

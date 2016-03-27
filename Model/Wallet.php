@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Transaction', 'Model');
 
 /**
  * Wallet Model
@@ -85,5 +86,14 @@ class Wallet extends AppModel {
             'counterQuery' => ''
         )
     );
-
+    
+    public function getAllWallets($walletId) {
+        $allWallets = $this->find('all', array('condition'=>array('id'=>$walletId)));
+        return $allWallets;
+    }
+    
+    public function getMoneyCurrent($walletId) {
+        $moneyCurrent = $this->query("select money_current from wallets where id = $walletId");
+        return $moneyCurrent;
+    }
 }

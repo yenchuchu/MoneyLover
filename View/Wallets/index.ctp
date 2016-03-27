@@ -3,9 +3,15 @@
 <?php echo $this->element('menu_user'); ?>
 <!-- Contact Section -->
 <section id="wallet" class="content-section text-center">
+    
     <span >
         <h1 id="title-h1">My Wallets</h1> 
     </span> 
+    <span> 
+        <p> Total money current: <?php echo $this->Number->currency($sumMoneyCurrent, ' VND', $options = array('thousands' => '.',
+        'wholePosition' => 'after', 'places' => 0
+    )); ?> </p>
+    </span>
     <a href="#add-wallet" id="a-add-wallet"> Add Wallet</a> 
     <div class="row">
         <?php if(empty($wallets)) {
@@ -28,6 +34,14 @@
                         ?> <br> 
                     </i>
                 </p>
+                
+                <span class="wallet-current-money"><i class="fa fa-money"></i> money_initialize: </span>
+                <p style="text-align: left;"> 
+    <?php
+    echo $this->Number->currency($wallet['Wallet']['money_initialize'], ' VND', $options = array('thousands' => '.',
+        'wholePosition' => 'after', 'places' => 0
+    ));
+    ?> </p>
                 <span class="wallet-current-money"><i class="fa fa-money"></i> Current money: </span>
                 <p style="text-align: left;"> 
     <?php
@@ -62,11 +76,12 @@
                     <label class="control-label" for="CategoryName">Wallet Name:</label>
                     <input name="data[Wallet][name]" class="form-control" placeholder="Wallet Name" maxlength="64" type="text" id="WalletName" required="required">
                 </div>
+                
                 <div class="form-group" style="height: 60px;">
-                    <label class="control-label" for="CategoryName">Current Money:</label>
-                    <input name="data[Wallet][money_current]" step="any" type="number" class="form-control" placeholder="Wallet Name" id="WalletMoneyCurrent" required="required">
+                    <label class="control-label" for="CategoryName">money_initialize:</label>
+                    <input name="data[Wallet][money_initialize]" step="any" type="number" class="form-control" placeholder="Wallet money_initialize" id="WalletMoneyCurrent" required="required">
 
-                </div>
+                </div> 
                 <div class="form-group">
                     <label class="control-label" for="CategoryName">Info Wallet:</label>
                     <input name="data[Wallet][info]"  class="form-control" placeholder="Wallet Name" maxlength="500" type="text" id="WalletInfo">

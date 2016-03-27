@@ -3,6 +3,12 @@
 App::uses('AppModel', 'Model');
 App::uses('CakeTime', 'Utility');
 App::uses('CakeNumber', 'Utility');
+//App::uses('Wallet', 'Model');
+//App::uses('User', 'Model');
+
+App::import('Model', 'Wallet');
+App::import('Model', 'User');
+//$walletModel = ClassRegistry::init('Wallet');
 
 /**
  * Transaction Model
@@ -130,17 +136,16 @@ class Transaction extends AppModel {
         $toalMoney = array();
         foreach ($months as $month) {
             $toalMoney = $outputExpense[$month] + $outputIncome[$month];
-            if($toalMoney == 0) {
+            if ($toalMoney == 0) {
                 return false;
-            }
-            else {
+            } else {
                 $percentExpense[$month] = ($outputExpense[$month] * 100) / $toalMoney;
                 $percentIncome[$month] = ($outputIncome[$month] * 100) / $toalMoney;
                 $percentMonth[$month] = [
                     ['value' => round($percentExpense[$month], 2), 'color' => '#FF8153', 'label' => 'Expense'],
                     ['value' => round($percentIncome[$month], 2), 'color' => '#4ACAB4', 'label' => 'Income']
                 ];
-            } 
+            }
         }
         return $percentMonth;
     }
@@ -225,45 +230,45 @@ class Transaction extends AppModel {
         $percentMonthCategory = array();
         $percentCategory = array();
         rsort($months);
-        $color = array( '#B1B92C', '#E8BF4F','#22D065', '#A058E9',  '#FB9734', '#EAEDEA',
-                        '#DEC3D5', '#A8A749', '#E7209C', '#E4A8AF',  '#7E2960', '#BEEE20',
-                        '#660040', '#84FAD0','#B96271', '#84F749', '#FBDBCA', '#B82754') ;
+        $color = array('#B1B92C', '#E8BF4F', '#22D065', '#A058E9', '#FB9734', '#EAEDEA',
+            '#DEC3D5', '#A8A749', '#E7209C', '#E4A8AF', '#7E2960', '#BEEE20',
+            '#660040', '#84FAD0', '#B96271', '#84F749', '#FBDBCA', '#B82754');
 
         foreach ($months as $month) {
             $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 
             for ($i = 0; $i < $countCategoryMonth[$month]; $i++) {
-                if($sumTotalMonths[$month] == 0) {
+                if ($sumTotalMonths[$month] == 0) {
                     return false;
                 } else {
                     $percentMonthCategory[$month][$categoriesMonths[$month][$i]] = ( $sumMoneyMonths[$month][$categoriesMonths[$month][$i]] * 100) / $sumTotalMonths[$month];
                     if (!isset($percentCategory[$month][$i])) {
                         $percentCategory[$month][$i] = ['value' => round($percentMonthCategory[$month][$categoriesMonths[$month][$i]], 2),
-                                    'color' => $color[$i],
-                                    'label' => $nameCategoryId[$categoriesMonths[$month][$i]]];
+                            'color' => $color[$i],
+                            'label' => $nameCategoryId[$categoriesMonths[$month][$i]]];
                     }
-                } 
+                }
             }
         }
         return $percentCategory;
     }
-    
+
     public function getMoneyGroupByCategories($walletId, $categoryId) {
         $moneyGroupByCategories = $this->find('all', array('conditions' => array('wallet_id' => $walletId,
-                    'categorie_id' => $categoryId),
-                'fields' => array('sum(Transaction.transaction_money) as total_money',
-                    'month(Transaction.day_transaction) as month',
-                    'Transaction.categorie_id'),
-                'order' => array('month(Transaction.day_transaction)' => 'asc'),
-                'group' => array('Transaction.categorie_id')));
+                'categorie_id' => $categoryId),
+            'fields' => array('sum(Transaction.transaction_money) as total_money',
+                'month(Transaction.day_transaction) as month',
+                'Transaction.categorie_id'),
+            'order' => array('month(Transaction.day_transaction)' => 'asc'),
+            'group' => array('Transaction.categorie_id')));
         return $moneyGroupByCategories;
     }
-    
-    public function getMonthTransaction ($walletId) {
+
+    public function getMonthTransaction($walletId) {
         $transactions = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
         $outputMonthTransactions = array();
         $i = 0;
-        if(!empty($transactions)){
+        if (!empty($transactions)) {
             foreach ($transactions as $key => $transaction) {
                 if (!isset($outputMonthTransactions[$i])) {
                     $outputMonthTransactions[$i] = date('Y-m', strtotime($transaction['Transaction']['day_transaction']));
@@ -271,39 +276,90 @@ class Transaction extends AppModel {
                 $i++;
             }
         }
-        
+
         return $monthTransaction;
     }
-    
+
     public function findAllTransactionsAuth($walletId) {
         $allTransactionsAuth = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
         return $allTransactionsAuth;
     }
-    
+
     public function findAllCategory() {
         $allCategories = $this->Categorie->find('all');
         return $allCategories;
     }
-    
-     public function findListCategory() {
-        $listCategories =  $this->Categorie->find('list');
+
+    public function findListCategory() {
+        $listCategories = $this->Categorie->find('list');
         return $listCategories;
     }
-    
+
     public function findIdCategory($categoryId) {
         $idCategories = $this->Categorie->find('list', array('conditions' => array('id' => $categoryId)));
         return $idCategories;
     }
-    
-     public function findListWallet() {
-        $listWallet =  $this->Wallet->find('list');
+
+    public function findListWallet() {
+        $listWallet = $this->Wallet->find('list');
         return $listWallet;
     }
-    
+
     public function findIdWalletAuth($walletId) {
-       $wallets = $this->Wallet->find('list', array('conditions' => array('id' => $walletId)));
-       return $wallets;
+        $wallets = $this->Wallet->find('list', array('conditions' => array('id' => $walletId)));
+        return $wallets;
+    } 
+    
+    public function getIncomeCategory($walletId) {
+        $incomeCategories = $this->Categorie->find('list', array('fields' => 'id', 'conditions' => array('type' => '0')));
+        $incomeTransactions = $this->find('all', array(
+            'fields' => array('sum(Transaction.transaction_money) as money',
+                'Wallet.id',
+                'Wallet.money_current',
+                'Wallet.money_initialize'),
+            'conditions' => array('categorie_id' => $incomeCategories,
+                'wallet_id' => $walletId)));
+        return $incomeTransactions;
     }
 
+    public function getExpenseCategory($walletId) {
+        $expenseCategories = $this->Categorie->find('list', array('fields' => 'id', 'conditions' => array('type' => '1')));
+        $expenseTransactions = $this->find('all', array(
+            'fields' => array('sum(Transaction.transaction_money) as money',
+                'Wallet.id',
+                'Wallet.money_current',
+                'Wallet.money_initialize'),
+            'conditions' => array('categorie_id' => $expenseCategories,
+                'wallet_id' => $walletId)));
+        return $expenseTransactions;
+    }
+    
+    public function getTypeCategory($categoryId) {
+        $typeCategorie = $this->Categorie->find('list', array('fields' => 'type', 'conditions' => array('id' => $categoryId)));
+        return $typeCategorie;
+    }
+ 
+    public function getWalletById($walletId) {
+        $walletModel = new Wallet();
+        $return_wallet = $walletModel->find('all', array(
+                        'conditions' => array(
+                                'Wallet.id' => $walletId)));
+        return $return_wallet;
+    }
+    
+    public function getTransactionById($transactionId) {
+        $return_transaction = $this->query(" select * from transactions where id = $transactionId");
+//                                'Transaction.id' => $transactionId)));
+        return $return_transaction;
+    }
+    
+    public function getWalletByTransactionId($transactionId) {
+        $transaction = $this->find('all', array(
+                        'conditions' => array(
+                                'Transaction.id' => $transactionId)));
+        $wallet = $transaction[0]['Wallet'];
+        return $wallet;
+    }
 }
+
 // '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)]

@@ -16,8 +16,6 @@
 
             <span class="wallet-info"><i class="fa fa-smile-o"></i> Wallet Info:</span>
             <?php echo $this->Form->textarea('info', array('label' => false, 'class' => 'form-control edit-wallet-info')); ?>  <br> 
-            <span class="wallet-current-money"><i class="fa fa-smile-o"></i> Current money: </span>
-            <?php echo $this->Form->input('money_current', array('label' => false, 'class' => 'form-control edit-money-current')); ?>  <span class="type-money">VND</span>     
         </div>
         <?php
         $sumbit = array(

@@ -25,13 +25,25 @@ class WalletsController extends AppController {
      * @return void
      */
     public function index() {
+        $this->loadModel('Transaction');
+        $this->loadModel('TransferWallet');
+        $this->loadModel('Category');
+
         $this->Paginator->settings = array(
             'conditions' => array('User.id' => $this->Auth->user('id'))
         );
+        
         $this->Wallet->recursive = 0;
+
+        $sumMoneyWallet = $this->Wallet->find('all', array(
+            'fields' => array('sum(money_current) as sumCurrent'),
+            'conditions' => array('user_id' => $this->Auth->user('id'))
+        ));
+
+        $this->set('sumMoneyCurrent', $sumMoneyWallet[0][0]['sumCurrent']);
         $this->set('wallets', $this->Paginator->paginate());
-    } 
-    
+    }
+
     /**
      * add method
      *
@@ -43,7 +55,10 @@ class WalletsController extends AppController {
             $this->Wallet->create();
             $data = $this->request->data;
             $data['Wallet']['user_id'] = $this->Auth->user('id');
-            if ($this->Wallet->save($data)) { 
+
+            if ($this->Wallet->save($data)) {
+                $changable = $this->request->data['Wallet'];
+                $this->Wallet->save(['money_current' => $changable["money_initialize"]]);
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
