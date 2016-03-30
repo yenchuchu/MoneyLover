@@ -463,6 +463,8 @@ body {
 #categories h1 {
     text-align: center;
     color: rgba(0, 0, 0, 0.73);
+    position: relative;
+    top: 20px;
 }
 
 #navbar-default {
@@ -625,6 +627,8 @@ input#edit-input-expense {
 #edit-category h1 {
     text-align: center;
     color: rgba(0, 0, 0, 0.73);
+    position: relative;
+    top: 14px;
 }
 
 #edit-category {
@@ -643,7 +647,7 @@ td#edit-category-type {
 
 #a-add-category {
     position: relative;
-    top: -72px;
+    top: -48px;
     right: -250px;
     border: none;
     padding: 7px 24px;
@@ -730,7 +734,7 @@ footer {
 
 #a-add-wallet {
     position: relative;
-    top: -112px;
+    top: -91px;
     right: -250px;
     border: none;
     padding: 7px 24px;
@@ -1427,6 +1431,20 @@ input {
     top: 130px;
 }
 
+#categories #search { 
+    color: black; 
+    position: relative; 
+    left: 7px; 
+    top: -12px;
+}
+
+#report-month #search  { 
+    color: black; 
+    position: relative; 
+    left: 7px; 
+    top: 0;
+}
+
 /* edit transaction */
 
 .edit-transaction-sigle .panel-heading {
@@ -2072,7 +2090,7 @@ footer {
 
 #search-time {
     position: relative;
-        top: -30px;
+    top: -30px;
     left:24%;
 }
 
@@ -2082,13 +2100,19 @@ footer {
     left: 32%;
     padding: 4px 25px !important;
     color: white;
-    background: rgba(102, 51, 153, 0.62); 
+    background: rgba(102, 51, 153, 0.85); 
     border: none;
-}   
+    font-size: 17px;
+}  
 
 #transaction #button-search {
-        left: 48% !important;
+    left: 48% !important;
     top: -32px !important;    
+}
+
+#categories #button-search {     
+    top: 0px;
+    left: -1%;
 }
 
 #search-category-transaction {
@@ -2132,7 +2156,7 @@ footer {
 
 #form-search-transfer button {
     font-size: 17px;
-        top: -62px;
+    top: -62px;
     left: 60%;
     padding: 4px 25px !important;
     background-color: rgba(102, 51, 153, 0.85);
@@ -2144,7 +2168,7 @@ footer {
     left: 41%;  
     width: 10%;
     padding-left: 10px;
-        border: 1px solid;
+    border: 1px solid;
     border-radius: 5px;
     margin-right: 15px;
 }
@@ -2175,16 +2199,16 @@ span.current.number-page {
 
 #search-year-transaction {
     float: right;
-           right: 27.9%;
+    right: 27.9%;
     position: relative;
     width: 10%;
     padding-left: 10px;
-        border: 1px solid;
+    border: 1px solid;
     border-radius: 5px;
 }
 
 #search-year-transfer {
-        float: right;
+    float: right;
     right: 9.2%;
     top: -60px;
     position: relative;
@@ -2222,8 +2246,8 @@ select {
 }
 
 #search-month-transaction {
-        position: relative !important;
-       top: -7px !important;
+    position: relative !important;
+    top: -7px !important;
     left: 12.6% !important;
 }
 
@@ -2242,4 +2266,17 @@ select {
     top: -7px;
     position: relative;
     left: 12%;
+}
+
+#expense-edit {
+    position: relative;
+    top: 7px;
+}
+
+#edit-category #transaction-month>.panel-body {
+    min-height: 0px !important;
+}
+
+select#TransactionCategorieId {
+    margin-left: -3px;
 }

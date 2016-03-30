@@ -38,8 +38,7 @@ class ReportMonthsController extends AppController {
         $result_wallet_id = Set::classicExtract($findWallet, '{n}.wallets.id');
         
         $year = $this->request->query('year_start');
-//        debug($year);die;
-        
+
         $wallets = $this->Transaction->findIdWalletAuth($result_wallet_id); 
         if(!empty($wallets)){
             $categories = $this->Transaction->findIdCategory($result_categorie_id);
@@ -56,13 +55,18 @@ class ReportMonthsController extends AppController {
             if(!empty($transactions)){
                 foreach ($transactions as $key => $transaction) {
                     if (!isset($outputMonthTransactions[$i])) {
-                        $outputMonthTransactions[$i] = date('Y-m', strtotime($transaction['Transaction']['day_transaction']));
+                        if(!empty($year)) { 
+                            $outputMonthTransactions[$i] = date($year.'-m', strtotime($transaction['Transaction']['day_transaction']));
+                        } else {
+                            $outputMonthTransactions[$i] = date('Y-m', strtotime($transaction['Transaction']['day_transaction']));
+                        }
+                        
                     }
                     $i++;
                 }
 
                 $months = array_unique($outputMonthTransactions);
-                rsort($months); 
+                rsort($months);  
                 $this->set('months', $months);
                 $this->set('pieData', $this->Transaction->getReportFollowType($result_wallet_id));
                 $this->set('pieDataCategories', $this->Transaction->getReportFollowCategories($result_wallet_id));

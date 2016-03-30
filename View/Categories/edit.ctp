@@ -13,20 +13,21 @@
                         <thead>
                             <th><?php echo $this->Paginator->sort('Category Name'); ?></th>
                             <th><?php echo $this->Paginator->sort('Type'); ?></th>  
-                        </thead>
-                        <?php //foreach ($categories as $category): ?>
+                        </thead> 
                         <?php echo $this->Form->create('Category'); ?>
                         <tr> 
                             <?php echo $this->Form->input('id'); ?>
                             <td><?php echo $this->Form->input('name', array('label' => false,'class'=>'edit-name-category' )); ?>&nbsp;</td> 
                             <td> 
+                             
                                 <label class="radio-inline">
-                                    <input type="radio" name="data[Category][type]" value="1" id="CategoryType" checked="checked">Income</label>
+                                    <input type="radio" name="data[Category][type]" value="0" id="CategoryType" >Income</label>
                                 <label class="radio-inline" id="lable-edit-input-expense">
-                                    <input type="radio"  name="data[Category][type]" value="0" id="CategoryType edit-input-expense" checked="checked">Expense</label>
+                                    <input type="radio"  name="data[Category][type]" value="1" id="CategoryType edit-input-expense">
+                                    <span id = "expense-edit">Expense</span>
+                                </label> 
                             </td> 
-                        </tr>
-                        <?php //endforeach; ?>
+                        </tr> 
                     </table>       
 
                 </div>
@@ -35,8 +36,7 @@
                     'class' => 'btn wallet-save',
                     'div' => array(
                         'class' => 'submit-wallet',
-                        'style' => ' margin-top: -18%;
-                                    margin-left: 16px;' ));
+                        'style' => 'margin-left: 16px;' ));
                 echo $this->Form->end($sumbit);
                 ?>
             </div>

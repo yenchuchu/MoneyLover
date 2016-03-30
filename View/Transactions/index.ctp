@@ -11,6 +11,7 @@
         <?php
         echo $this->Form->input('categorie_id', array(
             'options' => $categories,
+            'value' => $this->request->query('categorie_id'),
             'empty' => '--choose category--',
             'class' => 'select-style select2-offscreen',
             'id' => 'search-category-transaction',
@@ -21,6 +22,7 @@
         <?php
         echo $this->Form->input('wallet_id', array(
             'options' => $wallets,
+            'value' => $this->request->query('wallet_id'),
             'empty' => '--choose wallet--',
             'class' => 'select-style select2-offscreen',
             'id' => 'search-wallet-transaction',
@@ -31,6 +33,7 @@
         <?php
         echo $this->Form->input('money', array(
             'label' => false,
+            'value' => $this->request->query('money'),
             'type' => 'number',
             'placeholder' => 'enter money',
             'id' => 'search-money-transaction',
@@ -74,6 +77,7 @@
                     30 => '30',
                     31 => '31'
                 ),
+                'value'=>$this->request->query('day_start'),
                 'div' => false,
                 'label' => false,
                 'empty' => '-- day--',
@@ -97,6 +101,7 @@
                     11 => 'November',
                     12 => 'December'
                 ),
+                'value'=> $this->request->query('month_start'),
                 'div' => false,
                 'label' => false,
                 'empty' => '-- month--',
@@ -108,6 +113,7 @@
             <?php
             echo $this->Form->input('year_start', array(
                 'label' => false,
+                'value'=>$this->request->query('year_start'),
                 'div' => false,
                 'type' => 'number',
                 'placeholder' => 'enter year',
@@ -183,12 +189,8 @@
                                     <span class="with-selected"> <i> With selected: </i></span>
                                     <span  id="deleteAll"  class="glyphicon glyphicon-trash" title="Delete"> </span> 
                                     <?php
-                                    $counts = 0;
-                                    foreach ($transactions as $transaction):
-                                        $counts++;
-                                    endforeach;
-
-                                    if ($counts < 20) {
+                                    
+                                    if ($countTransaction < 20) {
                                         ?>
                                         <span></span>
                                         <?php
@@ -218,7 +220,20 @@
                                     <?php echo $this->Form->input('wallet_id'); ?>
                                 </div>
                                 <div class="form-group categorie-id" >
-                                    <?php echo $this->Form->input('categorie_id', array('options' => $categories)); ?>
+                                    <label for="TransactionCategorieId">Categorie</label>
+                                    
+                                    <?php
+                                    $options = array(
+                                        'Income' => array(
+                                            $categoriesIncome
+                                        ),
+                                        'Expense' => array(
+                                           $categoriesExpense
+                                        )
+                                     );
+                                     echo $this->Form->select('categorie_id',$options, array('empty'=> '--choose category--'));
+                                    ?>
+                                    
                                 </div>
                                 <div class="form-group transaction-money">
                                     <?php echo $this->Form->input('transaction_money', array('placeholder' => 'enter money', 'style' => 'padding-left: 8px')); ?>
@@ -256,19 +271,14 @@
 
     $('#deleteAll').click(function () {
         ids = new Array();
-//        idWallets = new Array();
         $("input:checkbox[name='transaction_id[]']:checked").each(function () {
             ids.push($(this).val());
-            idWallets.push($(this).next());
         });
-//        alert(idWallets);
-//        $("input:checkbox").next().alert("fsdfsdf");
         if (ids.length >= 1) {
             console.log(ids);
             deleteAll("transactions/deleteAll", ids);
             document.location.reload();
         } else {
-            // alert("select input, please!");
             return false;
         }
 

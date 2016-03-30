@@ -128,11 +128,5 @@ class TransferWallet extends AppModel {
     public function getTransferWalletById($transferWalletId) {
          $return_transfer = $this->query(" select * from transfer_wallets where id = $transferWalletId");
          return $return_transfer;
-    }
-    
-//    public function afterDelete() {
-//        $walletModel = new Wallet();
-//        parent::afterDelete();
-//        debug($this->data);die;
-//    }
+    } 
 }

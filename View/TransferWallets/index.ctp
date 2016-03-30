@@ -16,6 +16,7 @@
         <?php
         echo $this->Form->input('sent_wallet_id', array(
             'options' => $sentWallets,
+            'value'=>$this->request->query('sent_wallet_id'),
             'empty' => '--choose sent wallet --',
             'class' => 'select-style select2-offscreen',
             'id' => 'search-category-transaction',
@@ -26,6 +27,7 @@
         <?php
         echo $this->Form->input('receive_wallet_id', array(
             'options' => $receiveWallets, 
+            'value'=>$this->request->query('receive_wallet_id'),
             'empty' => '--choose recieve wallet --',
             'class' => 'select-style select2-offscreen',
             'id' => 'search-wallet-transaction',
@@ -36,6 +38,7 @@
         <?php
         echo $this->Form->input('transfer_money', array(
             'label' => false,
+            'value'=>$this->request->query('transfer_money'),
             'type' => 'number',
             'placeholder' => 'enter money',
             'id' => 'search-money-transfer',
@@ -81,8 +84,10 @@
                 31=>'31'
                 
             ),
+            'value'=>$this->request->query('day_start'),
             'label' => false, 
             'empty' => '-- day--',
+            'div' => false,
             'id' => 'search-day-transfer',
             'required' => false
         ));
@@ -103,6 +108,7 @@
                 11=>'November' ,
                 12=>'December' 
             ),
+            'value'=>$this->request->query('month_start'),
             'label' => false, 
             'empty' => '-- month--',
             'id' => 'search-month-transfer',
@@ -112,6 +118,7 @@
   <?php
         echo $this->Form->input('year_start', array(
             'label' => false,
+            'value'=>$this->request->query('year_start'),
             'type' => 'number',
             'placeholder' => 'enter year',
             'id' => 'search-year-transfer',
@@ -183,12 +190,8 @@
                                     <span class="with-selected"> <i> With selected: </i></span>
                                     <span id="deleteAll" class="glyphicon glyphicon-trash" title="Delete"> </span> 
                                     <?php
-                                    $counts = 0;
-                                    foreach ($transferWallets as $transferWallet):
-                                        $counts++;
-                                    endforeach;
-
-                                    if ($counts <20) {
+                                    
+                                    if ($countTransfer <20) {
                                         ?>
                                         <span></span>
                                         <?php

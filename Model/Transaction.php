@@ -3,12 +3,9 @@
 App::uses('AppModel', 'Model');
 App::uses('CakeTime', 'Utility');
 App::uses('CakeNumber', 'Utility');
-//App::uses('Wallet', 'Model');
-//App::uses('User', 'Model');
 
 App::import('Model', 'Wallet');
 App::import('Model', 'User');
-//$walletModel = ClassRegistry::init('Wallet');
 
 /**
  * Transaction Model
@@ -96,8 +93,15 @@ class Transaction extends AppModel {
         $idIncome = Hash::extract($categorie, '{n}.Categorie[type=1].id');
         $idExpense = Hash::extract($categorie, '{n}.Categorie[type=0].id');
 
-        $transactionsIncomes = $this->find('all', array('conditions' => array('Categorie.id IN' => $idIncome)));
-        $transactionsExpenses = $this->find('all', array('conditions' => array('Categorie.id IN' => $idExpense)));
+        $transactionsIncomes = $this->find('all', array(
+            'conditions' => array(
+                'Categorie.id IN' => $idIncome,
+                'Wallet.id IN' => $walletId
+                )));
+        $transactionsExpenses = $this->find('all', array(
+            'conditions' => array(
+                'Categorie.id IN' => $idExpense,
+                'Wallet.id IN' => $walletId)));
         $transactions = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
 
         $outputMonthTransactions = array();
@@ -114,7 +118,6 @@ class Transaction extends AppModel {
 
         $outputIncome = array();
         foreach ($transactionsIncomes as $key => $transactionIncome) {
-
             if (!isset($outputIncome[date('Y-m', strtotime($transactionIncome['Transaction']['day_transaction']))])) {
                 $outputIncome[date('Y-m', strtotime($transactionIncome['Transaction']['day_transaction']))] = $transactionIncome['Transaction']['transaction_money'];
             } else {
@@ -130,11 +133,18 @@ class Transaction extends AppModel {
                 $outputExpense[date('Y-m', strtotime($transactionExpense['Transaction']['day_transaction']))] += $transactionExpense['Transaction']['transaction_money'];
             }
         }
-
         $i = 0;
         $percentMonth = array();
         $toalMoney = array();
+        
         foreach ($months as $month) {
+            if(!isset($outputExpense[$month])) {
+                $outputExpense[$month]= 0;
+            }
+            if(!isset($outputIncome[$month])) {
+                $outputIncome[$month] = 0;
+            }
+            
             $toalMoney = $outputExpense[$month] + $outputIncome[$month];
             if ($toalMoney == 0) {
                 return false;
@@ -144,7 +154,7 @@ class Transaction extends AppModel {
                 $percentMonth[$month] = [
                     ['value' => round($percentExpense[$month], 2), 'color' => '#FF8153', 'label' => 'Expense'],
                     ['value' => round($percentIncome[$month], 2), 'color' => '#4ACAB4', 'label' => 'Income']
-                ];
+                    ];
             }
         }
         return $percentMonth;
@@ -338,7 +348,17 @@ class Transaction extends AppModel {
         $typeCategorie = $this->Categorie->find('list', array('fields' => 'type', 'conditions' => array('id' => $categoryId)));
         return $typeCategorie;
     }
- 
+    
+    public function getAllCategoriesIncome() {
+        $idCategoriesIncome = $this->Categorie->find('list', array('conditions' => array('type' => 0)));
+        return $idCategoriesIncome;
+    }
+
+    public function getAllCategoriesExpense() {
+        $idCategoriesExpense = $this->Categorie->find('list', array('conditions' => array('type' => 1)));
+        return $idCategoriesExpense;
+    }
+
     public function getWalletById($walletId) {
         $walletModel = new Wallet();
         $return_wallet = $walletModel->find('all', array(

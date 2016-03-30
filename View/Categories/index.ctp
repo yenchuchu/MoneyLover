@@ -3,55 +3,32 @@
 <section id="categories" class="content-section text-center">
     <div class="categories-section">
         <div class="container"> 
-                <h1 class="title"><?php echo __('Categories'); ?></h1> 
-                <a href="#add-category" id="a-add-category"> Add Category</a>
-             
-                <!--<span id="form-search-transfer">-->
-        <?php
-//        echo $this->Form->create(array(
-//            'type' => 'get',
-//            'id' => 'search',
-//            'class' => 'form-inline form-search-top'));
-        ?>
-        <?php
-//        echo $this->Form->input('name', array(
-//            'options' => $name,
-//            'empty' => '--choose name --',
-//            'class' => 'select-style select2-offscreen',
-//            'id' => 'search-category-transaction',
-//            'label' => false,
-//            'div' => false,
-//            'required' => false));
-        ?>
-        <?php
-//        echo $this->Form->input('type', array(
-//            'options' => array(0=>'income' , 1=>'expense'), 
-//            'empty' => '--choose type --',
-//            'class' => 'select-style select2-offscreen',
-//            'id' => 'search-wallet-transaction',
-//            'label' => false,
-//            'div' => false,
-//            'required' => false));
-        ?>
-        
-<!--        <span id="search-time-transfer " style="position: relative !important;
-    left: 20% !important;">
+            <h1 class="title"><?php echo __('Categories'); ?></h1> 
+            <a href="#add-category" id="a-add-category"> Add Category</a>
+
             <?php
-//            echo $this->Form->dateTime('Contact.date', 'DMY', array(
-//                'empty' => array(
-//                    'day' => 'Day', 
-//                    'month' => 'MONTH', 
-//                    'year' => 'YEAR' ),
-//                'required' => false ));
+            echo $this->Form->create(array(
+                'type' => 'get',
+                'id' => 'search',
+                'class' => 'form-inline form-search-top'));
+            ?> 
+            <?php
+            echo $this->Form->input('type', array(
+                'options' => array('income' => 'income', 'expense' => 'expense'),
+                'value' => $this->request->query('type'),
+                'empty' => '--choose type --',
+                'class' => 'select-style select2-offscreen',
+                'id' => 'search-wallet-transaction',
+                'label' => false,
+                'div' => false,
+                'required' => false));
             ?>
-        
-                </span>
-        <button class="btn btn-default " id="button-search" type="submit" title="search">
-            <i class="fa fa-search"></i>
-        </button> -->
-    <?php // echo $this->Form->end(); ?> 
-    <!--</span>-->
-    
+
+            <button class="btn btn-default " id="button-search" type="submit" title="search">
+                <i class="fa fa-search"></i>
+            </button> 
+            <?php echo $this->Form->end(); ?> 
+
             <div class="panel-body">
                 <div class="col-lg-12 categories-income"> 
                     <table class="table table-striped table-hover">
@@ -64,16 +41,16 @@
                         <th><?php echo $this->Paginator->sort('Modified'); ?></th>
                         <th class="actions"><?php echo $this->Paginator->sort('Actions'); ?></th> 
                         </thead>
-<?php foreach ($categories as $category): ?>
+                        <?php foreach ($categories as $category): ?>
                             <tr>
                                 <td> <input type="checkbox" name="category_id[]" class="category-checkbox"  value="<?php echo h($category['Category']['id']); ?>" id="<?php echo h($category['Category']['id']); ?>"></td>
                                 <td><?php echo h($category['Category']['id']); ?>&nbsp;</td>
                                 <td><?php echo h($category['Category']['name']); ?>&nbsp;</td> 
                                 <td><?php
                                     if ($category['Category']['type'] == 1):
-                                        echo "Income";
-                                    else :
                                         echo "Expense";
+                                    else :
+                                        echo "Income";
                                     endif;
                                     ?></td>
                                 <td><?php echo $this->Time->format($category['Category']['created'], '%B %e, %Y '); ?> </td>
@@ -81,21 +58,26 @@
                                 <td>
 
 
-    <?php echo $this->Html->link(__(''), array('action' => 'edit', $category['Category']['id']), array('class' => 'delete-transaction glyphicon glyphicon-pencil', 'title' => 'Edit')); ?><?php echo $this->Form->postLink('', array('action' => 'delete', $category['Category']['id']), array('class' => 'delete-transaction glyphicon glyphicon-trash', 'title' => 'Delete'), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>  
+                                    <?php echo $this->Html->link(__(''), array('action' => 'edit', $category['Category']['id']), array('class' => 'delete-transaction glyphicon glyphicon-pencil', 'title' => 'Edit')); ?>
+                                    <?php
+                                    echo $this->Form->postLink('', array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']),
+                                        'class' => 'delete-transaction glyphicon glyphicon-trash', 'title' => 'Delete')
+                                    );
+                                    ?>  
                                 </td>
                             </tr>
-                <?php endforeach; ?>
+<?php endforeach; ?>
                     </table>
                 </div>
                 <?php if (empty($categories)) { ?>
                     <p> No Category</p>
-<?php
-} else {
-    ?>
+                    <?php
+                } else {
+                    ?>
                     <div class="page" >
                         <div class="paging">
-    <?php echo $this->Html->image('../img/select.png', array('alt' => 'CakePHP', 'style' => 'margin-left: 22px;'));
-    ?> 
+                            <?php echo $this->Html->image('../img/select.png', array('alt' => 'CakePHP', 'style' => 'margin-left: 22px;'));
+                            ?> 
                             <span id="span-check-all"> 
                                 <input type="checkbox" name="checkAll" value="checkAll" id="checkAll">
                                 <label for="checkAll">Select All</label>
@@ -105,12 +87,7 @@
                             <span id="deleteAll"  class="glyphicon glyphicon-trash" title="Delete">  
                             </span> 
                             <?php
-                            $counts = 0;
-                            foreach ($categories as $category):
-                                $counts++;
-                            endforeach;
-
-                            if ($counts <20) {
+                            if ($countCategories < 20) {
                                 ?>
                                 <span></span>
                                 <?php
@@ -127,9 +104,9 @@
                         </div>
                     </div>
 
-    <?php
-}
-?>
+                    <?php
+                }
+                ?>
                 <div id="add-category" class="modalDialog">      
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
@@ -140,15 +117,16 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4" for="CategoryName" id="lable-name-category">Category Name:</label>
                                 <div class="col-sm-8">
-                                    <input name="data[Category][name]" maxlength="100" type="text" id="CategoryName" class="form-control" required="required">
+                                    <input name="data[Category][name]" maxlength="100" type="text" id="CategoryName" class="form-control" required="required" autofocus>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <label class="control-label col-sm-4" id="lable-type-category">Type:</label>
-                                <div class="col-sm-8" style="text-align: left;">
+                                <div class="col-sm-8" style="text-align: left;"  >
                                     <label class="radio-inline">
-                                        <input type="radio" name="data[Category][type]" value="1" id="CategoryType" >Income</label>
-                                    <label class="radio-inline"><input type="radio"  name="data[Category][type]" value="0" id="CategoryType" >Expense</label>
+                                        <input type="radio" name="data[Category][type]" value="1" id="CategoryType" >Expense</label>
+                                    <label class="radio-inline">
+                                        <input type="radio"  name="data[Category][type]" value="0" id="CategoryType" >Income</label>
 
                                 </div>
                             </div>

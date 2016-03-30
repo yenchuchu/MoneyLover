@@ -31,68 +31,63 @@ class TransferWalletsController extends AppController {
         $id_auth = $this->Auth->user('id');
         $findWallet = $this->User->findWalletAuth($id_auth);
 
-//        debug($allWallets);die;
         $result_wallet_selected = Set::classicExtract($findWallet, '{n}.wallets.id');
- 
+
         $sentWalletId = $this->request->query('sent_wallet_id');
-           $recieveWalletId = $this->request->query('receive_wallet_id');
-           $money = $this->request->query('transfer_money'); 
-           
-           $day = $this->request->query('day_start'); 
-           $month = $this->request->query('month_start');
-           $year = $this->request->query('year_start');
+        $recieveWalletId = $this->request->query('receive_wallet_id');
+        $money = $this->request->query('transfer_money');
 
-           $conditions = array('TransferWallet.sent_wallet_id is not null',
-                                'TransferWallet.receive_wallet_id is not null' 
-               );  
-           
-                if(!empty($sentWalletId)) {
-                    $conditions['TransferWallet.sent_wallet_id'] = $sentWalletId;
-                } else {
-                    $conditions['TransferWallet.sent_wallet_id'] = $result_wallet_selected;
-                }
-                
-                if(!empty($recieveWalletId)) {
-                    $conditions['TransferWallet.receive_wallet_id'] = $recieveWalletId; 
-                } else { 
-                    $conditions['TransferWallet.receive_wallet_id'] = $result_wallet_selected;
-                }
-                
-                if(!empty($money)) {
-                    if($money >= 500001) {
-                        $conditions[] = 'TransferWallet.transfer_money >'. $money; 
-                    } else {
-                        $conditions[] = 'TransferWallet.transfer_money <='. $money;
-                    }
-                } 
-//                debug($day);die;
-                if(!empty($day)) {
-                    $conditions['day(TransferWallet.created)'] = $day; 
-                } else {
-                    $conditions[] = 'day(TransferWallet.created) is not null';
-                }
-//                debug($month);die;
-                if(!empty($month)) { 
-                     $conditions['month(TransferWallet.created)'] = $month;  
-                }  
-                
-                if(!empty($year)) {
-                     $conditions['YEAR(TransferWallet.created)'] = $year;  
-                } 
-                
-//                $query = $this->TransferWallet->query('SELECT day(created) FROM `transfer_wallets`' );
-//                debug('2');
-//                debug($query);
-//                die;
-                 $this->paginate = array(
-                        'conditions' => $conditions,   
-                     'limit' => 20); 
-//                 debug(count($this->Paginator->paginate()));die;
-        $this->set('transferWallets', $this->Paginator->paginate());
+        $day = $this->request->query('day_start');
+        $month = $this->request->query('month_start');
+        $year = $this->request->query('year_start');
 
+        $conditions = array('TransferWallet.sent_wallet_id is not null',
+            'TransferWallet.receive_wallet_id is not null'
+        );
+
+        if (!empty($sentWalletId)) {
+            $conditions['TransferWallet.sent_wallet_id'] = $sentWalletId;
+        } else {
+            $conditions['TransferWallet.sent_wallet_id'] = $result_wallet_selected;
+        }
+
+        if (!empty($recieveWalletId)) {
+            $conditions['TransferWallet.receive_wallet_id'] = $recieveWalletId;
+        } else {
+            $conditions['TransferWallet.receive_wallet_id'] = $result_wallet_selected;
+        }
+
+        if (!empty($money)) {
+            if ($money >= 500001) {
+                $conditions[] = 'TransferWallet.transfer_money >' . $money;
+            } else {
+                $conditions[] = 'TransferWallet.transfer_money <=' . $money;
+            }
+        }
+        if (!empty($day)) {
+            $conditions['day(TransferWallet.created)'] = $day;
+        } else {
+            $conditions[] = 'day(TransferWallet.created) is not null';
+        }
+        if (!empty($month)) {
+            $conditions['month(TransferWallet.created)'] = $month;
+        }
+
+        if (!empty($year)) {
+            $conditions['YEAR(TransferWallet.created)'] = $year;
+        }
+        
+        $countTransfer = count($this->TransferWallet->find('all',array('conditions'=>$conditions)));
+ 
+        $this->paginate = array(
+            'conditions' => $conditions,
+            'limit' => 20);
+        
         $sentWallets = $this->TransferWallet->getListWalletSent($result_wallet_selected);
         $receiveWallets = $this->TransferWallet->getListWalletReceive($result_wallet_selected);
-
+        
+        $this->set('transferWallets', $this->Paginator->paginate());
+        $this->set('countTransfer', $countTransfer);
         $this->set(compact('sentWallets', 'receiveWallets'));
     }
 
@@ -265,7 +260,6 @@ class TransferWalletsController extends AppController {
             $this->Wallet->updateAll(array(
                 'Wallet.money_current' => $walletRecieve['money_current']), array(
                 'Wallet.id' => $idWalletRecieve));
-//            $this->Flash->success(__('The transfer wallet has been deleted.'));
         } else {
             $this->Flash->error(__('The transfer wallet could not be deleted. Please, try again.'));
         }
@@ -273,30 +267,36 @@ class TransferWalletsController extends AppController {
     }
 
     public function deleteAll() {
-        
+        $this->loadModel('Wallet');
+        $this->loadModel('Transaction');
+
         $this->request->allowMethod('post');
         $this->TransferWallet->hasAndBelongsToMany = false;
         $ids = $this->request->data['ids'];
-//        $transferDeletes = array();
-//        foreach($ids as $id) {
-//            $transferDeletes = $this->TransferWallet->getTransferWalletById($id);
-//        }
-//        debug($transferDeletes);die;
-        $transferDeletes = array();
-         foreach ($ids as $id) {
-            $transactionDelete[$id] = $this->Transaction->getTransactionById($id);
-            $typeCategoryDelete = $this->Transaction->getTypeCategory($transactionDelete[0]['transactions']['categorie_id']);
-            $wallet = $this->Transaction->getWalletById($transactionDelete[0]['transactions']['wallet_id']);
 
-            if($typeCategoryDelete[$transactionDelete[0]['transactions']['categorie_id']] ==  false) {
-                $wallet[0]['Wallet']['money_current'] -= $transactionDelete[0]['transactions']['transaction_money'];
-                } else {
-                 $wallet[0]['Wallet']['money_current'] += $transactionDelete[0]['transactions']['transaction_money'];
-            }
+        $transferDelete = array();
+        foreach ($ids as $id) {
+            $transferDelete = $this->TransferWallet->getTransferWalletById($id);
+
+            $moneyTransfer = $transferDelete[0]['transfer_wallets']['transfer_money'];
+            $idWalletSent = $transferDelete[0]['transfer_wallets']['sent_wallet_id'];
+            $idWalletRecieve = $transferDelete[0]['transfer_wallets']['receive_wallet_id'];
+
+            // get wallet info sent
+            $walletSent = $this->Transaction->getWalletById($idWalletSent)[0]['Wallet'];
+            // get wallet info sent
+            $walletRecieve = $this->Transaction->getWalletById($idWalletRecieve)[0]['Wallet'];
+
+            $walletSent['money_current'] += $moneyTransfer;
+            $walletRecieve['money_current'] -= $moneyTransfer;
+            
+            $this->Wallet->updateAll(array(
+                'Wallet.money_current' => '"' . $walletSent['money_current'] . '"'), array(
+                'Wallet.id' => $idWalletSent));
 
             $this->Wallet->updateAll(array(
-                    'Wallet.money_current' => $wallet[0]['Wallet']['money_current']), array(
-                    'Wallet.id' => $transactionDelete[0]['transactions']['wallet_id']));
+                'Wallet.money_current' => '"' . $walletRecieve['money_current'] . '"'), array(
+                'Wallet.id' => $idWalletRecieve));
         }
         if ($this->TransferWallet->deleteAll(array('id' => $ids), false)) {
             

@@ -1,35 +1,31 @@
-<?php echo $this->element('menu_user'); ?> 
-<!-- tim kiem theo nam, thang... -->
+<?php echo $this->element('menu_user'); ?>
 <!-- Contact Section -->
 
 <section id="report-month" class="content-section text-center">
     <span>
         <h1 id="title-report">Report Month</h1>  
     </span>
-    <!--<span id="form-search">-->
         <?php
-        echo $this->Form->create(array(
+        echo $this->Form->create('ReportMonths', array(
             'type' => 'get',
             'id' => 'search',
             'class' => 'form-inline form-search-top'));
         ?>
-        <form action="/MoneyLover/ReportMonths"  class="form-inline form-search-top" method="get" accept-charset="utf-8">
-     <?php
+       <?php
         echo $this->Form->input('year_start', array(
             'label' => false,
+            'value'=>$this->request->query('year_start'),
             'type' => 'number',
             'placeholder' => 'enter year',
             'id' => 'search-year-reportmonth',
             'required' => false
         ));
         ?>
-        <button class="btn btn-default " id="button-search" type="submit" title="search">
+    <button class="btn btn-default " id="button-search" type="submit" title="search">
             <i class="fa fa-search"></i>
         </button>  
-    <?php // echo $this->Form->end(); ?> 
-        </form>
-    <!--</span>-->
-    
+    <?php echo $this->Form->end(); ?> 
+       
     <div class="row" >
         <div class="col-lg-10 col-lg-offset-1 row-10-report">
         <?php if(empty($months)){
