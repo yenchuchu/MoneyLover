@@ -90,8 +90,8 @@ class Transaction extends AppModel {
     public function getReportFollowType($walletId) {
         $categorie = $this->Categorie->find('all');
 
-        $idIncome = Hash::extract($categorie, '{n}.Categorie[type=1].id');
-        $idExpense = Hash::extract($categorie, '{n}.Categorie[type=0].id');
+        $idIncome = Hash::extract($categorie, '{n}.Categorie[type=0].id');
+        $idExpense = Hash::extract($categorie, '{n}.Categorie[type=1].id');
 
         $transactionsIncomes = $this->find('all', array(
             'conditions' => array(
@@ -124,7 +124,7 @@ class Transaction extends AppModel {
                 $outputIncome[date('Y-m', strtotime($transactionIncome['Transaction']['day_transaction']))] += $transactionIncome['Transaction']['transaction_money'];
             }
         }
-
+        
         $outputExpense = array();
         foreach ($transactionsExpenses as $key => $transactionExpense) {
             if (!isset($outputExpense[date('Y-m', strtotime($transactionExpense['Transaction']['day_transaction']))])) {
@@ -133,6 +133,7 @@ class Transaction extends AppModel {
                 $outputExpense[date('Y-m', strtotime($transactionExpense['Transaction']['day_transaction']))] += $transactionExpense['Transaction']['transaction_money'];
             }
         }
+        
         $i = 0;
         $percentMonth = array();
         $toalMoney = array();
