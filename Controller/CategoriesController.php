@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('Category', 'Model');
 
 /**
  * Categories Controller
@@ -29,9 +30,9 @@ class CategoriesController extends AppController {
         $type = $this->request->query('type');
         $conditions = array();
         if ($type == 'expense') {
-            $conditions['Category.type'] = '1';
+            $conditions['Category.type'] = Category::TYPE_EXPENSE;
         } elseif ($type == 'income') {
-            $conditions['Category.type'] = '0';
+            $conditions['Category.type'] = Category::TYPE_INCOME;
         } else {
             $conditions[] = 'Category.type is not null';
         }
@@ -51,8 +52,12 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function add() {
+        $this->loadModel('User');
         if ($this->request->is('post')) {
             $this->Category->create();
+            if($this->Auth->user('role') === '1') {
+                $this->request->data['Category']['user_id'] = $this->Auth->user('id');
+            }
             if ($this->Category->save($this->request->data)) {
                 $this->Flash->success(__('The category has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -119,5 +124,30 @@ class CategoriesController extends AppController {
         echo json_encode(['status' => 1, 'message' => 'Save not success']);
         exit;
     }
+    
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === '1' && $user['active'] === '1') {
+            return true;
+        }
+        // Default deny
+       return false;
+    }
 
+    public function isAuthorizedC($user) {
+        // All registered users can add posts
+        if ($this->action === 'add') {
+            return false;
+        }
+
+        // The owner of a post can edit and delete it
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $postId = (int) $this->request->params['pass'][0];
+            if ($this->Category->isOwnedBy($postId, $user['id'])) {
+                return false;
+            }
+        }
+
+        return isAuthorized($user);
+    }
 }

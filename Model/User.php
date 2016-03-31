@@ -140,4 +140,8 @@ class User extends AppModel {
             inner join users on users.id = wallets.user_id where users.id = '$idAuth'");
         return $walletAuth;
     }
+    
+     public function isOwnedBy($post) {
+        return $this->field('id', array('id' => $post)) !== false;
+    }
 }

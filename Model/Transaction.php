@@ -381,6 +381,10 @@ class Transaction extends AppModel {
         $wallet = $transaction[0]['Wallet'];
         return $wallet;
     }
+    
+     public function isOwnedBy($post, $user) {
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
+    }
 }
 
 // '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)]

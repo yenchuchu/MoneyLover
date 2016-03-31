@@ -2091,7 +2091,7 @@ footer {
 #search-time {
     position: relative;
     top: -30px;
-    left:24%;
+    left: 36%;
 }
 
 #button-search {
@@ -2195,11 +2195,12 @@ span.current.number-page {
     color: white;
     font-size: 18px;
     margin-left: 6px;
+    margin-right: 4px;
 }
 
 #search-year-transaction {
     float: right;
-    right: 27.9%;
+    right: 39.9%;
     position: relative;
     width: 10%;
     padding-left: 10px;
@@ -2248,7 +2249,7 @@ select {
 #search-month-transaction {
     position: relative !important;
     top: -7px !important;
-    left: 12.6% !important;
+    left: 0.6% !important;
 }
 
 #search-month-transfer {
@@ -2264,8 +2265,7 @@ select {
 
 #search-day-transaction {
     top: -7px;
-    position: relative;
-    left: 12%;
+    position: relative; 
 }
 
 #expense-edit {

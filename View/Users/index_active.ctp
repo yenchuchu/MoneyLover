@@ -7,7 +7,7 @@
             <div class="col-lg-12 accounts-active">  
                 <h1> account <?php echo $typeLabel; ?> </h1>
                 <a href="#add-admin" id="add-admin-other"> Add Admin</a>
-                <?php echo $this->Form->create('User', array('url' => array('controller' => 'User', 'action' => 'index'))); ?>
+                <?php // echo $this->Form->create('User', array('url' => array('controller' => 'User', 'action' => 'index'))); ?>
                 <table class="table table-striped table-hover">
                     <tr class="table-header">
                         <th style="width: 1%;"></th>

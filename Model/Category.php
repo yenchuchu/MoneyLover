@@ -8,6 +8,9 @@ App::uses('AppModel', 'Model');
  */
 class Category extends AppModel {
 
+    const TYPE_INCOME = 0;
+    const TYPE_EXPENSE = 1;
+
     /**
      * Validation rules
      *
@@ -46,6 +49,10 @@ class Category extends AppModel {
             'conditions'=>array(
                 'Categories.name' => $name)));
         return $category;
+    }
+    
+    public function isOwnedBy($post, $user) {
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 
 }

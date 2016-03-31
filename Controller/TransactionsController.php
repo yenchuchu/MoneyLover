@@ -2,6 +2,10 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeNumber', 'Utility');
+App::import('Controller', 'Users');
+
+$Users = new UsersController;
+$Users->constructClasses();
 
 /**
  * Transactions Controller
@@ -10,7 +14,9 @@ App::uses('CakeNumber', 'Utility');
  * @property PaginatorComponent $Paginator
  */
 class TransactionsController extends AppController {
-
+    
+     
+  
     /**
      * Components
      *
@@ -95,10 +101,15 @@ class TransactionsController extends AppController {
      */
     public function add() {
         $this->loadModel('Wallet');
+        $this->loadModel('User');
+        
         if ($this->request->is('post')) {
             $this->Transaction->create();
             $data = $this->request->data;
-
+            if($this->Auth->user('role') === '0') {
+                $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+            }
+            
             $typeCategory = $this->Transaction->getTypeCategory($this->data['Transaction']['categorie_id']);
             $return_transaction = $this->Transaction->getWalletById($this->data['Transaction']['wallet_id']);
             if ($this->Transaction->save($data)) {
@@ -246,5 +257,33 @@ class TransactionsController extends AppController {
         echo json_encode(['status' => 1, 'message' => 'Save not success']);
         exit;
     }
+    
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === '0' && $user['active'] === '1') {
+            return true;
+        }
+        // Default deny
+       return false;
+    }
+        
+    public function isAuthorizedT($user) {
+        $this->loadModel('User');
+        // All registered users can add posts
+        if ($this->action === 'add') {
+            return true;
+        }
+        
+        
+        
+        // The owner of a post can edit and delete it
+        if (in_array($this->action, array('edit', 'delete', 'UploadImage', 'change_password', 'logout'))) {
+            $postId = (int) $this->request->params['pass'][0];
+            if ($this->Transaction->isOwnedBy($postId, $user['id'])) {
+                return true;
+            }
+        }
 
+        return parent::isAuthorized($user);
+    }
 }

@@ -111,7 +111,11 @@ class TransferWalletsController extends AppController {
 
             $walletSentEdit = $this->Transaction->getWalletById($idWalletSentEdit);
             $walletRecieveEdit = $this->Transaction->getWalletById($idWalletRecieveEdit);
-
+            
+            if($this->Auth->user('role') === '0') {
+                $this->request->data['TransferWallet']['user_id'] = $this->Auth->user('id');
+            }
+            
             if ($this->TransferWallet->save($this->request->data)) {
                 $walletSentEdit[0]['Wallet']['money_current'] -= $moneyEdit;
                 $walletRecieveEdit[0]['Wallet']['money_current'] += $moneyEdit;
@@ -307,5 +311,30 @@ class TransferWalletsController extends AppController {
         echo json_encode(['status' => 1, 'message' => 'Save not success']);
         exit;
     }
+    
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === '0' && $user['active'] === '1') {
+            return true;
+        }
+        // Default deny
+       return false;
+    }
 
+    public function isAuthorizedTransferWallet($user) {
+        // All registered users can add posts
+        if ($this->action === 'add') {
+            return true;
+        }
+
+        // The owner of a post can edit and delete it
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $postId = (int) $this->request->params['pass'][0];
+            if ($this->TransferWallet->isOwnedBy($postId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
 }

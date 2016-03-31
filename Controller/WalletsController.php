@@ -50,12 +50,15 @@ class WalletsController extends AppController {
      * @return void
      */
     public function add() {
-
+        $this->loadModel('User');
         if ($this->request->is('post')) {
             $this->Wallet->create();
             $data = $this->request->data;
             $data['Wallet']['user_id'] = $this->Auth->user('id');
-
+            if($this->Auth->user('role') === '0') {
+                $this->request->data['Wallet']['user_id'] = $this->Auth->user('id');
+            }
+            
             if ($this->Wallet->save($data)) {
                 $changable = $this->request->data['Wallet'];
                 $this->Wallet->save(['money_current' => $changable["money_initialize"]]);
@@ -115,4 +118,29 @@ class WalletsController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
+     public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === '0' && $user['active'] === '1') {
+            return true;
+        }
+        // Default deny
+       return false;
+    }
+
+    public function isAuthorizedW($user) {
+        // All registered users can add posts
+        if ($this->action === 'add') {
+            return true;
+        }
+
+        // The owner of a post can edit and delete it
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $postId = (int) $this->request->params['pass'][0];
+            if ($this->Wallet->isOwnedBy($postId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return isAuthorized($user);
+    }
 }

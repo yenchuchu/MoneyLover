@@ -71,6 +71,11 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             $aaas = $this->User->find('all');
+            
+            if($this->Auth->user('role') === '1') {
+                $this->request->data['User']['user_id'] = $this->Auth->user('id');
+            }
+            
             foreach ($aaas as $user):
                 if ($this->request->data['User']['email'] === $user['User']['email'] || $this->request->data['User']['username'] === $user['User']['username']):
                     $diff = 0;
@@ -283,6 +288,7 @@ class UsersController extends AppController {
                     $result['User']['active'] = User::USER_ACTIVE;
                     $this->User->updateAll(array('User.active' => $result['User']['active']), array('User.id' => AuthComponent::user('id')));
                     $this->Session->write('Auth.User.active', $result['User']['active']);
+                    $this->Session->write('Auth.User.password', $changable['new_password']);
                     return $this->redirect($this->referer());
                 } else {
                     $this->Flash->error(__('The password could not be saved'));
@@ -364,4 +370,61 @@ class UsersController extends AppController {
         }
     }
 
+//    public function isAuthorized($user) {
+//        // Admin can access every action
+//        if (isset($user['role']) && $user['role'] === '1' && $user['active'] === '1') {
+//            return true;
+//        }
+//        // Default deny
+//       return true;
+//    }
+    
+    public function isAuthorized($user) {
+        
+        switch($this->action) {
+            
+            case "logout":
+                if($user['active'] == '1') {
+                    return true;
+                }
+                break;
+            
+            case "add":
+            case "index":
+            case "delete":
+                if ($user['role'] == '1' && $user['active'] == '1') {
+                  return true;
+                }
+              break;
+
+            case "UploadImage":
+            case "change_password":
+//            case "logout":
+                if($user['active'] == '1') {
+                    $postId = (int) $this->request->params['pass'][0];
+                    if ($this->User->isOwnedBy($postId)) {
+                        return true;
+                    }
+                }
+                break;
+           }
+
+        return false;
+//
+//        
+//        // All registered users can add posts
+//        if ($this->action === 'add') {
+//            return true;
+//        }
+//
+//        // The owner of a post can edit and delete it
+//        if (in_array($this->action, array('edit', 'delete'))) {
+//            $postId = (int) $this->request->params['pass'][0];
+//            if ($this->User->isOwnedBy($postId, $user['id'])) {
+//                return true;
+//            }
+//        }
+//
+//        return parent::isAuthorized($user);
+    }
 }

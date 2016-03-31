@@ -129,4 +129,8 @@ class TransferWallet extends AppModel {
          $return_transfer = $this->query(" select * from transfer_wallets where id = $transferWalletId");
          return $return_transfer;
     } 
+    
+     public function isOwnedBy($post, $user) {
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
+    }
 }

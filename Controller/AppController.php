@@ -33,7 +33,12 @@ class AppController extends Controller {
             'logoutRedirect' => array(
                 'controller' => 'users',
                 'action' => 'main'
+            ),
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'main'
             )
+            ,'authorize' => array('Controller') // Added this line
         ),
         'DebugKit.Toolbar'
     );
@@ -42,5 +47,23 @@ class AppController extends Controller {
     public function beforeFilter() {
         $this->Auth->allow('main','confirmEmail');
     }
+    
+//     public function isAuthorized($user) {
+//         // Admin can access every action
+//         if (isset($user['role']) && $user['role'] === '1') {
+//             $author = 'admin';
+//             return $author;
+//         } elseif (isset($user['role']) && $user['role'] === '0') {
+//             if($user['active'] === '1') {
+//                 $author = 'active';
+//                 return $author;
+//             } else {
+//                 $author = 'request';
+//                 return $author;
+//             }
+//         }
 
+//         // Default deny
+// //        return false;
+//     }
 }

@@ -40,6 +40,11 @@ class ReportMonthsController extends AppController {
         $year = $this->request->query('year_start');
 
         $wallets = $this->Transaction->findIdWalletAuth($result_wallet_id); 
+        
+//        if($this->Auth->user('role') === '0') {
+//            $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+//        }
+            
         if(!empty($wallets)){
             $categories = $this->Transaction->findIdCategory($result_categorie_id);
 
@@ -73,4 +78,14 @@ class ReportMonthsController extends AppController {
             }  
         }
     }
+    
+     public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === '0' && $user['active'] === '1') {
+            return true;
+        }
+        // Default deny
+       return false;
+    }
+     
 }
