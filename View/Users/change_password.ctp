@@ -32,9 +32,9 @@ if ($active == 1) {
             echo $this->Form->input('confirm_password', array('type' => 'password',
                 'id' => 'confirm_password',
                 'label' => array('id' => 'label_confirm_password'),
-                'placeholder' => '****'));
-
-            $Save = array('id' => 'save-change-password', 'class' => 'btn wallet-save');
+                'placeholder' => '****')); ?>
+            <input type="" name="backUrl" value="<?php echo $backUrl; ?>"/>
+        <?php    $Save = array('id' => 'save-change-password', 'class' => 'btn wallet-save');
             echo $this->Form->end($Save);
             ?> 
         </div> 

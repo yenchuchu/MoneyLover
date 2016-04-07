@@ -92,7 +92,7 @@
                 <div class="panel-body">
                     <form role="form" class="form" method="post" >
                         <fieldset>
-                            <div class="form-group"> 
+                            <div class="form-group" > 
                                     <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
                             </div>
                                     <?php echo $this->Form->input('User.password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>

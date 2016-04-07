@@ -129,7 +129,7 @@ class WalletsController extends AppController {
 
     public function isAuthorizedW($user) {
         // All registered users can add posts
-        if ($this->action === 'add') {
+        if ($this->action === 'add' || $this->action === 'index') {
             return true;
         }
 

@@ -163,31 +163,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('main');
-    }
-
-//
-//    public function login() {
-//        if ($this->request->is('post')) {
-//            if ($this->Auth->login()) {
-//                $count = $this->User->find('first', array('conditions' => array('User.id' => AuthComponent::user('id'))));
-//
-//                if ($count['User']['role'] == 0) {
-//                    if ($count['User']['active'] == User::USER_REQUEST) {
-//                        $this->redirect(array('controller' => 'Users', 'action' => 'change_password', AuthComponent::user('id')));
-//
-//                        if (isset($this->request->data)) {
-//                            $this->User->updateAll(array('User.active' => ++$count['User']['active']), array('User.id' => AuthComponent::user('id')));
-//                        }
-//                    } else {
-//                        return $this->redirect($this->Auth->redirectUrl());
-//                    }
-//                } else {
-//                    return $this->redirect(array('controller' => 'Users', 'action' => 'index'));
-//                }
-//            }
-//            $this->Flash->error(__('Invalid username or password, try again'));
-//        }
-//    }
+    }  
 
     public function logout() {
         return $this->redirect($this->Auth->logout());
@@ -195,9 +171,8 @@ class UsersController extends AppController {
 
     public function main() {
         if ($this->request->data('signup') === 'Sign-up') {
-
             if ($this->request->is('post')) {
-
+                
                 $this->User->create();
                 $aaas = $this->User->find('all');
                 if (!empty($aaas)):
@@ -241,17 +216,21 @@ class UsersController extends AppController {
         }
         elseif ($this->request->data('signin') === 'Sign-in') {
             if ($this->request->is('post')) {
+                
                 if ($this->Auth->login()) {
                     $count = $this->User->find('first', array(
                         'conditions' => array('User.id' => AuthComponent::user('id'))
                     ));
                     if ($count['User']['active'] == User::USER_REQUEST) {
+//                        echo "request";die;
                         $this->redirect(array('controller' => 'Users',
                             'action' => 'change_password', AuthComponent::user('id')));
                     }
                     if ($count['User']['role'] == User::ROLE_USER) {
+//                        echo "admin";die;
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
+//                          echo "user";die;
                         return $this->redirect(array('controller' => 'users', 'action' => 'index'));
                     }
                 }
@@ -277,7 +256,8 @@ class UsersController extends AppController {
 
             $this->User->id = $id;
             $changable = $this->request->data['User'];
-
+//            die;
+            $backUrl = $this->request->data['backUrl'];
             $result = $this->User->find('first', array('conditions' => array('User.id' => $id)));
             if ($this->User->validateOldPassword($changable, $result['User']['password']) == False) {
                 $this->Flash->error(__('The password is not correct'));
@@ -289,17 +269,25 @@ class UsersController extends AppController {
                     $this->User->updateAll(array('User.active' => $result['User']['active']), array('User.id' => AuthComponent::user('id')));
                     $this->Session->write('Auth.User.active', $result['User']['active']);
                     $this->Session->write('Auth.User.password', $changable['new_password']);
-                    return $this->redirect($this->referer());
+//                    debug($this->request->data['backUrl']);die;
+//                    $this->redirect($this->request->data['backUrl']);
+//                     return $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
+                    $this->redirect($backUrl);
+//                    return $this->redirect($this->referer());
                 } else {
                     $this->Flash->error(__('The password could not be saved'));
                 }
             }
         }
-        if (AuthComponent::user('active') == User::USER_ACTIVE) {
-            $this->render('change_password');
-        } else {
-            $this->render();
+        else {
+            $backUrl = $this->referer();
+            $this->set('backUrl', $backUrl);
         }
+//        if (AuthComponent::user('active') == User::USER_ACTIVE) {
+//            $this->render('change_password');
+//        } else {
+//            $this->render();
+//        }
     }
 
     public function UploadImage($id = null) {
@@ -384,9 +372,10 @@ class UsersController extends AppController {
         switch($this->action) {
             
             case "logout":
-                if($user['active'] == '1') {
+//            case "change_password":
+//                if($user['active'] == '1') {
                     return true;
-                }
+//                }
                 break;
             
             case "add":
@@ -398,8 +387,14 @@ class UsersController extends AppController {
               break;
 
             case "UploadImage":
-            case "change_password":
-//            case "logout":
+                if($user['active'] == '1') {
+                    $postId = (int) $this->request->params['pass'][0];
+                    if ($this->User->isOwnedBy($postId)) {
+                        return true;
+                    }
+                }
+                break;
+             case "change_password":
                 if($user['active'] == '1') {
                     $postId = (int) $this->request->params['pass'][0];
                     if ($this->User->isOwnedBy($postId)) {
@@ -408,23 +403,6 @@ class UsersController extends AppController {
                 }
                 break;
            }
-
         return false;
-//
-//        
-//        // All registered users can add posts
-//        if ($this->action === 'add') {
-//            return true;
-//        }
-//
-//        // The owner of a post can edit and delete it
-//        if (in_array($this->action, array('edit', 'delete'))) {
-//            $postId = (int) $this->request->params['pass'][0];
-//            if ($this->User->isOwnedBy($postId, $user['id'])) {
-//                return true;
-//            }
-//        }
-//
-//        return parent::isAuthorized($user);
     }
 }
