@@ -988,7 +988,7 @@ footer {
 }
 
 .form-control {
-    border-color: rgba(132, 12, 29, 0.82) !important;
+    /*border-color: rgba(132, 12, 29, 0.82) !important;*/
 }
 
 .submit-passsword >.password-save,

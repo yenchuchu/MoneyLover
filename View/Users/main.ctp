@@ -1,61 +1,75 @@
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                <i class="fa fa-bars"></i>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">
-                <i class="fa fa-play-circle"></i>  <span class="light">Money</span> Lover
-            </a>
+            <a class="navbar-brand" href="#">Bootstrap Registration Form Template</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-            <ul class="nav navbar-nav">
-                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
+        <div class="collapse navbar-collapse top-navbar-1" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a class="page-scroll" href="#main-sign-up">Request New A Account</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#main-sign-in">Sign In</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#about">About</a>
-                </li>
+                    <span class="li-text">
+                        Put some text or
+                    </span> 
+                    <a href="#"><strong>links</strong></a> 
+                    <span class="li-text">
+                        here, or some icons: 
+                    </span> 
+                    <span class="li-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a> 
+                        <a href="#"><i class="fa fa-twitter"></i></a> 
+                        <a href="#"><i class="fa fa-envelope"></i></a> 
+                        <a href="#"><i class="fa fa-skype"></i></a>
+                    </span>
+                </li> 
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
 
-<!-- Intro Header -->
-<header class="intro">
-    <div class="intro-body">
+<!-- Top content -->
+<div class="top-content" id="user-main">
+
+    <div class="inner-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2 class="brand-heading">Money Lover</h2>
-                    <p class="intro-text">Money Lover is a great powerful tool to track your personal finance: incomes, expenses, debts, savings, etc</p>
-                    <a href="#about" class="btn btn-circle page-scroll main-about"  title="about">
-                        <i class="fa fa-angle-double-down animated"></i>
-                    </a>
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Money Lover</strong></h1>
+                    <div class="description">
+                        <p>
+                           is a great powerful tool to track your personal finance: incomes, expenses, debts, savings, etc
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</header>
+            <div class="row"> 
+                <div class="navbar-collapse collapse top-navbar-1" id="top-navbar-1">
+                    <ul class="nav nav-tabs" id="nav-tabs-main">
+                        <li class="active"><a data-toggle="tab" href="#sign-up">Sign Up</a></li>
+                        <li><a data-toggle="tab" href="#sign-in">Sign In</a></li>
+                    </ul>
+                </div>
+                <!-- </nav> -->
 
-<!-- About Section -->
-<section id="main-sign-up" class="container content-section text-center">
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="panel-heading">
-                <h3 class="panel-title">Please Sign Up</h3>
-            </div>
-            <div class="panel-body" >
-                <form role="form" method="POST">
+                <div class="tab-content">
+                    <div id="sign-up" class="tab-pane fade in active">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3> Sign Up</h3>
+                                    <p>Fill in the form below to get instant access:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                 <form role="form" method="POST" class="registration-form">
                     <fieldset>
                         <div class="form-group">
                                     <?php echo $this->Form->input('username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
@@ -65,82 +79,57 @@
                         </div> 
 
                         <!-- Change this to a button or input when using this as a form -->
-                                <?php 
-                                $signup = array(
-                                'label' => 'Sign-up',
-                                'name' => 'signup',
-                                'id' => 'sign-up',
-                                'class' => 'btn-lg',
-                            );
-                            echo $this->Form->end($signup); ?>
+                                <button type="submit" id="sign-up" class="btn button-sign-up" name="signup" value="Sign-up">Sign Up</button>
                     </fieldset>
                 </form>
-            </div>
-        </div>
-    </div>
-</section>
+                            </div>
+                        </div>
+                    </div>
 
-
-<!-- Download Section -->
-<section id="main-sign-in" class="content-section text-center">
-    <div class="download-section">
-        <div class="container">
-            <div class="col-lg-4 col-lg-offset-4">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form" class="form" method="post" >
-                        <fieldset>
-                            <div class="form-group" > 
-                                    <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
+                    <div id="sign-in" class="tab-pane fade">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Sign In</h3>
+                                    <p>Fill in the form below to get instant access:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
                             </div>
-                                    <?php echo $this->Form->input('User.password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
-                            </div>
-                            <div class="checkbox" >
-                                <label>
-                                    <input name="User.remember" type="checkbox" value="Remember Me" >Remember Me
-                                </label>
-                            </div>
-                            <!-- Change this to a button or input when using this as a form -->
-                                <?php 
-                                $signin = array(
-                                    'style'=>'    border-top-left-radius: 0px;
-                                    border-top-right-radius: 0px;',
-                                'label' => 'Sign-in',
-                                'name' => 'signin',
-                                'id' => 'sign-in',
-                                'class' => 'btn-lg',
-                            );
-                            echo $this->Form->end($signin); ?>
+                            <div class="form-bottom"> 
+                                <form role="form" class="form" method="post"  class="registration-form">
+                                    <fieldset>
+                                        <div class="form-group" > 
+                                                <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
+                                        </div>
+                                        <div class="form-group" > 
+                                                <?php echo $this->Form->input('User.password', array('class'=>'form-control','label' => false, 'placeholder' => 'enter password')); ?>
+                                        </div>
+<!--                                        <div class="checkbox" >
+                                            <label>
+                                                <input name="User.remember" type="checkbox" value="Remember Me" >Remember Me
+                                            </label>
+                                        </div>-->
+                                <!-- Change this to a button or input when using this as a form -->
+                                     <button type="submit" class="btn button-sign-in"  name="signin" id="sign-in" value="Sign-in">Sign in </button>
 
                         </fieldset>
-                    </form>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Contact Section -->
-<section id="about" class="container content-section text-center">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <h2>Contact Start Bootstrap</h2>
-            <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-            <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
-            </p>
-            <ul class="list-inline banner-social-buttons">
-                <li>
-                    <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                </li>
-                <li>
-                    <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                </li>
-                <li>
-                    <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                </li>
-            </ul>
-        </div>
     </div>
-</section>
+</div>
+</div>
+ 
+    <?= $this->Html->script('jquery.backstretch.min') ?>
+    <?= $this->Html->script('retina-1.1.0.min') ?>
+    <?= $this->Html->script('scripts') ?>
+    <?= $this->Html->css('style') ?>
+    <?= $this->Html->css('form-elements') ?>

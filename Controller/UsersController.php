@@ -175,16 +175,16 @@ class UsersController extends AppController {
                 
                 $this->User->create();
                 $aaas = $this->User->find('all');
-                if (!empty($aaas)):
-                    foreach ($aaas as $user):
-                        if ($this->request->data['email'] === $user['User']['email'] || $this->request->data['username'] === $user['User']['username']):
+                if (!empty($aaas)) {
+                    foreach ($aaas as $user) {
+                        if ($this->request->data['email'] === $user['User']['email'] || $this->request->data['username'] === $user['User']['username']) {
                             $diff = 0;
-                        else:
+                        } else {
                             $diff = 1;
-                        endif;
-                    endforeach;
-                    if ($diff == 1):
-                        if ($this->User->save($this->request->data)):
+                        }
+                    }
+                    if ($diff == 1) {
+                        if ($this->User->save($this->request->data)) {
                             $passwordRandom = User::createRandomString(10);
                             $this->User->save(['password' => $passwordRandom]);
                             $Email = new CakeEmail('gmail');
@@ -193,14 +193,14 @@ class UsersController extends AppController {
                                     ->subject('Confirm Account')
                                     ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
                             return $this->redirect(array('controller' => 'Users', 'action' => 'confirmEmail'));
-                        else:
+                        } else {
                             $this->Flash->error(__('Cant save account. Please, try again.'));
-                        endif;
-                    else:
-                        $this->Flash->error(__('Username or email existed. Please, try again.'));
-                    endif;
-                else:
-                    if ($this->User->save($this->request->data)):
+                        }
+                    } else {
+                            $this->Flash->error(__('Username or email existed. Please, try again.'));
+                        }
+                } else {
+                    if ($this->User->save($this->request->data)) {
                         $passwordRandom = User::createRandomString(10);
                         $this->User->save(['password' => $passwordRandom]);
                         $Email = new CakeEmail('gmail');
@@ -208,10 +208,10 @@ class UsersController extends AppController {
                                 ->to($this->request->data['email'])
                                 ->subject('Confirm Account')
                                 ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
-                    else:
+                    } else {
                         $this->Flash->error(__('Cant save account. Please, try again.'));
-                    endif;
-                endif;
+                    }
+                }
             }
         }
         elseif ($this->request->data('signin') === 'Sign-in') {
