@@ -43,10 +43,7 @@ class TransferWalletsController extends AppController {
 
         $conditions = array('TransferWallet.sent_wallet_id is not null',
             'TransferWallet.receive_wallet_id is not null'
-        );
-//        debug($this->TransferWallet->getIdWalletSentByIdTransfer('81')['TransferWallet']['sent_wallet_id']);
-//        debug($this->TransferWallet->getIdWalletRecieveByIdTransfer('81')['TransferWallet']['receive_wallet_id']);
-//        die;
+        ); 
         if (!empty($sentWalletId)) {
             $conditions['TransferWallet.sent_wallet_id'] = $sentWalletId;
         } else {

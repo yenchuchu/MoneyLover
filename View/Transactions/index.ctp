@@ -144,10 +144,9 @@
                     <th></th>
                     <th style="display: none"></th>
                     <th><?php echo $this->Paginator->sort('wallet_id'); ?></th>
-                    <th><?php echo $this->Paginator->sort('categorie_id'); ?></th>
+                    <th style="width: 16%;"><?php echo $this->Paginator->sort('categorie_id'); ?></th>
                     <th style="width: 20%;"><?php echo $this->Paginator->sort('transaction_money'); ?></th>
-                    <th><?php echo $this->Paginator->sort('day_transaction'); ?></th>
-                    <th><?php echo $this->Paginator->sort('created'); ?></th>
+                    <th><?php echo $this->Paginator->sort('day_transaction'); ?></th> 
                     <th><?php echo $this->Paginator->sort('modified'); ?></th>
                     <th class="actions" style="color:#337ab7;"><?php echo h('Actions'); ?></th> 
 
@@ -187,14 +186,13 @@
                         </td> 
                         <td class="tr-transaction-day">
                             <?php echo $this->Time->format($transaction['Transaction']['day_transaction'], '%B %e, %Y'); ?>&nbsp;</td>
-                        <td><?php echo $this->Time->format($transaction['Transaction']['created'], '%B %e, %Y '); ?>&nbsp;</td>
-                        <td><?php echo $this->Time->format($transaction['Transaction']['modified'], '%B %e, %Y '); ?>&nbsp;</td>
+                         <td><?php echo $this->Time->format($transaction['Transaction']['modified'], '%B %e, %Y '); ?>&nbsp;</td>
                         <td class="actions">
 <!--                            <a style="float:none;color:#27c24c" id="update-link" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil-square-o"></i> </a>
                             <a style="float:none;"id="delete-link" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i>-->
                             
                                 <a style="float:none;color:#27c24c" class="update-link" 
-                               id="update-link" data-toggle="modal" data-target="#editModal">
+                               id="update-link" data-toggle="modal" data-target="#editModal" title="Edit">
                                 <i class="fa fa-pencil-square-o"></i> </a>
  
                             <a href="#" id="delete-link" name="<?php echo h($transaction['Transaction']['id']); ?> " 
@@ -271,7 +269,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"
                            for="inputPassword3" >Wallet</label>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="margin-bottom: 10px;">
                         <?php
                         echo $this->Form->input('wallet_id', array(
                             'label' => false,
@@ -284,7 +282,7 @@
                 <div class="form-group">
                     <label  class="col-sm-4 control-label"
                             for="inputEmail3">Category</label>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="margin-bottom: 10px;">
                         <?php
                         $options = array(
                             'Income' => array(
@@ -306,7 +304,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"
                            for="inputPassword3" >Money Transaction</label>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="margin-bottom: 10px;">
                         <?php
                         echo $this->Form->input('transaction_money', array('label' => false,
                             'placeholder' => 'enter money',
@@ -319,7 +317,7 @@
                 <div class="form-group" id="add-transaction-date">
                     <label class="col-sm-4 control-label"
                            for="inputPassword3" >Day Transaction</label>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="margin-bottom: 10px;">
                         <?php
                         echo $this->Form->input('day_transaction', array('label' => false,
                             'placeholder' => 'Wallet Name receive',
@@ -333,20 +331,20 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"
                            for="inputPassword3" >Note</label>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" >
                         <?php
                         echo $this->Form->input('transaction_description', array('label' => false,
                             'id' => 'WalletName',
                             'class' => 'form-control',
                             'placeholder' => 'enter a note',
-                            'style' => 'padding-left: 8px'));
+                            'style' => 'padding-left: 8px;min-height: 70px; height: 70px;'));
                         ?> 
                     </div>
                 </div>
 
 
                 <!-- Modal Footer -->
-                <div class="modal-footer" style=" margin-top: 83% !important;">
+                <div class="modal-footer" style=" margin-top: 78% !important;">
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">
                         Close
@@ -417,10 +415,24 @@
                                 <span id="pricetag-vnd"><b>VND</b></span> 
                             </div>
                         </div> 
+                    <div class="form-group">
+                            <label class="col-sm-4 control-label"
+                                   for="edit-transaction-note" style="margin-top: 15px; margin-bottom: 10px;">Note</label>
+                            <div class="col-sm-12">
+                                <?php echo $this->Form->input('transaction_description', array(
+                                    'label' => false, 
+                                    'div'=>false, 
+                                    'placeholder' => 'Enter a note',
+                                    'id'=> 'edit-transaction-note',
+                                    'value'=>"",
+                                    'style' => 'padding-left: 8px;min-height: 70px; height: 70px;'
+                                    . '    width: 100%; border: 1px solid #27C24C; border-radius: 5px;')); ?>  
+                            </div>
+                        </div> 
                 </div>
 
                 <!-- Modal Footer -->
-                <div class="modal-footer" style="margin-top: 35%;">
+                <div class="modal-footer" style="margin-top: 53%;">
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">
                         Close
@@ -499,7 +511,10 @@
         });
 
          $(".update-link").click(function () { 
-
+             
+             var note = $(this).closest('tr').attr("title").trim();
+              $("#edit-transaction-note").val(note);
+             
             var idWallet = $(this).closest('tr').find('.tr-transaction-wallet').attr("name");
             $(".edit-transaction-wallet select").val(idWallet);
 

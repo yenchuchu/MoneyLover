@@ -72,7 +72,9 @@
                         <td><?php echo $this->Time->format($category['Category']['created'], '%B %e, %Y '); ?> </td>
                         <td><?php echo $this->Time->format($category['Category']['modified'], '%B %e, %Y '); ?> </td>             
                         <td class="actions">
-                            <a style="float:none;color:#27c24c" class="update-link" id="update-link" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil-square-o"></i> </a>
+                            <a style="float:none;color:#27c24c" class="update-link" 
+                               id="update-link" data-toggle="modal" data-target="#editModal" title="Edit">
+                                <i class="fa fa-pencil-square-o"></i> </a>
 
                             <a href="#" id="delete-link" name="<?php echo h($category['Category']['id']); ?> " 
                                data-toggle="modal" data-target="#deleteModal" 

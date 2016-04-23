@@ -184,7 +184,7 @@
                         <td><?php echo $this->Time->format($transferWallet['TransferWallet']['modified'], '%B %e, %Y '); ?>&nbsp;</td>
                         <td class="actions">
                             <a style="float:none;color:#27c24c" class="update-link" 
-                               id="update-link" data-toggle="modal" data-target="#editModal">
+                               id="update-link" data-toggle="modal" data-target="#editModal" title="Edit">
                                 <i class="fa fa-pencil-square-o"></i> </a>
  
                             <a href="#" id="delete-link" name="<?php echo h($transferWallet['TransferWallet']['id']); ?> " 
@@ -262,7 +262,7 @@
                                 <div class="form-group">
                                     <label  class="col-sm-4 control-label"
                                             for="inputEmail3">Wallet Sent</label>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12" style="margin-bottom: 12px;">
                                         <?php echo $this->Form->input('sent_wallet_id', array('label' => false, 
                                             'placeholder' => 'Wallet Name sent', 
                                             'id' => 'WalletName', 
@@ -273,7 +273,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label"
                                            for="inputPassword3" >Wallet Receive</label>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12" style="margin-bottom: 12px;">
                                         <?php echo $this->Form->input('receive_wallet_id', array('label' => false, 
                                             'placeholder' => 'Wallet Name receive', 
                                             'id' => 'WalletName', 
@@ -284,7 +284,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label"
                                            for="inputPassword3" >Money</label>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12" style="margin-bottom: 12px;">
                                         <?php echo $this->Form->input('transfer_money', array('label' => false, 
                                             'id' => 'WalletMoneyCurrent', 
                                             'class' => 'form-control', 
@@ -300,7 +300,7 @@
                         </div>
 
                         <!-- Modal Footer -->
-                        <div class="modal-footer " style=" margin-top: 199px !important;">
+                        <div class="modal-footer " style=" margin-top: 37% !important;">
                             <button type="button" class="btn btn-default"
                                     data-dismiss="modal">
                                 Close
@@ -470,7 +470,8 @@
                     $(".edit-receive-wallet select").val(idWalletReceive);
 
                     var money = $(this).closest('tr').find('.tr-transfer-money').children(".money-tr").text().trim();
-                    $("#edit-money").val(money);
+                    var replaceMoney = money.replace(/\./g, '');
+                    $("#edit-money").val(replaceMoney);
                     
                     var id = $(this).closest('tr').find('.tr-transfer-id').text().trim();
                     $("#TransferEditForm").attr("action", "/MoneyLover/transferWallets/edit/" + id + "");

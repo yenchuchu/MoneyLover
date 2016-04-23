@@ -11,6 +11,23 @@ body{
 #navbar1 a:hover{
 	background-color: rgba(35, 175, 69, 0.73);
 }
+
+.banner-header:hover {
+     background-color: rgba(35, 175, 69, 0.73);
+    cursor: pointer;
+}
+ 
+.banner-header:hover {
+ width: 17%;
+    height: 50px;
+    margin-left: -15px;
+    padding-left: 16px;
+}  
+
+.banner-header a:hover {
+    text-decoration: none;
+}
+
 .card{
 	/*width: 30%;*/
 	margin-right: 30px;

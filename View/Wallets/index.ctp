@@ -34,7 +34,7 @@ echo $this->Number->currency($sumMoneyCurrent, ' VND', $options = array('thousan
                                onclick="deleteSigle(this.name)"></a> 
                             
                             <a id="update-link "  class="update-link update-link-wallet-edit"  
-                               data-toggle="modal" data-target="#editModal">
+                               data-toggle="modal" data-target="#editModal" title="Edit">
                                 <i class="fa fa-pencil-square-o" style="font-size: 22px;"></i> </a>  
                         </li>
                         <li class="list-group-item wallet-info-in-for"><b>Wallet info: </b>
