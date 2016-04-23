@@ -62,12 +62,21 @@ echo $this->Number->currency($sumMoneyCurrent, ' VND', $options = array('thousan
                         <li class="list-group-item"><b>Current money: </b>
                             <span style="color: black">
                              <?php
-                            echo $this->Number->currency($wallet['Wallet']['money_current'], 
+                             $money_current = $wallet['Wallet']['money_current'];
+                             if($money_current >= 0 ) {
+                                 echo $this->Number->currency($money_current, 
                                     '', $options = array(
                                         'thousands' => '.',
                                         'wholePosition' => 'after', 
                                         'places' => 0
-                            ));
+                                ));
+                             } else {
+                                 echo CakeNumber::formatDelta($money_current, array(
+                                    'places' => 0, 
+                                    'thousands' => '.'
+                                ));
+                             }
+                            
                             ?>    
                             </span> <span style="color: black"><b>VND</b></span> 
                             <?php 
