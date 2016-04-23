@@ -115,6 +115,8 @@ class Transaction extends AppModel {
 
         $months = array_unique($outputMonthTransactions);
         rsort($months);
+        
+//        debug($months);
 
         $outputIncome = array();
         foreach ($transactionsIncomes as $key => $transactionIncome) {
@@ -124,6 +126,7 @@ class Transaction extends AppModel {
                 $outputIncome[date('Y-m', strtotime($transactionIncome['Transaction']['day_transaction']))] += $transactionIncome['Transaction']['transaction_money'];
             }
         }
+//        debug($outputIncome);
         
         $outputExpense = array();
         foreach ($transactionsExpenses as $key => $transactionExpense) {
@@ -133,6 +136,7 @@ class Transaction extends AppModel {
                 $outputExpense[date('Y-m', strtotime($transactionExpense['Transaction']['day_transaction']))] += $transactionExpense['Transaction']['transaction_money'];
             }
         }
+//        debug($outputExpense);
         
         $i = 0;
         $percentMonth = array();
@@ -147,11 +151,15 @@ class Transaction extends AppModel {
             }
             
             $toalMoney = $outputExpense[$month] + $outputIncome[$month];
+//            debug($toalMoney);
             if ($toalMoney == 0) {
                 return false;
             } else {
                 $percentExpense[$month] = ($outputExpense[$month] * 100) / $toalMoney;
                 $percentIncome[$month] = ($outputIncome[$month] * 100) / $toalMoney;
+//                debug($percentExpense);
+//                debug($percentIncome);
+                
                 $percentMonth[$month] = [
                     ['value' => round($percentExpense[$month], 2), 'color' => '#FF8153', 'label' => 'Expense'],
                     ['value' => round($percentIncome[$month], 2), 'color' => '#4ACAB4', 'label' => 'Income']
@@ -294,6 +302,47 @@ class Transaction extends AppModel {
     public function findAllTransactionsAuth($walletId) {
         $allTransactionsAuth = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
         return $allTransactionsAuth;
+    }
+    
+    public function findAllTransactionByCategory($idCategory) {
+        $allTransactions = $this->find('all', array('conditions' => array('categorie_id IN' => $idCategory)));
+        debug($allTransactions);die;
+    }
+    
+    public function deleteTransactionByCategoryNotExits($idCategory) {
+        $allTransactionsAuths = $this->find('all', array('conditions' => array('categorie_id IN' => $idCategory)));
+//          debug($allTransactionsAuths);
+        foreach ($allTransactionsAuths as $allTransactionsAuth) {
+//            $idCategories = $this->Categorie->find('list', array(
+//                'conditions' => array(
+//                    'id' => $allTransactionsAuth['Transaction']['categorie_id'])));
+//            if(empty($idCategories)) {
+                $query = $this->query(" delete from transactions where id =". $allTransactionsAuth['Transaction']['id']);
+//            }
+        }
+//        $allTransactions = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
+//        debug($allTransactions);die;
+         return true;
+//        return $allTransactions;
+    }
+    
+    public function findTransactionHaveCategoryExist($walletId) {
+        $allCategories = $this->Categorie->find('all');
+        $allTransactionsAuths = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
+          debug($allTransactionsAuths);
+        foreach ($allTransactionsAuths as $allTransactionsAuth) {
+            $idCategories = $this->Categorie->find('list', array(
+                'conditions' => array(
+                    'id' => $allTransactionsAuth['Transaction']['categorie_id'])));
+            if(empty($idCategories)) {
+                $query = $this->query(" delete from transactions where id =". $allTransactionsAuth['Transaction']['id']);
+            }
+        }
+        $allTransactions = $this->find('all', array('conditions' => array('Wallet.id IN' => $walletId)));
+//        debug($allTransactions);die;
+         
+        return $allTransactions;
+        
     }
 
     public function findAllCategory() {

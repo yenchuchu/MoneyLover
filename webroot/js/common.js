@@ -15,7 +15,7 @@ function deleteAll (url,ids) {
           } 
       }
   });
-}
+} 
 
 function editAll (url,ids) {
    
@@ -32,3 +32,4 @@ function editAll (url,ids) {
       }
   });
 }
+ 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".top-navbar-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="row"> 
-                <div class="navbar-collapse collapse top-navbar-1" id="top-navbar-1">
+                <div class="navbar-collapse collapse" id="form-sign">
                     <ul class="nav nav-tabs" id="nav-tabs-main">
                         <li class="active"><a data-toggle="tab" href="#sign-up">Sign Up</a></li>
                         <li><a data-toggle="tab" href="#sign-in">Sign In</a></li>

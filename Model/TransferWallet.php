@@ -111,18 +111,40 @@ class TransferWallet extends AppModel {
         return $listWalletReceive;
     }
     
-    public function getWalletSent($walletIdSent) {
+    public function getWalletRecieveSent($walletIdSent) {
         $result_sent = $walletModel->find('first', array(
                         'conditions' => array(
                                 'Wallet.id' => $walletIdSent)));
         return $result_sent;
     }
-
+ 
     public function getWalletRecieve($walletIdRecieve) {
         $result_recieve = $walletModel->find('first', array(
                         'conditions' => array(
                                 'Wallet.id' => $walletIdRecieve)));
         return $result_recieve;
+    }
+    
+    public function getIdWalletSentByIdTransfer($idTransfer) {
+        $id_wallet_sent = $this->find('first', array(
+            'fields'=> 'sent_wallet_id',
+            'conditions'=> array(
+                'id' => $idTransfer
+            )
+        ));
+        
+        return $id_wallet_sent; 
+    }
+    
+     public function getIdWalletRecieveByIdTransfer($idTransfer) {
+        $id_wallet_receive = $this->find('first', array(
+            'fields'=> 'receive_wallet_id',
+            'conditions'=> array(
+                'id' => $idTransfer
+            )
+        ));
+        
+        return $id_wallet_receive; 
     }
     
     public function getTransferWalletById($transferWalletId) {

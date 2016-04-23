@@ -44,7 +44,9 @@ class TransferWalletsController extends AppController {
         $conditions = array('TransferWallet.sent_wallet_id is not null',
             'TransferWallet.receive_wallet_id is not null'
         );
-
+//        debug($this->TransferWallet->getIdWalletSentByIdTransfer('81')['TransferWallet']['sent_wallet_id']);
+//        debug($this->TransferWallet->getIdWalletRecieveByIdTransfer('81')['TransferWallet']['receive_wallet_id']);
+//        die;
         if (!empty($sentWalletId)) {
             $conditions['TransferWallet.sent_wallet_id'] = $sentWalletId;
         } else {
@@ -85,7 +87,7 @@ class TransferWalletsController extends AppController {
         
         $sentWallets = $this->TransferWallet->getListWalletSent($result_wallet_selected);
         $receiveWallets = $this->TransferWallet->getListWalletReceive($result_wallet_selected);
-        
+
         $this->set('transferWallets', $this->Paginator->paginate());
         $this->set('countTransfer', $countTransfer);
         $this->set(compact('sentWallets', 'receiveWallets'));
@@ -115,8 +117,9 @@ class TransferWalletsController extends AppController {
             if($this->Auth->user('role') === '0') {
                 $this->request->data['TransferWallet']['user_id'] = $this->Auth->user('id');
             }
-            
-            if ($this->TransferWallet->save($this->request->data)) {
+              
+//            if($walletSentEdit[0]['Wallet']['money_initialize'] >= $moneyEdit) {
+                if ($this->TransferWallet->save($this->request->data)) {
                 $walletSentEdit[0]['Wallet']['money_current'] -= $moneyEdit;
                 $walletRecieveEdit[0]['Wallet']['money_current'] += $moneyEdit;
 
@@ -130,9 +133,13 @@ class TransferWalletsController extends AppController {
 
                 $this->Flash->success(__('The transfer wallet has been saved.'));
                 return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Flash->error(__('The transfer wallet could not be saved. Please, try again.'));
-            }
+                } else {
+                    $this->Flash->error(__('The transfer wallet could not be saved. Please, try again.'));
+                }
+//            } else {
+//                $this->Flash->error(__('money of wallet dont enought to complete transfer'));
+//                return $this->redirect(array('action' => 'index'));
+//            }
         }
         $sentWallets = $this->TransferWallet->findListWalletSent();
         $receiveWallets = $this->TransferWallet->findListWalletReceive();
@@ -182,7 +189,6 @@ class TransferWalletsController extends AppController {
             $idWalletRecieveEdit = $this->data['TransferWallet']['receive_wallet_id'];
 
             if ($this->TransferWallet->save($this->request->data)) {
-
                 $walletSentBefore['money_current'] += $moneyTransferBefore;
                 $walletRecieveBefore['money_current'] -= $moneyTransferBefore;
 

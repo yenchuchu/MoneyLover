@@ -45,7 +45,7 @@ class UsersController extends AppController {
 
             $this->set('users', $this->Paginator->paginate());
             $this->set('countAccountActive', $countAccountActive);
-            $this->set('typeLabel', strtoupper('active'));
+            $this->set('typeLabel', 'Active');
         } else {
             $this->Paginator->settings = array(
                 'conditions' => array('User.active' => 0)
@@ -56,7 +56,7 @@ class UsersController extends AppController {
 
             $this->set('users', $this->Paginator->paginate());
             $this->set('countAccountRequest', $countAccountRequest);
-            $this->set('typeLabel', strtoupper('request'));
+            $this->set('typeLabel', 'Request');
         }
 
         $this->render('index_active');
@@ -86,13 +86,14 @@ class UsersController extends AppController {
             if ($diff == 1):
                 if ($this->User->save($this->request->data)):
                     $passwordRandom = User::createRandomString(10);
-                    $this->User->save(['password' => $passwordRandom, 'role' => ROLE_ADMIN]);
+                    $this->User->save(['password' => $passwordRandom, 'role' => User::ROLE_ADMIN]);
 
                     $Email = new CakeEmail('gmail');
                     $Email->emailFormat('html')
                             ->to($this->request->data['User']['email'])
                             ->subject('Confirm Account')
                             ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
+                   return $this->redirect(array('controller'=>'users','action'=> 'index'));       
                 else:
                     $this->Flash->error(__('Cant save account. Please, try again.'));
                 endif;
@@ -101,6 +102,10 @@ class UsersController extends AppController {
             endif;
         }
     }
+    
+
+    
+    
 
     /**
      * edit method
@@ -110,6 +115,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+        
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Invalid user'));
         }
@@ -134,18 +140,26 @@ class UsersController extends AppController {
      * @return void
      */
     public function delete($id = null) {
+//        debug("ádfsdf");
+//        die;
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
+        $emailRequest = $this->User->getEmailById($this->User->id);
         $this->request->allowMethod('post', 'delete');
         if ($this->User->delete()) {
+            $Email = new CakeEmail('gmail');
+            $Email->emailFormat('html')
+                    ->to($emailRequest[0]['users']['email'])
+                    ->subject('Destroy Account')
+                    ->send("Your account is deleted because some reason...! <br> Sign up to have a new account.");
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
         return $this->redirect(array('action' => 'index'));
-    }
+    } 
 
     public function deleteAll() {
         $this->request->allowMethod('post');
@@ -158,8 +172,8 @@ class UsersController extends AppController {
 
         echo json_encode(['status' => 1, 'message' => 'Save not success']);
         exit;
-    }
-
+    }  
+    
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('main');
@@ -222,15 +236,12 @@ class UsersController extends AppController {
                         'conditions' => array('User.id' => AuthComponent::user('id'))
                     ));
                     if ($count['User']['active'] == User::USER_REQUEST) {
-//                        echo "request";die;
                         $this->redirect(array('controller' => 'Users',
                             'action' => 'change_password', AuthComponent::user('id')));
                     }
                     if ($count['User']['role'] == User::ROLE_USER) {
-//                        echo "admin";die;
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
-//                          echo "user";die;
                         return $this->redirect(array('controller' => 'users', 'action' => 'index'));
                     }
                 }
@@ -244,7 +255,6 @@ class UsersController extends AppController {
     }
 
     public function change_password($id = null) {
-
         if (!$id) {
             throw new NotFoundException(__('Invalid User'));
         }
@@ -253,41 +263,42 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid User'));
         }
         if ($this->request->is(array('put', 'post'))) {
+//            die;
+            $this->request->data['User']['id'] = $id; 
 
             $this->User->id = $id;
             $changable = $this->request->data['User'];
-//            die;
-            $backUrl = $this->request->data['backUrl'];
             $result = $this->User->find('first', array('conditions' => array('User.id' => $id)));
-            if ($this->User->validateOldPassword($changable, $result['User']['password']) == False) {
-                $this->Flash->error(__('The password is not correct'));
-            } elseif ($this->User->validateConfirmPassword($changable) == False) {
-                $this->Flash->error(__('The confirm password not match with the new password'));
+            $this->User->set($this->request->data);
+            $this->User->setValidateOldPassword($result['User']['password']);
+            if (!$this->User->validates()) {
+                $this->Flash->error(__('The password could not be saved'));
             } else {
                 if ($this->User->save(['password' => $changable['new_password']])) {
-                    $result['User']['active'] = User::USER_ACTIVE;
-                    $this->User->updateAll(array('User.active' => $result['User']['active']), array('User.id' => AuthComponent::user('id')));
+                    if($result['User']['active'] == User::USER_REQUEST ) {
+                        $result['User']['active'] == User::USER_ACTIVE;
+                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
+                            'User.id' => AuthComponent::user('id')));
+                         if($result['User']['role'] == User::ROLE_ADMIN) {
+                            $this->Session->write('Auth.User.active', $result['User']['active']);
+                            $this->Session->write('Auth.User.password', $changable['new_password']);
+                            $this->redirect(array('controller' => 'users', 'action' => 'index'));
+                        } else {
+                            $this->Session->write('Auth.User.active', $result['User']['active']);
+                            $this->Session->write('Auth.User.password', $changable['new_password']);
+                            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
+                        }
+                    } 
+                    
                     $this->Session->write('Auth.User.active', $result['User']['active']);
                     $this->Session->write('Auth.User.password', $changable['new_password']);
-//                    debug($this->request->data['backUrl']);die;
-//                    $this->redirect($this->request->data['backUrl']);
-//                     return $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
-                    $this->redirect($backUrl);
-//                    return $this->redirect($this->referer());
-                } else {
+                    
+                    $this->redirect(array('action' => 'index'));
+                } else { 
                     $this->Flash->error(__('The password could not be saved'));
                 }
             }
-        }
-        else {
-            $backUrl = $this->referer();
-            $this->set('backUrl', $backUrl);
-        }
-//        if (AuthComponent::user('active') == User::USER_ACTIVE) {
-//            $this->render('change_password');
-//        } else {
-//            $this->render();
-//        }
+        } 
     }
 
     public function UploadImage($id = null) {
@@ -321,12 +332,7 @@ class UsersController extends AppController {
                     echo "File is not an image.";
                     $uploadOk = 0;
                 }
-            }
-            // Check if file already exists
-            // if (file_exists($target_file)) {
-            //     echo "Sorry, file already exists.";
-            //     $uploadOk = 0;
-            // }
+            } 
             // Check file size
             if ($_FILES["fileToUpload"]["size"] > 500000) {
                 $uploadOk = 0;
@@ -347,40 +353,26 @@ class UsersController extends AppController {
                     $this->User->save(['avatar' => basename($_FILES["fileToUpload"]["name"])]);
                     $this->Session->write('Auth.User.avatar', basename($_FILES["fileToUpload"]["name"]));
                     echo "<p>Upload avatar success!</p>";
-                    $this->redirect($this->request->data['backUrl']);
+                    $this->redirect(array('action'=>'index'));
                 } else {
                     echo "Sorry, there was an error uploading your file.";
                 }
             }
-        } else {
-            $backUrl = $this->referer();
-            $this->set('backUrl', $backUrl);
         }
     }
-
-//    public function isAuthorized($user) {
-//        // Admin can access every action
-//        if (isset($user['role']) && $user['role'] === '1' && $user['active'] === '1') {
-//            return true;
-//        }
-//        // Default deny
-//       return true;
-//    }
-    
+            
     public function isAuthorized($user) {
         
         switch($this->action) {
             
-            case "logout":
-//            case "change_password":
-//                if($user['active'] == '1') {
-                    return true;
-//                }
+            case "logout": 
+                    return true; 
                 break;
             
             case "add":
             case "index":
             case "delete":
+            case "deleteAll":
                 if ($user['role'] == '1' && $user['active'] == '1') {
                   return true;
                 }
@@ -395,12 +387,10 @@ class UsersController extends AppController {
                 }
                 break;
              case "change_password":
-                if($user['active'] == '1') {
                     $postId = (int) $this->request->params['pass'][0];
                     if ($this->User->isOwnedBy($postId)) {
                         return true;
                     }
-                }
                 break;
            }
         return false;

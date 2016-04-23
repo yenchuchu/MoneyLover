@@ -309,6 +309,12 @@ ul.navbar-nav {
     height: 50px;
 }
 
+.nav-tabs > li > a {
+        border: 1px solid #3A5B84;
+    background-color: rgba(44, 82, 119, 0.52);
+    color: white;
+}
+
 /*
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #F9F4F4;

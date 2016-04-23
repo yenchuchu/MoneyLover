@@ -1,0 +1,288 @@
+body{
+	background-color: #edf1f2;
+}
+#navbar1{
+	background-color: #27c24c;
+	border-color:#27c24c;
+}
+#navbar1 a{
+	color:white;
+}
+#navbar1 a:hover{
+	background-color: rgba(35, 175, 69, 0.73);
+}
+.card{
+	/*width: 30%;*/
+	margin-right: 30px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	color: #27c24c;
+	/*width: 60%;*/
+}
+#card-header{
+	background-color: #27c24c;
+	font-weight: bold;
+	color:white;
+	font-size: 20px;
+}
+.navbar-inverse{
+	background-color: #27c24c;
+}
+
+ #button{ 
+        background-color: #27c24c;
+	border-color: #27c24c;
+	color:white;
+        position: relative;
+}
+
+.main-transaction .search { 
+        top: -121px;
+    border-bottom-left-radius: 0px;
+    left: 80.9%;
+    border-top-left-radius: 0px;
+}
+#add-button{
+	border-radius: 100%;
+	border: none;
+	background-color: #b9e563;
+	width: 40px;
+	height: 40px; 
+	color: white;
+	font-size: 20px;
+}
+#add-button:hover{
+	background-color: #CAEF84;
+	color:#A5C16E;
+}
+#update-link{
+	float:right;
+	color: white;
+	font-size: 20px;
+}
+#delete-link{
+	    color: #27c24c;
+    font-size: 18px;
+    top: 1px;
+}
+/* add modal*/
+.modal-body .form-horizontal .col-sm-2,
+.modal-body .form-horizontal .col-sm-10 {
+    width: 100%
+}
+
+.modal-body .form-horizontal .control-label {
+    text-align: left;
+}
+.modal-body .form-horizontal .col-sm-offset-2 {
+    margin-left: 15px;
+}
+.modal-header{
+	background-color: #65E563;
+	color:white;
+}
+/*button default*/
+.btn-default {
+    /* text-shadow: 0 1px 0 #fff; */
+    /* background-image: -webkit-linear-gradient(top,#fff 0,#0E0808 100%); */
+    background-image: none;
+    border-color: #27C24C;
+}
+.dropdown-toggle.btn-default:hover {
+    color: white;
+    background-color: #B9E563;
+    border-color:none;
+}
+
+.table > tbody > tr > td {
+        padding: 5px 8px 0px 8px !important;
+        text-align: center;
+}
+
+.offset-table-right {
+    margin-right: 8%;   
+}
+
+.page-header {
+        border-bottom: none;
+}
+
+#addModal label {
+    text-align: left !important;
+        padding-bottom: 10px !important;
+}
+
+#button > a {
+    color: white !important;
+}
+
+#button > a:hover {
+    text-decoration: none !important;
+}
+
+#button:hover {
+    background-color: rgba(39, 160, 68, 0.99);
+}
+
+/*.btn-default> option:hover {
+    background-color: #e6e6e6 !important;
+}*/
+
+select {
+    height: 34px;
+     border: 1px solid #3BC75C;
+}
+
+.main-transaction .page {
+    left: 0px !important;
+}
+
+.main-transaction .with-selected {
+    float: none;
+}
+
+.main-transaction #deleteAll {
+        right: -2%;
+        float: none;
+} 
+
+.main-transaction #search-year-transaction {
+    float: right;
+      right: 74.9%;
+    top: 1px;
+    position: relative;
+    width: 10%;
+    padding-left: 10px; 
+        border-radius: 0;
+    background-color: white;
+     border: 1px solid #3BC75C !important;
+     height: 34px;
+}
+
+.sidebar .nav > li:active,
+.sidebar .nav > li:focus {
+    background-color: #0F171D;
+}
+
+#add-admin,
+#add-addmin {
+        position: relative;
+    top: -11px;
+        padding-left: 5px;
+    padding-right: 20px;
+}
+
+#addModal .form-control {
+    /*margin-bottom: 13px;*/
+}
+
+#search-type-category {
+    position: relative;
+    top: -130px;
+    right: 19%;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#input-group-search-type {
+    left: 57px;
+}
+
+#query-category-name {
+    position: relative;
+    width: 180%;
+    border: 1px solid #27C24C;
+    bottom: 164px;
+    left: 5%;
+}
+
+.button-search-category {
+    position: relative;
+    bottom: 130px;
+    margin-left: -7px;
+}
+
+/*search transfer*/ 
+
+#search-wallet-receive {
+       position: relative;
+    left: 38.1%;
+    border-radius: 0;
+    top: 0;
+}
+
+#search-wallet-sent {
+    position: relative;
+    left: 38.5%;
+        border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+h1 >a {
+    color: #27c24c;
+}
+
+h1 >a:hover {
+    text-decoration: none;
+    color: rgba(39, 194, 76, 0.69) !important;
+}
+
+#button-search-report {
+        position: relative;
+    bottom: 99px !important;
+    background: rgb(39, 194, 76);
+    left: 40% !important;
+    height: 34px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    color: white;
+}
+
+#add-transaction-date select {
+        width: 32%;
+    float: left;
+    min-width: 20% !important;
+    margin-right: 11px;
+}
+
+select#WalletNameYear {
+    margin-right: -1px;
+}
+
+#email-profile {
+    padding-right: 10px;
+    position: relative;
+    top: -3px;
+}
+
+#total-money-current {
+        position: relative;
+    bottom: 67px;
+    left: 30%;
+    width: 50%;
+}
+
+.update-link-wallet-edit {
+    color: white; 
+    float: right; 
+    position: relative; 
+    top: 4px;
+}
+
+.delete-link-wallet {
+    color: white !important; 
+    float: right; 
+        padding-left: 15px;
+    margin-top: 6px;
+}
+
+#ReportMonthsIndexForm {
+    bottom: 65px;
+    position: relative;
+    left: 22%;
+    width: 50%;
+}
+
+.wallet-info-details {
+    color: black;
+}

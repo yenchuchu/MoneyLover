@@ -44,6 +44,11 @@ class Category extends AppModel {
             )
     );
     
+    public function findAllCategories() {
+        $allCategories = $this->find('all');
+        return $allCategories;
+    }
+    
     public function getCategoryByName($name) {
         $category = $this->find('all',array(
             'conditions'=>array(

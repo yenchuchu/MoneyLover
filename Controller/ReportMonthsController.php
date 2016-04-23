@@ -22,8 +22,7 @@ class ReportMonthsController extends AppController {
      *
      * @return void
      */
-    public function index() {
-
+    public function index() { 
         $this->loadModel('User');
         $this->loadModel('Wallet');
         $this->loadModel('Transaction');
@@ -69,7 +68,9 @@ class ReportMonthsController extends AppController {
                     }
                     $i++;
                 }
-
+//                debug($result_wallet_id);
+//                debug( $this->Transaction->getReportFollowType($result_wallet_id));
+//                die;
                 $months = array_unique($outputMonthTransactions);
                 rsort($months);  
                 $this->set('months', $months);

@@ -1,31 +1,38 @@
-<?php echo $this->element('menu_user'); ?>
-<!-- Contact Section -->
+<?php echo $this->Flash->render('positive') ?>
 
-<section id="report-month" class="content-section text-center">
-    <span>
-        <h1 id="title-report">Report Month</h1>  
-    </span>
-        <?php
+<?php echo $this->element('menu_user'); ?>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-wallet">
+
+    <h1 class="page-header"> 
+        <?php echo $this->Html->link(__('Report Month'), array('controller' => 'ReportMonths', 'action' => 'index')); ?>  </h1>
+           <?php
         echo $this->Form->create('ReportMonths', array(
-            'type' => 'get',
-            'id' => 'search',
-            'class' => 'form-inline form-search-top'));
+            'type' => 'get', 
+            'class' => 'form-inline form-search-top'  ));
         ?>
+     <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" name="year_start"
+                   placeholder="Search..." value ="<?php $this->request->query('year_start'); ?>"
+                   style=" 
+    position: relative;    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;">
+          </form>
        <?php
-        echo $this->Form->input('year_start', array(
-            'label' => false,
-            'value'=>$this->request->query('year_start'),
-            'type' => 'number',
-            'placeholder' => 'enter year',
-            'id' => 'search-year-reportmonth',
-            'required' => false
-        ));
+//        echo $this->Form->input('year_start', array(
+//            'label' => false,
+//            'value'=>$this->request->query('year_start'),
+//            'type' => 'number',
+//            'placeholder' => 'enter year',
+//            'id' => 'search-year-reportmonth',
+//            'required' => false
+//        ));
         ?>
-    <button class="btn btn-default " id="button-search" type="submit" title="search">
+    <button class="btn btn-default " id="button-search-report" type="submit" title="search">
             <i class="fa fa-search"></i>
         </button>  
     <?php echo $this->Form->end(); ?> 
-       
+    
     <div class="row" >
         <div class="col-lg-10 col-lg-offset-1 row-10-report">
         <?php if(empty($months)){
@@ -39,21 +46,23 @@
                     </span> 
                 </div>
                 <div class="panel-body"  >
-                    <div class="type" >
+                    <div class="col-md-6" style="text-align: center;" >
                         <h3>Incom-Expense</h3>
-                        <canvas id="<?php echo h($month); ?>" width="600" height="400" ></canvas> 
-                    </div>
-                    <div class="type-category">
+                        <canvas id="<?php echo h($month); ?>" width="400" height="266.666" 
+                                style="margin-left: 14%;    margin-top: 11px;"></canvas> 
+                    </div> 
+                    <div class="col-md-6" style="text-align: center;">
                         <h3>categories</h3>
-                        <canvas id="<?php echo h($month) . "-cate"; ?>" width="600" height="400" ></canvas>
+                        <canvas id="<?php echo h($month) . "-cate"; ?>" width="400" height="266.666"  
+                                style="margin-left:14%;    margin-top: 11px;"></canvas>
                     </div>
                 </div>
     <?php } }?>
             <!-- /.panel-body -->
         </div>
     </div>
-</section>
-
+</div> 
+  
 <script type="text/javascript">
     // pie chart data
 

@@ -28,6 +28,7 @@ class CategoriesController extends AppController {
         $this->Category->recursive = 0;
 
         $type = $this->request->query('type');
+        $name = $this->request->query('name');
         $conditions = array();
         if ($type == 'expense') {
             $conditions['Category.type'] = Category::TYPE_EXPENSE;
@@ -35,6 +36,10 @@ class CategoriesController extends AppController {
             $conditions['Category.type'] = Category::TYPE_INCOME;
         } else {
             $conditions[] = 'Category.type is not null';
+        }
+        
+        if(!empty($name)) {
+            $conditions[] = "Category.name LIKE '%".$name."%'";
         }
 
         $this->Paginator->settings = array(
@@ -53,17 +58,36 @@ class CategoriesController extends AppController {
      */
     public function add() {
         $this->loadModel('User');
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) { 
+            
+            
             $this->Category->create();
+            
+            $allCategories = $this->Category->findAllCategories();
+//           
+            $diff = 1;
+            foreach ($allCategories as $allCategory) { 
+                if ($this->request->data['Category']['name'] === $allCategory['Category']['name']) { 
+                    $diff = 0; // category existed
+                } 
+            } 
+             
             if($this->Auth->user('role') === '1') {
                 $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             }
-            if ($this->Category->save($this->request->data)) {
-                $this->Flash->success(__('The category has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+            
+            if($diff == 1) {
+               if ($this->Category->save($this->request->data)) {
+                    $this->Flash->success(__('The category has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Flash->error(__('The category could not be saved. Please, try again.'));
+                } 
             } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
-            }
+                    $this->Flash->error(__('The category existed'));
+            } 
+            
+            
         }
     }
 
@@ -75,10 +99,13 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+    
+        $this->set('idRequest', $id);
         if (!$this->Category->exists($id)) {
             throw new NotFoundException(__('Invalid category'));
         }
         if ($this->request->is(array('post', 'put'))) {
+            $this->request->data['Category']['id'] = $id;
             if ($this->Category->save($this->request->data)) {
                 $this->Flash->success(__('The category has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -89,6 +116,7 @@ class CategoriesController extends AppController {
             $options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
             $this->request->data = $this->Category->find('first', $options);
         }
+        
     }
 
     /**
@@ -99,12 +127,15 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function delete($id = null) {
+        $this->loadModel('Transaction');
+        
         $this->Category->id = $id;
         if (!$this->Category->exists()) {
             throw new NotFoundException(__('Invalid category'));
         }
         $this->request->allowMethod('post', 'delete');
         if ($this->Category->delete()) {
+            $this->Transaction->deleteTransactionByCategoryNotExits(array($id));
             $this->Flash->success(__('The category has been deleted.'));
         } else {
             $this->Flash->error(__('The category could not be deleted. Please, try again.'));
@@ -113,10 +144,13 @@ class CategoriesController extends AppController {
     }
 
     public function deleteAll() {
+        $this->loadModel('Transaction');
+        
         $this->request->allowMethod('post');
 
         $ids = $this->request->data['ids'];
         if ($this->Category->deleteAll(array('id' => $ids), false)) {
+            $this->Transaction->deleteTransactionByCategoryNotExits($ids);
             echo json_encode(['status' => 0, 'message' => 'OK']);
             exit;
         }

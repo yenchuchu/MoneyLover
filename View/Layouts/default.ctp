@@ -21,6 +21,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->css('grayscale');
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css ('/font-awesome/css/font-awesome');
+                echo $this->Html->css('dashboard');
+                echo $this->Html->css('mystyle');
 		// echo $this->Html->css('grayscale');
 		
 		echo $this->Html->script('jquery-1.6.1.min');

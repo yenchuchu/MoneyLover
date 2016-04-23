@@ -39,7 +39,7 @@ class User extends AppModel {
         'password' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'A password is require'
+                'message' => '* A password is require'
             )
         ),
         'old_password' => array(
@@ -47,24 +47,26 @@ class User extends AppModel {
                 'rule' => 'notBlank',
                 'message' => 'A password is require'
             ),
-            'match' => array(
-            ),
         ),
         'new_password' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'A password is require'
+                'message' => '* A password is require'
             ),
             'match' => array(
-            ),
+                'rule' => 'validateConfirmPassword',
+                'message' => '* A password is require'
+            )
         ),
         'confirm_password' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'A password is require'
+                'message' => '* A password is require'
             ),
             'match' => array(
-            ),
+                'rule' => 'validateConfirmPassword',
+                'message' => '* confirm password wrong.'
+            )
         ),
     );
 
@@ -110,8 +112,14 @@ class User extends AppModel {
      */
     public function validateOldPassword($check, $result) {
         $hashed = AuthComponent::password($check['old_password']);
-
         return $hashed == $result;
+    }
+    
+    public function setValidateOldPassword($oldPassword) {
+        $this->validator()->add('old_password', 'matchOld', array(
+            'rule' => array('validateOldPassword', $oldPassword),
+            'message' => '* abc'
+        ));
     }
 
     /**
@@ -119,8 +127,8 @@ class User extends AppModel {
      * @return bool
      */
     public function validateConfirmPassword($check) {
-        $hashed_confirm = AuthComponent::password($check['confirm_password']);
-        $hashed_new = AuthComponent::password($check['new_password']);
+        $hashed_confirm = AuthComponent::password($this->data[$this->alias]['confirm_password']);
+        $hashed_new = AuthComponent::password($this->data[$this->alias]['new_password']);
         return $hashed_new === $hashed_confirm;
     }
 
@@ -134,6 +142,12 @@ class User extends AppModel {
         return $code;
     }
     
+    public function getEmailById($id) {
+         $emailRequest = $this->query("select email from users where id = $id ");
+         return $emailRequest;
+    }
+
+
     public function findWalletAuth($idAuth) {
         $walletAuth = $this->query(
                 "select wallets.user_id, wallets.id from wallets 
