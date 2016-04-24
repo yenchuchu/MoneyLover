@@ -230,14 +230,16 @@ class UsersController extends AppController {
         }
         elseif ($this->request->data('signin') === 'Sign-in') {
             if ($this->request->is('post')) {
-                
                 if ($this->Auth->login()) {
                     $count = $this->User->find('first', array(
                         'conditions' => array('User.id' => AuthComponent::user('id'))
                     ));
+//                    debug($count);die;
                     if ($count['User']['active'] == User::USER_REQUEST) {
-                        $this->redirect(array('controller' => 'Users',
-                            'action' => 'change_password', AuthComponent::user('id')));
+                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
+                            'User.id' => AuthComponent::user('id')));
+//                        $this->redirect(array('controller' => 'Users',
+//                            'action' => 'change_password', AuthComponent::user('id')));
                     }
                     if ($count['User']['role'] == User::ROLE_USER) {
                         return $this->redirect($this->Auth->redirectUrl());
@@ -275,22 +277,23 @@ class UsersController extends AppController {
                 $this->Flash->error(__('The password could not be saved'));
             } else {
                 if ($this->User->save(['password' => $changable['new_password']])) {
-                    if($result['User']['active'] == User::USER_REQUEST ) {
-                        $result['User']['active'] == User::USER_ACTIVE;
-                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
-                            'User.id' => AuthComponent::user('id')));
-                         if($result['User']['role'] == User::ROLE_ADMIN) {
-                            $this->Session->write('Auth.User.active', $result['User']['active']);
-                            $this->Session->write('Auth.User.password', $changable['new_password']);
-                            $this->redirect(array('controller' => 'users', 'action' => 'index'));
-                        } else {
-                            $this->Session->write('Auth.User.active', $result['User']['active']);
-                            $this->Session->write('Auth.User.password', $changable['new_password']);
-                            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
-                        }
-                    } 
+//                    if($result['User']['active'] == User::USER_REQUEST ) {
+//                        $result['User']['active'] == User::USER_ACTIVE;
+//                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
+//                            'User.id' => AuthComponent::user('id')));
+//                    $this->Session->write('Auth.User.password', $changable['new_password']);
+//                    if($result['User']['role'] == User::ROLE_ADMIN) {
+////                            $this->Session->write('Auth.User.active', $result['User']['active']);
+////                            $this->Session->write('Auth.User.password', $changable['new_password']);
+//                            $this->redirect(array('action' => 'index'));
+//                        } else {
+//                            $this->Session->write('Auth.User.active', $result['User']['active']);
+//                            $this->Session->write('Auth.User.password', $changable['new_password']);
+//                            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
+//                        }
+//                    } 
                     
-                    $this->Session->write('Auth.User.active', $result['User']['active']);
+//                    $this->Session->write('Auth.User.active', $result['User']['active']);
                     $this->Session->write('Auth.User.password', $changable['new_password']);
                     
                     $this->redirect(array('action' => 'index'));

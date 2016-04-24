@@ -17,27 +17,17 @@
                    style=" 
     position: relative;    border-top-right-radius: 0;
     border-bottom-right-radius: 0;">
-          </form>
-       <?php
-//        echo $this->Form->input('year_start', array(
-//            'label' => false,
-//            'value'=>$this->request->query('year_start'),
-//            'type' => 'number',
-//            'placeholder' => 'enter year',
-//            'id' => 'search-year-reportmonth',
-//            'required' => false
-//        ));
-        ?>
+          </form> 
     <button class="btn btn-default " id="button-search-report" type="submit" title="search">
             <i class="fa fa-search"></i>
         </button>  
     <?php echo $this->Form->end(); ?> 
     
-    <div class="row" >
-        <div class="col-lg-10 col-lg-offset-1 row-10-report">
+    <div class="row" > 
         <?php if(empty($months)){
-            echo "<p>You need create wallet and add transaction!</p>";
-            } else {?>
+            echo "<p style= 'color: red; text-align: center; margin-top: 5%;'>You need create wallet and add transaction!</p> ";
+            }  else {?>
+         <div class="col-lg-10 col-lg-offset-1 row-10-report">
 <?php foreach ($months as $key => $month) { ?>
                 <div class="panel-heading" >
                     <i class="fa fa-bar-chart-o fa-fw" ></i> 
@@ -45,6 +35,7 @@
     <?php echo h($month); ?>
                     </span> 
                 </div>
+        </div>
                 <div class="panel-body"  >
                     <div class="col-md-6" style="text-align: center;" >
                         <h3>Incom-Expense</h3>
@@ -60,8 +51,7 @@
     <?php } }?>
             <!-- /.panel-body -->
         </div>
-    </div>
-</div> 
+</div>
   
 <script type="text/javascript">
     // pie chart data

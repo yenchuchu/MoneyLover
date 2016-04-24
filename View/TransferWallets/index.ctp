@@ -44,12 +44,13 @@
             'type' => 'number',
             'placeholder' => 'enter money',
             'class' => 'btn-default',
+            'div'=>false,
             'id' => 'search-money-transfer',
             'required' => false
         ));
         ?>
-        <span id="search-time-transfer " style="position: relative !important;
-              left: 37% !important;">
+<!--        <span id="search-time-transfer " style="position: relative !important;
+              left: 37% !important;">-->
 
             <?php
             echo $this->Form->input('day_start', array(
@@ -115,6 +116,7 @@
                 'label' => false,
                 'empty' => '-- month--',
                 'class' => ' btn-default',
+                'div'=>false,
                 'id' => 'search-month-transfer',
                 'required' => false
             ));
@@ -126,20 +128,20 @@
                 'type' => 'number',
                 'placeholder' => 'enter year',
                 'class' => ' btn-default',
+                'div'=>false,
                 'id' => 'search-year-transfer',
                 'required' => false
             ));
             ?>
-        </span>
-        <span class="input-group-btn">
+        <!--</span>--> 
             <button class="btn"id="button" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-        </span>
+       
         <?php echo $this->Form->end(); ?> 
     </span>
 
 
     <br><br>
-    <div class="row" style="position: relative; bottom: 62px;">
+    <div class="row" style="position: relative;margin-top: 4%;">
         <div class="col-xs-10 col-xs-offset-1">
             <table class="table table-striped">
                 <th></th>
@@ -199,7 +201,7 @@
             <!-- phan trang -->
 
             <?php if (empty($transferWallets)) { ?>
-                <p style="    text-align: center;"> No transfer Wallets</p>
+                <p style=" color: red;margin-top: 8%; text-align: center;"> No transfer Wallets. First, you must add wallet!</p>
                 <?php
             } else {
                 ?>
@@ -241,12 +243,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
-                        <div class="modal-header">
-                            <button type="button" class="close" 
-                                    data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
+                        <div class="modal-header"> 
                             <h4 class="modal-title" id="myModalLabel">
                                 Add a transfer
                             </h4>
@@ -266,6 +263,7 @@
                                         <?php echo $this->Form->input('sent_wallet_id', array('label' => false, 
                                             'placeholder' => 'Wallet Name sent', 
                                             'id' => 'WalletName', 
+                                            'empty' => '--choose wallet--',
                                             'class' => 'form-control', 
                                             'name' => 'data[TransferWallet][sent_wallet_id]')); ?>  
                                     </div>
@@ -277,6 +275,7 @@
                                         <?php echo $this->Form->input('receive_wallet_id', array('label' => false, 
                                             'placeholder' => 'Wallet Name receive', 
                                             'id' => 'WalletName', 
+                                            'empty' => '--choose wallet--',
                                             'class' => 'form-control', 
                                             'name' => 'data[TransferWallet][receive_wallet_id]')); ?> 
                                     </div>
@@ -320,12 +319,7 @@
     <div class="modal-dialog">
         <div class="modal-content"> 
             <!-- Modal Header --> 
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="myModalLabel">
                     Delete a transfer
                 </h4>
@@ -359,12 +353,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <!-- Modal Header -->
-                        <div class="modal-header">
-                            <button type="button" class="close" 
-                                    data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
+                        <div class="modal-header"> 
                             <h4 class="modal-title" id="myModalLabel">
                                 Edit a category
                             </h4>

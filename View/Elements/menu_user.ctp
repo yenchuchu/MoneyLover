@@ -16,9 +16,12 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-top: 15px;
     padding-bottom: 5px;">
                         <span id="email-profile">         
-                             <?php $email = AuthComponent::user('email');
-                             $email = explode("@", $email);
-                                echo $email[0]; ?>
+                             <?php 
+                              $username = AuthComponent::user('username');
+                             echo $username;
+//                             $email = AuthComponent::user('email');
+//                             $email = explode("@", $email);
+//                                echo $email[0]; ?>
                         </span>       
                         <?php
                         $avatar = AuthComponent::user('avatar');
@@ -57,14 +60,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="myModalLabel">
-                    Thay đổi ảnh 
+                     Change Profile 
                 </h4>
             </div>
             
@@ -78,7 +76,7 @@
         <!--<span id="note-upload-avatar">Only JPG, JPEG, PNG, GIF files are allowed!</span> <br>-->
             <div class="modal-body">
                   
-                  Select image. Note: Only JPG, JPEG, PNG, GIF files are allowed!
+                   <b> Select image. </b> <i>Note: Only JPG, JPEG, PNG, GIF files are allowed! </i>
                   <input type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onchange="loadFile(event)">
                   <img id="output" style="width:200px"/>
                   <script>
@@ -113,14 +111,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="changeModal">
-                    CHANGE YOUR PASSWORD
+                    Change Your Password
                 </h4>
             </div>
                 <?php

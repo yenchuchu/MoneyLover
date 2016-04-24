@@ -110,12 +110,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="myModalLabel">
                     Add a Account
                 </h4>
@@ -178,12 +173,7 @@
     <div class="modal-dialog">
         <div class="modal-content"> 
              <!--Modal Header--> 
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="myModalLabel">
                     Delete a User
                 </h4>

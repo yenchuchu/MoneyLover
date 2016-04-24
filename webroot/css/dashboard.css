@@ -59,6 +59,7 @@ body {
   padding-right: 20px;
   padding-left: 20px;
   color: #27c24c;
+  font-size: 17px;
 }
 .nav-sidebar > li > a:hover{
   background-color: #191D21;

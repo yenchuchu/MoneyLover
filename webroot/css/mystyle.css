@@ -54,10 +54,9 @@ body{
 }
 
 .main-transaction .search { 
-        top: -121px;
     border-bottom-left-radius: 0px;
-    left: 80.9%;
     border-top-left-radius: 0px;
+        padding: 6px 25px !important;
 }
 #add-button{
 	border-radius: 100%;
@@ -164,9 +163,7 @@ select {
 } 
 
 .main-transaction #search-year-transaction {
-    float: right;
-      right: 74.9%;
-    top: 1px;
+    float: left;
     position: relative;
     width: 10%;
     padding-left: 10px; 
@@ -223,14 +220,17 @@ select {
 
 #search-wallet-receive {
        position: relative;
-    left: 38.1%;
+        float: left;
+    width: 17%;
     border-radius: 0;
     top: 0;
 }
 
 #search-wallet-sent {
     position: relative;
-    left: 38.5%;
+    /*left: 38.5%;*/
+    float: left;
+    width: 16%;
         border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
@@ -248,7 +248,7 @@ h1 >a:hover {
         position: relative;
     bottom: 99px !important;
     background: rgb(39, 194, 76);
-    left: 40% !important;
+    left: 42% !important;
     height: 34px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
@@ -296,10 +296,14 @@ select#WalletNameYear {
 #ReportMonthsIndexForm {
     bottom: 65px;
     position: relative;
-    left: 22%;
+    left: 25%;
     width: 50%;
 }
 
 .wallet-info-details {
     color: black;
+}
+
+.page-header >a {
+        margin-left: 24px;
 }

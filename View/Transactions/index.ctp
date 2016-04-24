@@ -19,7 +19,6 @@
             'value' => $this->request->query('categorie_id'),
             'empty' => '--choose category--',
             'class' => ' btn-default select-style select2-offscreen',
-//            'class'=>'',
             'id' => 'search-category-transaction',
             'label' => false,
             'div' => false,
@@ -43,12 +42,11 @@
             'type' => 'number',
             'placeholder' => 'enter money',
             'class' => 'btn-default',
+            'div'=>false,
             'id' => 'search-money-transaction',
             'required' => false
         ));
-        ?>
-        <span id="search-time">
-
+        ?> 
             <?php
             echo $this->Form->input('day_start', array(
                 'options' => array(
@@ -129,8 +127,7 @@
                 'id' => 'search-year-transaction',
                 'required' => false
             ));
-            ?> 
-        </span> 
+            ?>  
         <button class="btn search" id="button"  type="submit" title="search"><span class="glyphicon glyphicon-search"></span></button>
 
         <?php echo $this->Form->end(); ?> 
@@ -207,7 +204,7 @@
 
             </table>
             <?php if (empty($transactions)) { ?>
-                <p style="    text-align: center;"> No Transaction</p>
+                <p style=" color:red;margin-top: 8%;text-align: center;"> No Transaction.  First, you must add wallet!</p>
                 <?php
             } else {
                 ?>
@@ -251,12 +248,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                        data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
+            <div class="modal-header"> 
                 <h4 class="modal-title" id="myModalLabel">
                     Add a transaction
                 </h4>
@@ -273,6 +265,7 @@
                         <?php
                         echo $this->Form->input('wallet_id', array(
                             'label' => false,
+                            'empty' => '--choose wallet--',
                             'id' => 'WalletMoneyCurrent',
                             'class' => 'form-control'));
                         ?>  
@@ -364,12 +357,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" 
-                            data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
+                <div class="modal-header"> 
                     <h4 class="modal-title" id="myModalLabel">
                         Edit a transaction
                     </h4>
@@ -451,12 +439,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" 
-                            data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
+                <div class="modal-header"> 
                     <h4 class="modal-title" id="myModalLabel">
                         Delete a transfer
                     </h4>

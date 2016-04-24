@@ -10,16 +10,18 @@
     </h1>
     
             <p id="total-money-current"> Total money current: <?php
-echo $this->Number->currency($sumMoneyCurrent, ' VND', $options = array('thousands' => '.',
+echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' => '.',
     'wholePosition' => 'after', 'places' => 0
 ));
-?> </p>
+?></p>
     <div class="row">
-        <?php
-        if (empty($wallets)) {
-            echo "<p>No wallet</p>";
-        }
-        ?>
+        <span style="text-align: center; color: red;">
+            <?php
+                if (empty($wallets)) {
+                    echo "<p>No wallet. You should add wallet to make transaction or transfer wallet!</p>";
+                }
+                ?> 
+        </span>
 <?php foreach ($wallets as $wallet): ?>
             <div class="col-lg-6 ">
                 <div class="card">
