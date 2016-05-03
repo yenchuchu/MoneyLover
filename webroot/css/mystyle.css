@@ -307,3 +307,18 @@ select#WalletNameYear {
 .page-header >a {
         margin-left: 24px;
 }
+
+#content-message {
+    background: rgb(28, 43, 54);
+    color: #C5BBBB;
+    width: 50%;
+    text-align: center;
+        margin-left: 29%;
+}
+
+.body-report-month {
+    margin: auto;
+    width: 83.2% ;
+    border: 1px solid #27C24C;
+    margin-bottom: 3%;
+}

@@ -36,7 +36,7 @@
                     </span> 
                 </div>
         </div>
-                <div class="panel-body"  >
+        <div class="panel-body body-report-month"  >
                     <div class="col-md-6" style="text-align: center;" >
                         <h3>Incom-Expense</h3>
                         <canvas id="<?php echo h($month); ?>" width="400" height="266.666" 

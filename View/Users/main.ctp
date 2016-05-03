@@ -50,14 +50,14 @@
             <div class="row"> 
                 <div class="navbar-collapse collapse" id="form-sign">
                     <ul class="nav nav-tabs" id="nav-tabs-main">
-                        <li class="active"><a data-toggle="tab" href="#sign-up">Sign Up</a></li>
-                        <li><a data-toggle="tab" href="#sign-in">Sign In</a></li>
+                        <li class="active"><a data-toggle="tab" href="#wrap-sign-up">Sign Up</a></li>
+                        <li><a data-toggle="tab" href="#wrap-sign-in">Sign In</a></li>
                     </ul>
                 </div>
                 <!-- </nav> -->
 
                 <div class="tab-content">
-                    <div id="sign-up" class="tab-pane fade in active">
+                    <div id="wrap-sign-up" class="tab-pane fade in active">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                             <div class="form-top">
                                 <div class="form-top-left">
@@ -86,7 +86,7 @@
                         </div>
                     </div>
 
-                    <div id="sign-in" class="tab-pane fade">
+                    <div id="wrap-sign-in" class="tab-pane fade">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                             <div class="form-top">
                                 <div class="form-top-left">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="form-bottom"> 
-                                <form role="form" class="form" method="post"  class="registration-form">
+                                <form role="form" method="post"  class=" form registration-form">
                                     <fieldset>
                                         <div class="form-group" > 
                                                 <?php echo $this->Form->input('User.username', array('class'=>'form-control','label' => false, 'placeholder' => 'enter username')); ?>
@@ -125,7 +125,6 @@
         </div>
 
     </div>
-</div>
 </div>
  
     <?= $this->Html->script('jquery.backstretch.min') ?>

@@ -36,10 +36,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user"> 
                         <li> 
-                            <a href="#"  type="button" data-toggle="modal" data-target="#changeAvatar">Update Avatar</a>
+                            <a href="#" data-toggle="modal" data-target="#changeAvatar">Update Avatar</a>
                         </li> 
                      <li>  
-                            <a href="#"  type="button" data-toggle="modal" data-target="#changeModal">Change your password</a>
+                            <a href="#" data-toggle="modal" data-target="#changeModal">Change your password</a>
                         </li> 
                         <li>
 <?php echo $this->Html->link(__('Log out'), array('controller' => 'users', 'action' => 'logout')); ?>

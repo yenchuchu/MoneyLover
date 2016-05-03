@@ -1993,17 +1993,12 @@ li.dropdown img {
     top: -5px;
 }
 
-#check-mail {
-    background-color: rgba(87, 174, 208, 0.83);
-    width: 30%;
-    height: 150px;
+#check-mail { 
     text-align: center;
-    color: white;
+    color: black;
     margin: auto;
-    position: relative;
-    top: 130px;
-    font-size: 19px;
-    border-radius: 5px;
+    position: relative; 
+    font-size: 19px; 
     padding-top: 4%;
 }
 

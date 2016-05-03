@@ -190,14 +190,25 @@ class UsersController extends AppController {
                 $this->User->create();
                 $aaas = $this->User->find('all');
                 if (!empty($aaas)) {
+                    $count_diff_email = 0;
                     foreach ($aaas as $user) {
-                        if ($this->request->data['email'] === $user['User']['email'] || $this->request->data['username'] === $user['User']['username']) {
-                            $diff = 0;
+                        if ($this->request->data['email'] === $user['User']['email']) {
+                            $count_diff_email = 1;
+                            $diff_email = 0;
                         } else {
-                            $diff = 1;
+                            $diff_email = 1;
                         }
-                    }
-                    if ($diff == 1) {
+                    } 
+                    $count_diff_user = 0;
+                    foreach ($aaas as $user) {
+                        if ($this->request->data['username'] === $user['User']['username']) {
+                            $count_diff_user = 1;
+                            $diff_user = 0;
+                        } else { 
+                            $diff_user = 1;
+                        }
+                    } 
+                    if ($count_diff_user == 0 && $count_diff_email == 0) {  
                         if ($this->User->save($this->request->data)) {
                             $passwordRandom = User::createRandomString(10);
                             $this->User->save(['password' => $passwordRandom]);
@@ -205,13 +216,15 @@ class UsersController extends AppController {
                             $Email->emailFormat('html')
                                     ->to($this->request->data['email'])
                                     ->subject('Confirm Account')
-                                    ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
-                            return $this->redirect(array('controller' => 'Users', 'action' => 'confirmEmail'));
-                        } else {
-                            $this->Flash->error(__('Cant save account. Please, try again.'));
+                                    ->send("Your password is: {$passwordRandom}. Comeback home to login!");
+                            $this->Flash->success(__('Check your mail to active account, please!')); 
+                        } else { 
+                            $this->Flash->error(__('Cant save account. '
+                                    . '       Try again, Please'));
                         }
                     } else {
-                            $this->Flash->error(__('Username or email existed. Please, try again.'));
+                            $this->Flash->error(__('Username or email existed.'
+                                    . '      Try again, Please'));
                         }
                 } else {
                     if ($this->User->save($this->request->data)) {
@@ -221,7 +234,8 @@ class UsersController extends AppController {
                         $Email->emailFormat('html')
                                 ->to($this->request->data['email'])
                                 ->subject('Confirm Account')
-                                ->send("Your password is: {$passwordRandom}. You need to change your password on the first login!");
+                                ->send("Your password is: {$passwordRandom}. Comeback home to login!");
+                        $this->Flash->success(__('Check your mail to active account, please!'));
                     } else {
                         $this->Flash->error(__('Cant save account. Please, try again.'));
                     }
@@ -234,12 +248,9 @@ class UsersController extends AppController {
                     $count = $this->User->find('first', array(
                         'conditions' => array('User.id' => AuthComponent::user('id'))
                     ));
-//                    debug($count);die;
                     if ($count['User']['active'] == User::USER_REQUEST) {
                         $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
                             'User.id' => AuthComponent::user('id')));
-//                        $this->redirect(array('controller' => 'Users',
-//                            'action' => 'change_password', AuthComponent::user('id')));
                     }
                     if ($count['User']['role'] == User::ROLE_USER) {
                         return $this->redirect($this->Auth->redirectUrl());
@@ -252,9 +263,9 @@ class UsersController extends AppController {
         }
     }
 
-    public function confirmEmail($value = '') {
-        $this->set('showLayoutContent', true);
-    }
+//    public function confirmEmail($value = '') {
+//        $this->set('showLayoutContent', true);
+//    }
 
     public function change_password($id = null) {
         if (!$id) {
@@ -265,7 +276,6 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid User'));
         }
         if ($this->request->is(array('put', 'post'))) {
-//            die;
             $this->request->data['User']['id'] = $id; 
 
             $this->User->id = $id;
@@ -277,25 +287,8 @@ class UsersController extends AppController {
                 $this->Flash->error(__('The password could not be saved'));
             } else {
                 if ($this->User->save(['password' => $changable['new_password']])) {
-//                    if($result['User']['active'] == User::USER_REQUEST ) {
-//                        $result['User']['active'] == User::USER_ACTIVE;
-//                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
-//                            'User.id' => AuthComponent::user('id')));
-//                    $this->Session->write('Auth.User.password', $changable['new_password']);
-//                    if($result['User']['role'] == User::ROLE_ADMIN) {
-////                            $this->Session->write('Auth.User.active', $result['User']['active']);
-////                            $this->Session->write('Auth.User.password', $changable['new_password']);
-//                            $this->redirect(array('action' => 'index'));
-//                        } else {
-//                            $this->Session->write('Auth.User.active', $result['User']['active']);
-//                            $this->Session->write('Auth.User.password', $changable['new_password']);
-//                            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
-//                        }
-//                    } 
-                    
-//                    $this->Session->write('Auth.User.active', $result['User']['active']);
                     $this->Session->write('Auth.User.password', $changable['new_password']);
-                    
+                    $this->Flash->success(__('Change password success!')); 
                     $this->redirect(array('action' => 'index'));
                 } else { 
                     $this->Flash->error(__('The password could not be saved'));
@@ -332,33 +325,33 @@ class UsersController extends AppController {
                     echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    $this->Flash->error(__('File is not an image.')); 
                     $uploadOk = 0;
                 }
             } 
             // Check file size
             if ($_FILES["fileToUpload"]["size"] > 500000) {
                 $uploadOk = 0;
-                echo "Sorry, your file is too large.";
+                $this->Flash->error(__('Sorry, your file is too large.')); 
             }
             // Allow certain file formats
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $this->Flash->error(__('Sorry, only JPG, JPEG, PNG & GIF files are allowed.')); 
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
+                $this->Flash->error(__('Sorry, your file was not uploaded.')); 
                 // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
                     $this->User->save(['avatar' => basename($_FILES["fileToUpload"]["name"])]);
                     $this->Session->write('Auth.User.avatar', basename($_FILES["fileToUpload"]["name"]));
-                    echo "<p>Upload avatar success!</p>";
+                    $this->Flash->success(__('Upload avatar success!'));  
                     $this->redirect(array('action'=>'index'));
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    $this->Flash->error(__('Sorry, there was an error uploading your file.'));
                 }
             }
         }
