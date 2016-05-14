@@ -34,7 +34,7 @@
             'label' => false,
             'div' => false,
             'required' => false));
-        ?>
+        ?> 
         <?php
         echo $this->Form->input('money', array(
             'label' => false,
@@ -90,7 +90,7 @@
                 'id' => 'search-day-transaction',
                 'required' => false
             ));
-            ?>    
+            ?> 
             <?php
             echo $this->Form->input('month_start', array(
                 'options' => array(
@@ -517,4 +517,83 @@
         function deleteSigle($id) {
             $("#TransactionDeleteForm").attr("action", "/MoneyLover/transactions/delete/" + $id);
         }
+       
+//    $('#search-category-transaction').change(function() {
+//      
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+//    
+//    $('#search-wallet-transaction').change(function() {
+//      
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+//    
+//    $("#search-money-transaction").keyup(function(event) {
+//        
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+//    
+//    $('#search-day-transaction').change(function() {
+//      
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+//    
+//    $('#search-month-transaction').change(function() {
+//      
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+//    
+//    $("#search-year-transaction").keyup(function(event) {
+//        
+//        $cateForm = $('#search-category-transaction').val();
+//        $walletForm = $('#search-wallet-transaction').val();
+//        $moneyForm = $('#search-money-transaction').val();
+//        $dayForm = $('#search-day-transaction').val();
+//        $monthForm = $('#search-month-transaction').val();
+//        $yearForm = $('#search-year-transaction').val();
+//          
+//        searchTransaction('<?php // echo Router::Url(array('controller' => 'transactions', 'action' => 'search')); ?>',
+//                $cateForm, $walletForm, $moneyForm, $dayForm, $monthForm, $yearForm);
+//    });
+        
     </script>

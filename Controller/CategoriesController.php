@@ -24,7 +24,8 @@ class CategoriesController extends AppController {
      * @return void
      */
     public function index() {
-
+        
+        
         $this->Category->recursive = 0;
 
         $type = $this->request->query('type');
@@ -50,6 +51,53 @@ class CategoriesController extends AppController {
         $this->set('countCategories', $countCategories);
         $this->set('categories', $this->Paginator->paginate());
     }
+    
+//    public function search() {
+//        
+//        $this->request->allowMethod('post');
+//        $conditions = array();
+//        $name = $this->request->data['searchName'];
+//        $type = $this->request->data['searchType'];
+//
+//        if(!empty($name)) {
+//            $conditions[] = "name LIKE '".$name."%'";
+//        }
+//        
+//        if($this->request->data['searchType'] === 'income') {
+//            $type = 'income';
+//        } elseif($this->request->data['searchType'] === 'expense') {
+//            $type = 'expense';
+//        }
+//         
+//        if(!empty($type)) {
+//            if($type == 'income') {
+//                 $conditions['type'] = 0;
+//            } else {
+//                $conditions['type'] = 1;
+//            } 
+//        }
+//        
+//        $searchs = $this->Category->find('all', array('conditions' => $conditions ));
+//        $searchJsonArrays = array();
+//        if(!empty($searchs)) {
+//            foreach ($searchs as $search) {
+//                $searchJsonArrays[] = ['status' => 0, 'message' => 'OK', 
+//                    'id' => $search['Category']['id'],
+//                    'name' => $search['Category']['name'],
+//                    'type' => $search['Category']['type'],
+//                    'created' => $search['Category']['created'],
+//                    'modified' => $search['Category']['modified']
+//                    ];
+//                
+//            }
+//            echo json_encode($searchJsonArrays);
+//            exit;
+//        } else {
+//           $searchJsonArrays[] = ['status' => 1, 'message' => 'No Category'];
+//            echo json_encode($searchJsonArrays);
+//            exit;
+//        }
+//    }
 
     /**
      * add method
@@ -60,11 +108,9 @@ class CategoriesController extends AppController {
         $this->loadModel('User');
         if ($this->request->is('post')) { 
             
-            
             $this->Category->create();
-            
             $allCategories = $this->Category->findAllCategories();
-//           
+
             $diff = 1;
             foreach ($allCategories as $allCategory) { 
                 if ($this->request->data['Category']['name'] === $allCategory['Category']['name']) { 
@@ -86,8 +132,6 @@ class CategoriesController extends AppController {
             } else {
                     $this->Flash->error(__('The category existed'));
             } 
-            
-            
         }
     }
 
@@ -183,5 +227,11 @@ class CategoriesController extends AppController {
         }
 
         return isAuthorized($user);
+    }
+    
+    public function test() {
+        $this->set('val', 'ok');
+        $this->set('_serialize', array('val'));
+        $this->response->statusCode(200);
     }
 }

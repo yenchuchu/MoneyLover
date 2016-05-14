@@ -15,7 +15,8 @@
                     'type' => 'get',
                     'id' => 'search',
                     'class' => 'form-inline form-search-top',
-                    'style'=>'    top: 138px;'));
+                    'style'=>'    top: 138px;' 
+                    ));
                 ?> 
                 <?php
                 echo $this->Form->input('type', array(
@@ -24,12 +25,13 @@
                     'empty' => '--type --',
                     'class' => 'select-style select2-offscreen',
                     'id' => 'search-type-category',
-                    'label' => false,
+                    'label' => false, 
                     'div' => false,
-                    'required' => false));
+                    'required' => false  
+                    ));
                 ?> 
                 <input type="text" class="form-control" id="query-category-name" name="name" 
-                       placeholder="Enter Category"  value = <?php echo $this->request->query('name'); ?>>
+                       placeholder="Enter Category"  value = <?php echo $this->request->query('name'); ?> >
 
 
 
@@ -43,7 +45,7 @@
             </div>
         </div>
     </div>
-
+     
     <br><br>
     <div class="row" style="position: relative; top: -53px;">
         <div class="col-xs-10 col-xs-offset-1 offset-table-right">
@@ -56,35 +58,35 @@
                     <th><?php echo $this->Paginator->sort('Created'); ?></th>
                     <th><?php echo $this->Paginator->sort('Modified'); ?></th>
                     <th class="actions"><?php echo $this->Paginator->sort('Actions'); ?></th> 
-
+                <span class="mesage">
                 </tr>
-                <?php foreach ($categories as $category): ?>
-                    <tr id="tr-category">
-                        <td> <input type="checkbox" name="category_id[]" class="category-checkbox"  value="<?php echo h($category['Category']['id']); ?>" id="<?php echo h($category['Category']['id']); ?>"></td>
-                        <td class="tr-category-id"><?php echo h($category['Category']['id']); ?>&nbsp;</td>
-                        <td class="tr-category-name"><?php echo h($category['Category']['name']); ?>&nbsp;</td> 
-                        <td class="tr-category-type"><?php
-                            if ($category['Category']['type'] == 1):
-                                echo "Expense";
-                            else :
-                                echo "Income";
-                            endif;
-                            ?></td>
-                        <td><?php echo $this->Time->format($category['Category']['created'], '%B %e, %Y '); ?> </td>
-                        <td><?php echo $this->Time->format($category['Category']['modified'], '%B %e, %Y '); ?> </td>             
-                        <td class="actions">
-                            <a style="float:none;color:#27c24c" class="update-link" 
-                               id="update-link" data-toggle="modal" data-target="#editModal" title="Edit">
-                                <i class="fa fa-pencil-square-o"></i> </a>
+                    <?php foreach ($categories as $category): ?> 
+                        <tr class="tr-category">
+                            <td> <input type="checkbox" name="category_id[]" class="category-checkbox"  value="<?php echo h($category['Category']['id']); ?>" id="<?php echo h($category['Category']['id']); ?>"></td>
+                            <td class="tr-category-id"><?php echo h($category['Category']['id']); ?>&nbsp;</td>
+                            <td class="tr-category-name"><?php echo h($category['Category']['name']); ?>&nbsp;</td> 
+                            <td class="tr-category-type"><?php
+                                if ($category['Category']['type'] == 1):
+                                    echo "Expense";
+                                else :
+                                    echo "Income";
+                                endif;
+                                ?></td>
+                            <td><?php echo $this->Time->format($category['Category']['created'], '%B %e, %Y '); ?> </td>
+                            <td><?php echo $this->Time->format($category['Category']['modified'], '%B %e, %Y '); ?> </td>             
+                            <td class="actions">
+                                <a style="float:none;color:#27c24c" class="update-link" 
+                                   id="update-link" data-toggle="modal" data-target="#editModal" title="Edit">
+                                    <i class="fa fa-pencil-square-o"></i> </a>
 
-                            <a href="#" id="delete-link" name="<?php echo h($category['Category']['id']); ?> " 
-                               data-toggle="modal" data-target="#deleteModal" 
-                               class="delete-transaction glyphicon glyphicon-trash" title="Delete" 
-                               onclick="deleteSigle(this.name)"></a>                
-                        </td>   
-                    </tr>
-                <?php endforeach; ?>
-
+                                <a href="#" id="delete-link" name="<?php echo h($category['Category']['id']); ?> " 
+                                   data-toggle="modal" data-target="#deleteModal" 
+                                   class="delete-transaction glyphicon glyphicon-trash" title="Delete" 
+                                   onclick="deleteSigle(this.name)"></a>                
+                            </td>   
+                        </tr>
+                    <?php endforeach; ?>
+               
             </table>
             <!-- phan trang -->
 
@@ -124,7 +126,7 @@
                 </div>
 
             <?php } ?>
-
+</div>
             <!-- Add Modal -->
 
             <div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
@@ -147,18 +149,18 @@
                                 <div class="col-sm-12" style="margin-bottom: 17px;">
                                     <?php
                                     echo $this->Form->input('name', array('class' => 'form-control',
-                                        'label' => false, 'placeholder' => 'Enter a name', 'id' => 'inputEmail3'));
+                                        'label' => false, 'placeholder' => 'Enter a name', 'id' => 'add-name-category'));
                                     ?>
 
                                 </div>
                             </div>
                             <label class="radio-inline" style="padding-left: 46px; top: 0px;">
                                 <input type="radio" name="data[Category][type]" 
-                                       value="1" id="CategoryType" 
+                                       value="1" id="CategoryTypeExpense" checked="1" 
                                        style="margin-left: -22px; top: -8px;">Expense</label>
                             <label class="radio-inline">
                                 <input type="radio"  name="data[Category][type]" 
-                                       value="0" id="CategoryType" 
+                                       value="0" id="CategoryTypeIncome"  
                                        style="margin-left: -22px; top: -8px;">Income</label>
                         </div>
 
@@ -239,12 +241,12 @@
                                 </div>
                                 <label class="radio-inline" style="padding-left: 46px; top: 0px;">  
                                     <input type="radio" name="data[Category][type]" 
-                                           value="1" id="edit-type-income"
+                                           value="1" id="edit-type-income" checked
                                            style="margin-left: -22px; top: -8px;"> Expense </label>
                                 <label class="radio-inline" >
                                     <input type="radio" name="data[Category][type]" 
                                            value="0" id="edit-type-expense edit-input-expense"
-                                           style="margin-left: -22px; top: -8px;"> Income </label>
+                                           style="margin-left: -22px; top: -8px;" > Income </label>
 
                             </div>
 
@@ -263,13 +265,13 @@
                                 </div>
                                 </div>
  
-        </div>
+        
     </div>
 </div>
 <!--dungf jquery lấy dữ liệu từ table. chuyển vào modal-->
 <script type="text/javascript">
 
-
+   
     function deleteSigle($id) {
         $("#CategoryDeleteForm").attr("action", "/MoneyLover/Categories/delete/" + $id);
     }
@@ -279,7 +281,7 @@
         var name = $(this).closest('tr').find('.tr-category-name').text();
         $("#edit-name").val(name);
         var type = $(this).closest('tr').find('.tr-category-type').text();
-
+        
         var id = $(this).closest('tr').find('.tr-category-id').text();
         $("#CategoryEditForm").attr("action", "/MoneyLover/Categories/edit/" + id + "");
     });
@@ -299,7 +301,22 @@
         } else {
             return false;
         }
-
-
     });
+    
+//     $("#query-category-name").keyup(function(event) {
+//         $nameForm = $(this).val();
+//         $typeForm = $('#search-type-category').val();
+//        searchCategory('<?php // echo Router::Url(array('controller' => 'categories', 'action' => 'search')); ?>',
+//                        $nameForm, $typeForm);
+//    });
+//     
+//    $('#search-type-category').change(function() {
+//        $nameForm = $('#query-category-name').val();
+//        $typeForm = $('#search-type-category').val();
+//        searchCategory('<?php // echo Router::Url(array('controller' => 'categories', 'action' => 'search')); ?>',
+//                $nameForm, $typeForm);
+//    });
+
 </script>
+
+

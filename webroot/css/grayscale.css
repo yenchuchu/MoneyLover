@@ -1571,8 +1571,8 @@ th {
     margin-top: 10%;
 }
 
-#report-month .row-10-report {
-    margin-bottom: 30px; 
+.row-10-report {
+    margin-bottom: 3% !important; 
     top:-51px
 }
 
@@ -2085,10 +2085,9 @@ footer {
     color: #151313;
 }
 
-#fileToUpload{
-    margin: auto;
-    margin-top: 21px;
-    margin-bottom: 15px;
+#fileToUpload{ 
+    width: 100%;
+    margin: 0;
 }
 
 #save-upload-avatar {

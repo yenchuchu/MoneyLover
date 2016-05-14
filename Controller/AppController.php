@@ -42,10 +42,9 @@ class AppController extends Controller {
         ),
         'DebugKit.Toolbar'
     );
-    public $helpers = array('Common');
-
+    public $helpers = array('Common','Html' );
     public function beforeFilter() {
-        $this->Auth->allow('main','confirmEmail');
+        $this->Auth->allow('main','confirmEmail', 'forgotPassword');
     }
     
 //     public function isAuthorized($user) {

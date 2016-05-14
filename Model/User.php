@@ -26,6 +26,16 @@ class User extends AppModel {
      * @var array
      */
     public $validate = array(
+        'username' => array(
+            'username' => array(
+                'rule' => array('username'),
+                'message' => 'username empty',
+                //'allowEmpty' => false,
+                'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+        ),
         'email' => array(
             'email' => array(
                 'rule' => array('email'),

@@ -12,8 +12,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
+		MoneyLover
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
@@ -26,14 +25,15 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 echo $this->Html->css('jAlert-v3'); 
 		// echo $this->Html->css('grayscale');
 		
-		echo $this->Html->script('jquery-1.6.1.min');
+		echo $this->Html->script('jquery-1.11.1.min');
 		echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery.easing.min');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('common');
 		echo $this->Html->script('grayscale');
 		echo $this->Html->script('Chart.min'); 
-              
+              echo $this->Html->script('md5.min'); 
+              echo $this->Html->script('md5'); 
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -46,7 +46,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
             
 		<?php echo $this->fetch('content'); ?>
         <div class="ja_wrap ja_wrap_black" style="position: fixed; background-color: transparent;border: none;" id="wrap-message">
-            <div class="jAlert animated  ja_md fadeInUp"   style="margin-top: 10%; display: block;" id="ja_146220171853648143">
+            <div class="jAlert animated  ja_md fadeInUp"   style="/*margin-top: 10%;*/ display: block;" id="ja_146220171853648143">
                     <div>  
                             <div class="ja_body" id="content-message"><?php echo $this->Session->flash();  ?> </div>
                     </div>
@@ -70,8 +70,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
           } 
         });
         
-        </script>
         
+        </script>
         
 </body>
 </html>

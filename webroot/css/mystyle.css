@@ -1,24 +1,24 @@
 body{
-	background-color: #edf1f2;
+    background-color: #edf1f2;
 }
 #navbar1{
-	background-color: #27c24c;
-	border-color:#27c24c;
+    background-color: #27c24c;
+    border-color:#27c24c;
 }
 #navbar1 a{
-	color:white;
+    color:white;
 }
 #navbar1 a:hover{
-	background-color: rgba(35, 175, 69, 0.73);
+    background-color: rgba(35, 175, 69, 0.73);
 }
 
 .banner-header:hover {
-     background-color: rgba(35, 175, 69, 0.73);
+    background-color: rgba(35, 175, 69, 0.73);
     cursor: pointer;
 }
- 
+
 .banner-header:hover {
- width: 17%;
+    width: 17%;
     height: 50px;
     margin-left: -15px;
     padding-left: 16px;
@@ -29,55 +29,55 @@ body{
 }
 
 .card{
-	/*width: 30%;*/
-	margin-right: 30px;
-	margin-left: 50px;
-	margin-bottom: 50px;
-	color: #27c24c;
-	/*width: 60%;*/
+    /*width: 30%;*/
+    margin-right: 30px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    color: #27c24c;
+    /*width: 60%;*/
 }
 #card-header{
-	background-color: #27c24c;
-	font-weight: bold;
-	color:white;
-	font-size: 20px;
+    background-color: #27c24c;
+    font-weight: bold;
+    color:white;
+    font-size: 20px;
 }
 .navbar-inverse{
-	background-color: #27c24c;
+    background-color: #27c24c;
 }
 
- #button{ 
-        background-color: #27c24c;
-	border-color: #27c24c;
-	color:white;
-        position: relative;
+#button{ 
+    background-color: #27c24c;
+    border-color: #27c24c;
+    color:white;
+    position: relative;
 }
 
 .main-transaction .search { 
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-        padding: 6px 25px !important;
+    padding: 6px 25px !important;
 }
 #add-button{
-	border-radius: 100%;
-	border: none;
-	background-color: #b9e563;
-	width: 40px;
-	height: 40px; 
-	color: white;
-	font-size: 20px;
+    border-radius: 100%;
+    border: none;
+    background-color: #b9e563;
+    width: 40px;
+    height: 40px; 
+    color: white;
+    font-size: 20px;
 }
 #add-button:hover{
-	background-color: #CAEF84;
-	color:#A5C16E;
+    background-color: #CAEF84;
+    color:#A5C16E;
 }
 #update-link{
-	float:right;
-	color: white;
-	font-size: 20px;
+    float:right;
+    color: white;
+    font-size: 20px;
 }
 #delete-link{
-	    color: #27c24c;
+    color: #27c24c;
     font-size: 18px;
     top: 1px;
 }
@@ -94,8 +94,8 @@ body{
     margin-left: 15px;
 }
 .modal-header{
-	background-color: #65E563;
-	color:white;
+    background-color: #65E563;
+    color:white;
 }
 /*button default*/
 .btn-default {
@@ -111,8 +111,8 @@ body{
 }
 
 .table > tbody > tr > td {
-        padding: 5px 8px 0px 8px !important;
-        text-align: center;
+    padding: 5px 8px 0px 8px !important;
+    text-align: center;
 }
 
 .offset-table-right {
@@ -120,12 +120,12 @@ body{
 }
 
 .page-header {
-        border-bottom: none;
+    border-bottom: none;
 }
 
 #addModal label {
     text-align: left !important;
-        padding-bottom: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 #button > a {
@@ -146,7 +146,7 @@ body{
 
 select {
     height: 34px;
-     border: 1px solid #3BC75C;
+    border: 1px solid #3BC75C;
 }
 
 .main-transaction .page {
@@ -158,8 +158,8 @@ select {
 }
 
 .main-transaction #deleteAll {
-        right: -2%;
-        float: none;
+    right: -2%;
+    float: none;
 } 
 
 .main-transaction #search-year-transaction {
@@ -167,10 +167,10 @@ select {
     position: relative;
     width: 10%;
     padding-left: 10px; 
-        border-radius: 0;
+    border-radius: 0;
     background-color: white;
-     border: 1px solid #3BC75C !important;
-     height: 34px;
+    border: 1px solid #3BC75C !important;
+    height: 34px;
 }
 
 .sidebar .nav > li:active,
@@ -180,9 +180,9 @@ select {
 
 #add-admin,
 #add-addmin {
-        position: relative;
+    position: relative;
     top: -11px;
-        padding-left: 5px;
+    padding-left: 5px;
     padding-right: 20px;
 }
 
@@ -219,8 +219,8 @@ select {
 /*search transfer*/ 
 
 #search-wallet-receive {
-       position: relative;
-        float: left;
+    position: relative;
+    float: left;
     width: 17%;
     border-radius: 0;
     top: 0;
@@ -231,7 +231,7 @@ select {
     /*left: 38.5%;*/
     float: left;
     width: 16%;
-        border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
 
@@ -245,7 +245,7 @@ h1 >a:hover {
 }
 
 #button-search-report {
-        position: relative;
+    position: relative;
     bottom: 99px !important;
     background: rgb(39, 194, 76);
     left: 42% !important;
@@ -256,7 +256,7 @@ h1 >a:hover {
 }
 
 #add-transaction-date select {
-        width: 32%;
+    width: 32%;
     float: left;
     min-width: 20% !important;
     margin-right: 11px;
@@ -273,7 +273,7 @@ select#WalletNameYear {
 }
 
 #total-money-current {
-        position: relative;
+    position: relative;
     bottom: 67px;
     left: 30%;
     width: 50%;
@@ -289,7 +289,7 @@ select#WalletNameYear {
 .delete-link-wallet {
     color: white !important; 
     float: right; 
-        padding-left: 15px;
+    padding-left: 15px;
     margin-top: 6px;
 }
 
@@ -305,7 +305,7 @@ select#WalletNameYear {
 }
 
 .page-header >a {
-        margin-left: 24px;
+    margin-left: 24px;
 }
 
 #content-message {
@@ -313,12 +313,160 @@ select#WalletNameYear {
     color: #C5BBBB;
     width: 50%;
     text-align: center;
-        margin-left: 29%;
+    margin-left: 29%;
 }
 
 .body-report-month {
     margin: auto;
     width: 83.2% ;
-    border: 1px solid #27C24C;
+    /*border: 1px solid #27C24C;*/
     margin-bottom: 3%;
+}
+
+/*popu*/ 
+
+.arrow_box {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid red;
+    padding: 5px;
+}
+.arrow_box:after, .arrow_box:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.arrow_box:after {
+    border-bottom-color: #BF0808;
+    border-width: 11px;
+    /* border: 4px solid; */
+    left: 18%;
+}
+.arrow_box:before {
+    border-color: rgba(194, 225, 245, 0);
+    /*border-bottom-color: #c2e1f5;*/
+    border-width: 36px;
+    margin-left: -36px;
+}
+
+#confirmMessageChangPass {
+    position: relative;
+    color: rgb(102, 204, 102);
+    padding-left: 13px;
+    top: -8px;
+}
+
+#MessageChangOldPass {
+    float: left; 
+    right: 97%; 
+    margin-bottom: 8px;
+    margin-top: -10px;
+    width: 100%;
+    margin-left: 16px;
+    color: red;
+}
+
+#confirmMessageUploadAva {
+    position: relative;
+    right: 38%;
+    top: 21px;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    background-color: white;
+    padding-bottom: 6px;
+    border: 1px solid #BDBABA;
+    float:left;
+}
+
+.fileUpload .fa-camera {
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    /*float: left;*/
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+#note-upload-ava {
+    float: left;
+}
+
+#load-avatar-upload {
+    margin: 10px;
+    /*float: left;*/
+}
+
+.forgot-password {
+    margin-bottom: 8px;
+}
+
+#btn-forgot-password {
+    background-color: #27c24c;
+    border-color: #27c24c;
+    line-height: 35px;
+    color: white;
+    position: relative;
+    height: auto;
+}
+
+#btn-colse-forgot-password {
+    height: auto;
+    line-height: 33px;
+    border: 1px solid #65E563;
+    background-color: white;
+    color: black;
+}
+
+#btn-colse-forgot-password:hover {
+    background-color: rgba(128, 128, 128, 0.24);
+    color: rgb(0, 0, 0);
+}
+
+#forgot-pass-email {
+    font-size: 16px;
+    height: 40px ;
+}
+
+.iconcheck-username-forgotPass {
+    position: relative;
+    right: 49%; 
+    top: 5px; 
+    font-size: 20px;
+    color: red;
+}
+
+.iconcheck-email-forgot {
+    position: relative;
+    right: 55%;
+    top: 3px;
+    font-size: 20px;
+    color: red;
+}
+
+#id-a-forgotPass:hover {
+    text-decoration: underline;
+}
+
+#active-cate:active {
+    background-color: #191D21 !important;
 }

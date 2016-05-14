@@ -27,16 +27,17 @@
         <?php if(empty($months)){
             echo "<p style= 'color: red; text-align: center; margin-top: 5%;'>You need create wallet and add transaction!</p> ";
             }  else {?>
-         <div class="col-lg-10 col-lg-offset-1 row-10-report">
+         
 <?php foreach ($months as $key => $month) { ?>
+        <div class="col-lg-10 col-lg-offset-1 row-10-report" >
                 <div class="panel-heading" >
                     <i class="fa fa-bar-chart-o fa-fw" ></i> 
                     <span class="title-month" >
     <?php echo h($month); ?>
                     </span> 
                 </div>
-        </div>
-        <div class="panel-body body-report-month"  >
+        
+                <div class="panel-body body-report-month"  >
                     <div class="col-md-6" style="text-align: center;" >
                         <h3>Incom-Expense</h3>
                         <canvas id="<?php echo h($month); ?>" width="400" height="266.666" 
@@ -48,9 +49,11 @@
                                 style="margin-left:14%;    margin-top: 11px;"></canvas>
                     </div>
                 </div>
+            </div>
     <?php } }?>
             <!-- /.panel-body -->
-        </div>
+        
+    </div>
 </div>
   
 <script type="text/javascript">

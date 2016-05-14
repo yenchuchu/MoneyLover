@@ -39,8 +39,6 @@ class TransactionsController extends AppController {
 
         $result_wallet_id = Set::classicExtract($findWallet, '{n}.wallets.id');
         
-//        debug($this->Transaction->findCategoryDeleted($result_wallet_id));die;
-        
         $categorieId = $this->request->query('categorie_id');
         $walletId = $this->request->query('wallet_id');
         $money = $this->request->query('money');
@@ -91,6 +89,77 @@ class TransactionsController extends AppController {
         $this->set('countTransaction', $countTransaction);
         $this->set(compact('categoriesIncome', 'categoriesExpense', 'categories', 'wallets'));
     }
+    
+//    public function search() {
+//        
+//        $this->request->allowMethod('post');
+//        
+//        $conditions = array();
+//        
+//        $cate = $this->request->data['searchCate'];
+//        $wallet = $this->request->data['searchWallet'];
+//        $money = $this->request->data['searchMoney'];
+//        $day = $this->request->data['searchDay'];
+//        $month = $this->request->data['searchMonth'];
+//        $year = $this->request->data['searchYear'];
+//        
+//        
+//        if(!empty($cate)) {
+//            $conditions['categorie_id'] = $cate ;
+//        }
+//          
+//        if(!empty($wallet)) {
+//            $conditions['wallet_id'] = $wallet ;
+//        }
+//        
+//       if (!empty($money)) {
+//                $conditions[] = 'transaction_money <=' . $money;
+//        }
+//
+//        if (!empty($day)) {
+//            $conditions['day(day_transaction)'] = $day;
+//        }
+//
+//        if (!empty($month)) {
+//            $conditions['month(day_transaction)'] = $month;
+//        }
+//
+//        if (!empty($year)) {
+//            $conditions['year(day_transaction)'] = $year;
+//        }
+//         
+//        $searchs = $this->Transaction->find('all', array('conditions' => $conditions ));
+//        
+//        $searchJsonArrays = array();
+//        if(!empty($searchs)) {
+//            foreach ($searchs as $search) { 
+//
+//                $nameCategory = $this->Transaction->findIdCategory($search['Transaction']['categorie_id']);
+//                $nameWallet = $this->Transaction->findIdWalletAuth($search['Transaction']['wallet_id']);
+//                 
+//                $searchJsonArrays[] = ['status' => 0, 'message' => 'OK', 
+//                    'id' => $search['Transaction']['id'],
+////                    'categorie_id' => $nameCategory[$search['Transaction']['categorie_id']],
+//                    'wallet_id' => $nameWallet[$search['Transaction']['wallet_id']],
+//                    'transaction_money' => $search['Transaction']['transaction_money'],
+//                    'day_transaction' => $search['Transaction']['day_transaction'],
+//                    'transaction_description' => $search['Transaction']['transaction_description'],
+//                    'created' => $search['Transaction']['created'],
+//                    'modified' => $search['Transaction']['modified']
+//                    ];
+//                
+//            }
+//            debug($searchJsonArrays);
+//            echo json_encode($searchJsonArrays);
+//            exit;
+//        } else {
+//           $searchJsonArrays[] = ['status' => 1, 'message' => 'No Category'];
+//            echo json_encode($searchJsonArrays);
+//            exit;
+//        }
+//        die;
+//    }
+
     
     public function view($id) {
         $this->loadModel('User');
