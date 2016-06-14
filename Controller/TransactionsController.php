@@ -31,6 +31,7 @@ class TransactionsController extends AppController {
      */
     public function index() {
         $this->loadModel('User');
+        $this->loadModel('Wallet');
 
         $this->Transaction->recursive = 0;
 
@@ -80,6 +81,12 @@ class TransactionsController extends AppController {
         
         $countTransaction = count($this->Transaction->find('all',array('conditions'=>$conditions)));
         
+        $countWallets = $this->Wallet->countWallets($id_auth);
+        if($countWallets[0][0]['count(*)'] < 1) {
+            $this->Flash->error(__('you must add wallet before add transaction!'));
+            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
+        } 
+        
         $categoriesIncome = $this->Transaction->getAllCategoriesIncome();
         $categoriesExpense = $this->Transaction->getAllCategoriesExpense();
         $categories = $this->Transaction->findListCategory();
@@ -88,104 +95,8 @@ class TransactionsController extends AppController {
         $this->set('transactions', $this->Paginator->paginate());
         $this->set('countTransaction', $countTransaction);
         $this->set(compact('categoriesIncome', 'categoriesExpense', 'categories', 'wallets'));
-    }
+    } 
     
-//    public function search() {
-//        
-//        $this->request->allowMethod('post');
-//        
-//        $conditions = array();
-//        
-//        $cate = $this->request->data['searchCate'];
-//        $wallet = $this->request->data['searchWallet'];
-//        $money = $this->request->data['searchMoney'];
-//        $day = $this->request->data['searchDay'];
-//        $month = $this->request->data['searchMonth'];
-//        $year = $this->request->data['searchYear'];
-//        
-//        
-//        if(!empty($cate)) {
-//            $conditions['categorie_id'] = $cate ;
-//        }
-//          
-//        if(!empty($wallet)) {
-//            $conditions['wallet_id'] = $wallet ;
-//        }
-//        
-//       if (!empty($money)) {
-//                $conditions[] = 'transaction_money <=' . $money;
-//        }
-//
-//        if (!empty($day)) {
-//            $conditions['day(day_transaction)'] = $day;
-//        }
-//
-//        if (!empty($month)) {
-//            $conditions['month(day_transaction)'] = $month;
-//        }
-//
-//        if (!empty($year)) {
-//            $conditions['year(day_transaction)'] = $year;
-//        }
-//         
-//        $searchs = $this->Transaction->find('all', array('conditions' => $conditions ));
-//        
-//        $searchJsonArrays = array();
-//        if(!empty($searchs)) {
-//            foreach ($searchs as $search) { 
-//
-//                $nameCategory = $this->Transaction->findIdCategory($search['Transaction']['categorie_id']);
-//                $nameWallet = $this->Transaction->findIdWalletAuth($search['Transaction']['wallet_id']);
-//                 
-//                $searchJsonArrays[] = ['status' => 0, 'message' => 'OK', 
-//                    'id' => $search['Transaction']['id'],
-////                    'categorie_id' => $nameCategory[$search['Transaction']['categorie_id']],
-//                    'wallet_id' => $nameWallet[$search['Transaction']['wallet_id']],
-//                    'transaction_money' => $search['Transaction']['transaction_money'],
-//                    'day_transaction' => $search['Transaction']['day_transaction'],
-//                    'transaction_description' => $search['Transaction']['transaction_description'],
-//                    'created' => $search['Transaction']['created'],
-//                    'modified' => $search['Transaction']['modified']
-//                    ];
-//                
-//            }
-//            debug($searchJsonArrays);
-//            echo json_encode($searchJsonArrays);
-//            exit;
-//        } else {
-//           $searchJsonArrays[] = ['status' => 1, 'message' => 'No Category'];
-//            echo json_encode($searchJsonArrays);
-//            exit;
-//        }
-//        die;
-//    }
-
-    
-    public function view($id) {
-        $this->loadModel('User');
-    
-        if (!$id) {
-            throw new NotFoundException(__('Invalid employee'));
-        }
-        $transaction = $this->Transaction->getTransactionById($id);
-        if (!$transaction) {
-            throw new NotFoundException(__('Invalid employee'));
-        }
-        
-
-        $id_auth = $this->Auth->user('id');
-        $findWallet = $this->User->findWalletAuth($id_auth);
-
-        $result_wallet_id = Set::classicExtract($findWallet, '{n}.wallets.id');
-        $categoriesIncome = $this->Transaction->getAllCategoriesIncome();
-        $categoriesExpense = $this->Transaction->getAllCategoriesExpense();
-        $categorie = $this->Transaction->findListCategory();
-        debug($categorie);
-//        debug($transaction);die;
-        $this->set('transaction', $transaction);
-        $this->set(compact('categoriesIncome', 'categoriesExpense', 'categorie', 'wallets'));
-    }
-
     /**
      * add method
      *
@@ -203,17 +114,8 @@ class TransactionsController extends AppController {
             }
             $typeCategory = $this->Transaction->getTypeCategory($this->data['Transaction']['categorie_id']);
             $return_transaction = $this->Transaction->getWalletById($this->data['Transaction']['wallet_id']);
-//           debug($this->data['Transaction']['transaction_money']);
-//            debug($return_transaction); 
             
-//            $condition =  1 ;//- du dieu kien. 
-//            if ($typeCategory[$this->data['Transaction']['categorie_id']] == true) {
-//                if($return_transaction[0]['Wallet']['money_current'] < $this->data['Transaction']['transaction_money']) {
-//                    $condition = 0;
-//                } 
-//            }  
-//            if($condition == 1) {
-                if ($this->Transaction->save($data)) {
+            if ($this->Transaction->save($data)) {
                 if ($typeCategory[$this->data['Transaction']['categorie_id']] == false) { // category - thu 
                     $return_transaction[0]['Wallet']['money_current'] += $this->data['Transaction']['transaction_money'];
                 } else {
@@ -224,14 +126,9 @@ class TransactionsController extends AppController {
                     'Wallet.id' => $this->data['Transaction']['wallet_id']));
                 $this->Flash->success(__('The transaction has been saved.'));
                 return $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
-                }
-//            } else {
-//                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
-//                return $this->redirect(array('action' => 'index'));
-//            }
-            
+            } else {
+                $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
+            } 
         }
         $categories = $this->Transaction->findListCategory();
         $wallets = $this->Transaction->findListWallet();
@@ -281,7 +178,7 @@ class TransactionsController extends AppController {
                 $this->Wallet->updateAll(array(
                     'Wallet.money_current' => $return_transaction[0]['Wallet']['money_current']), array(
                     'Wallet.id' => $this->data['Transaction']['wallet_id']));
-
+                $this->Flash->success(__('The transaction has been Updated.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The transaction could not be saved. Please, try again.'));
@@ -325,6 +222,7 @@ class TransactionsController extends AppController {
             $this->Wallet->updateAll(array(
                 'Wallet.money_current' => $wallet[0]['Wallet']['money_current']), array(
                 'Wallet.id' => $transactionDelete[0]['transactions']['wallet_id']));
+            $this->Flash->success(__('The transaction has been deleted.'));
         } else {
             $this->Flash->error(__('The transaction could not be deleted. Please, try again.'));
         }

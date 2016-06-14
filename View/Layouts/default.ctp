@@ -32,8 +32,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->script('common');
 		echo $this->Html->script('grayscale');
 		echo $this->Html->script('Chart.min'); 
-              echo $this->Html->script('md5.min'); 
-              echo $this->Html->script('md5'); 
+//              echo $this->Html->script('md5.min'); 
+//              echo $this->Html->script('md5'); 
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -66,7 +66,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
           if(contentMessage.length == 0 ) {
               return false;
           } else {
-              $("#wrap-message").fadeIn(1000).delay(1700).fadeOut(500) ;
+              $("#wrap-message").fadeIn(1000).delay(2000).fadeOut(500) ;
           } 
         });
         

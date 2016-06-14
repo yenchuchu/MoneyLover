@@ -151,7 +151,7 @@
                 <th><?php echo $this->Paginator->sort('transfer_money'); ?></th>
                 <th><?php echo $this->Paginator->sort('created'); ?></th>
                 <th><?php echo $this->Paginator->sort('modified'); ?></th>
-                <th class="actions" style="color:#337ab7;"><?php echo h('Actions'); ?></th> 
+                <th class="actions" style="color:#04b173;"><?php echo h('Actions'); ?></th> 
                   
                 <?php foreach ($transferWallets as $transferWallet): ?>
                     <tr> 
@@ -201,7 +201,7 @@
             <!-- phan trang -->
 
             <?php if (empty($transferWallets)) { ?>
-                <p style=" color: red;margin-top: 8%; text-align: center;"> No transfer Wallets. First, you must add wallet!</p>
+                <p style=" color: red;margin-top: 8%; text-align: center;"> No transfer.</p>
                 <?php
             } else {
                 ?>

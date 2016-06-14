@@ -18,7 +18,7 @@
                     <th><?php echo $this->Paginator->sort('username'); ?></th>
                     <th><?php echo $this->Paginator->sort('email'); ?></th>
                     <th><?php echo $this->Paginator->sort('created'); ?></th>
-                    <th style="color:#337ab7;"><?php echo h('Destroy'); ?></th>
+                    <th style="color:#04b173;"><?php echo h('Destroy'); ?></th>
                     <th><?php echo $this->Paginator->sort('role'); ?></th>
                 </tr>
                 <?php foreach ($users as $user): ?>

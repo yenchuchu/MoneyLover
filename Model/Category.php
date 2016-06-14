@@ -59,5 +59,10 @@ class Category extends AppModel {
     public function isOwnedBy($post, $user) {
         return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
+    
+    public function countCategory(){
+        $categories = $this->query(" select count(*) from categories  ");
+        return $categories;
+    }
 
 }

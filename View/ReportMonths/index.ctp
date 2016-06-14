@@ -25,13 +25,13 @@
     
     <div class="row" > 
         <?php if(empty($months)){
-            echo "<p style= 'color: red; text-align: center; margin-top: 5%;'>You need create wallet and add transaction!</p> ";
+            echo "<p style= 'color: red; text-align: center; margin-top: 5%;'>No report!</p> ";
             }  else {?>
          
 <?php foreach ($months as $key => $month) { ?>
         <div class="col-lg-10 col-lg-offset-1 row-10-report" >
                 <div class="panel-heading" >
-                    <i class="fa fa-bar-chart-o fa-fw" ></i> 
+                    <i class="fa fa-bar-chart-o" ></i> 
                     <span class="title-month" >
     <?php echo h($month); ?>
                     </span> 

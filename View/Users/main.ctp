@@ -111,31 +111,27 @@
                                 <form role="form" method="post"  class=" form registration-form">
                                     <fieldset>
                                         <div class="form-group" > 
-<?php
-echo $this->Form->input('User.username', array('class' => 'form-control',
-    'label' => false,
-    'placeholder' => 'enter username',
-    'style' => 'color: black'));
-?>
+                                            <?php
+                                            echo $this->Form->input('User.username', array('class' => 'form-control',
+                                                'label' => false,
+                                                'placeholder' => 'enter username',
+                                                'style' => 'color: black'));
+                                            ?>
                                         </div>
                                         <div class="form-group" > 
-<?php
-echo $this->Form->input('User.password', array('class' => 'form-control',
-    'label' => false,
-    'placeholder' => 'enter password',
-    'style' => 'font-size: 16px;color: black'));
-?>
+                                            <?php
+                                            echo $this->Form->input('User.password', array('class' => 'form-control',
+                                                'label' => false,
+                                                'placeholder' => 'enter password',
+                                                'type' => 'password',
+                                                'style' => 'font-size: 16px;color: black'));
+                                            ?>
                                         </div>
                                         <div class="forgot-password">
                                             <a href="#" data-toggle="modal" data-target="#forgotPassword"
                                                style="color:#0DCC15" id="id-a-forgotPass">ForGot Password</a>
 
                                         </div>
-                                        <!--                                        <div class="checkbox" >
-                                                                                    <label>
-                                                                                        <input name="User.remember" type="checkbox" value="Remember Me" >Remember Me
-                                                                                    </label>
-                                                                                </div>-->
                                         <!-- Change this to a button or input when using this as a form -->
                                         <button type="submit" class="btn button-sign-in"  name="signin" id="sign-in" value="Sign-in">Sign in </button>
 
@@ -176,14 +172,14 @@ echo $this->Form->input('User.password', array('class' => 'form-control',
                         <span class="iconcheck-username-forgotPass" id="iconRequired"> *  </span>
                         <!--</div>-->
                         <div class="col-sm-12">
-<?php
-echo $this->Form->input('username', array('label' => false,
-    'id' => 'forgot-pass-username',
-    'class' => 'form-control',
-    'placeholder' => 'enter username',
-    'name' => 'data[User][username]', 'required'
-));
-?>  
+                            <?php
+                            echo $this->Form->input('username', array('label' => false,
+                                'id' => 'forgot-pass-username',
+                                'class' => 'form-control',
+                                'placeholder' => 'enter username',
+                                'name' => 'data[User][username]', 'required'
+                            ));
+                            ?>  
                         </div> 
                         <span id="message-reset-pass"></span>
                     </div> 
@@ -221,17 +217,7 @@ echo $this->Form->input('username', array('label' => false,
                 </form>
             </div>
         </div>
-    </div>
-    <script>
-//            $('#btn-forgot-password').click(function(){
-//            alert('fdfdsf');
-//            var checkEmailForm = $('#forgot-pass-email').val();
-//            console.log(checkEmailForm);
-//                checkEmail('<?php //echo Router::Url(array('controller' => 'users', 'action' => 'forgotPassword')); ?>',
-//                        checkEmailForm);
-//        });
-
-    </script>
+    </div> 
 
 </div>
 <?= $this->Html->script('jquery.backstretch.min') ?>

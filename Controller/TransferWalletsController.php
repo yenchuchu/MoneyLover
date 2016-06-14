@@ -77,6 +77,12 @@ class TransferWalletsController extends AppController {
         }
         
         $countTransfer = count($this->TransferWallet->find('all',array('conditions'=>$conditions)));
+        
+        $countWallets = $this->Wallet->countWallets($id_auth);
+        if($countWallets[0][0]['count(*)'] < 2) {
+            $this->Flash->error(__('you must have two wallets before add transfer!'));
+            $this->redirect(array('controller' => 'wallets', 'action' => 'index'));
+        }
  
         $this->paginate = array(
             'conditions' => $conditions,
@@ -132,11 +138,7 @@ class TransferWalletsController extends AppController {
                 return $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Flash->error(__('The transfer wallet could not be saved. Please, try again.'));
-                }
-//            } else {
-//                $this->Flash->error(__('money of wallet dont enought to complete transfer'));
-//                return $this->redirect(array('action' => 'index'));
-//            }
+                } 
         }
         $sentWallets = $this->TransferWallet->findListWalletSent();
         $receiveWallets = $this->TransferWallet->findListWalletReceive();
@@ -211,7 +213,7 @@ class TransferWalletsController extends AppController {
                 $this->Wallet->updateAll(array(
                     'Wallet.money_current' => $walletRecieveEdit[0]['Wallet']['money_current']), array(
                     'Wallet.id' => $idWalletRecieveEdit));
-
+                $this->Flash->success(__('The transfer has been Updated.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The transfer wallet could not be saved. Please, try again.'));
@@ -267,6 +269,7 @@ class TransferWalletsController extends AppController {
             $this->Wallet->updateAll(array(
                 'Wallet.money_current' => $walletRecieve['money_current']), array(
                 'Wallet.id' => $idWalletRecieve));
+            $this->Flash->success(__('The transfer wallet has been deleted.'));
         } else {
             $this->Flash->error(__('The transfer wallet could not be deleted. Please, try again.'));
         }

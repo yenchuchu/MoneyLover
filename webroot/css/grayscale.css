@@ -9,7 +9,7 @@ body {
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
-    background-color: #EDF9F4 !important;
+    /*background-color: #EDF9F4 !important;*/
 }
 
 html {
@@ -973,13 +973,13 @@ footer {
 }
 
 .login-panel > .panel-body {
-    border: 1px solid #841717;
+    border: 1px solid #04b173;
     border-top: none;
     margin-top: -1px;
 }
 
 .panel-heading {
-    background-color: rgb(39, 194, 76)  !important;
+    background-color: #04b173 !important;
     color: white;
 }
 
@@ -2179,7 +2179,7 @@ footer {
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
     padding: 4px 25px !important;
-    background-color: rgb(39, 194, 76);
+    background-color:  #04b173;
 }
 
 #search-money-transfer {
@@ -2338,8 +2338,20 @@ select#TransactionCategorieId {
 }
 
 .row-10-report {
-    border: 1px solid #27C24C;
+    border: 1px solid #04b173;
     border-top-left-radius: 5px;
     padding: 0 !important;
     border-top-right-radius: 5px;
+}
+
+.fa-fw, .fa-fw:hover {
+    font-size: 18px !important;
+    position: absolute;
+    top: 13px;
+    color: white;
+    padding-left: 22px;
+} 
+
+li#account-dash>a:hover {
+    background-color: transparent;
 }

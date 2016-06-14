@@ -430,8 +430,17 @@ class Transaction extends AppModel {
         $wallet = $transaction[0]['Wallet'];
         return $wallet;
     }
-    
-     public function isOwnedBy($post, $user) {
+     
+    public function countTransaction($walletAuth) {
+        $transaction = $this->find('all', array(
+                        'fields'=>'count(*)',
+                        'conditions' => array(
+                                'Transaction.wallet_id' => $walletAuth)));
+        
+        return $transaction[0][0]['count(*)'];
+    }
+
+    public function isOwnedBy($post, $user) {
         return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 }

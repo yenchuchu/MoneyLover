@@ -145,7 +145,7 @@
                     <th style="width: 20%;"><?php echo $this->Paginator->sort('transaction_money'); ?></th>
                     <th><?php echo $this->Paginator->sort('day_transaction'); ?></th> 
                     <th><?php echo $this->Paginator->sort('modified'); ?></th>
-                    <th class="actions" style="color:#337ab7;"><?php echo h('Actions'); ?></th> 
+                    <th class="actions" style="color:#04b173;"><?php echo h('Actions'); ?></th> 
 
                 </tr>
                 <?php foreach ($transactions as $transaction): ?>  
@@ -204,7 +204,7 @@
 
             </table>
             <?php if (empty($transactions)) { ?>
-                <p style=" color:red;margin-top: 8%;text-align: center;"> No Transaction.  First, you must add wallet!</p>
+                <p style=" color:red;margin-top: 8%;text-align: center;"> No Transaction.</p>
                 <?php
             } else {
                 ?>

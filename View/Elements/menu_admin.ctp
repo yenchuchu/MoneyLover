@@ -1,18 +1,13 @@
 <nav class="navbar  navbar-fixed-top" id="navbar1">
     <div class="container-fluid">
         <div class="navbar-header banner-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'users', 'action' => 'index'), array('class' => 'navbar-brand', 'style' => '    font-size: 19px;'));
+             
+            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'users', 'action' => 'dashboard_admin'), array('class' => 'navbar-brand', 'style' => '    font-size: 19px;'));
             ?> 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li class="dropdown" id="account-dash">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-top: 15px;
                        padding-bottom: 5px;">
 
@@ -150,7 +145,7 @@
                            for="changeOldPass" >OLD PASSWORD</label> 
                     <div id="iconcheck">
                         <span style=" position: relative;
-                              right: 9%;
+                              right: 11%;
                               font-size: 20px;
                               color: red;" id="iconRequired"> *  </span>
                         <i class="fa fa-check" 
@@ -180,7 +175,7 @@
                            for="change-new-pass" >NEW PASSWORD</label>
 
                     <span style=" position: relative;
-                          left: -4px;
+                          left: -13px;
                           font-size: 20px;
                           color: red"> *  </span>
 
@@ -199,7 +194,7 @@
                     <label class="col-sm-4 control-label"  style="margin-bottom: 2%;"
                            for="change-conf-pass" >CONFIRM PASSWORD</label>
                     <span style="position: relative;
-                          left: -18px; 
+                          left: -29px; 
                           font-size: 20px;
                           color: red"> *  </span>
                     <div class="col-sm-12" style="margin-bottom: 3%;">

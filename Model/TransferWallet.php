@@ -102,7 +102,6 @@ class TransferWallet extends AppModel {
     
      public function findListWalletSent() {
         $listWalletSent =  $this->SentWallet->find('list');
-//                , array( 'conditions'=>array( 'Wallet.id' => $authId)) );
         return $listWalletSent;
     }
     
@@ -150,9 +149,16 @@ class TransferWallet extends AppModel {
     public function getTransferWalletById($transferWalletId) {
          $return_transfer = $this->query(" select * from transfer_wallets where id = $transferWalletId");
          return $return_transfer;
-    } 
+    }  
     
-     public function isOwnedBy($post, $user) {
+    public function countTransfer($walletId) { 
+        $wallet = implode(",",$walletId);
+        $result = $this->query("SELECT count(*) FROM `cakephp_MoneyLover`.`transfer_wallets` AS `TransferWallet` WHERE `sent_wallet_id` IN ( $wallet )");
+        
+        return $result[0][0]['count(*)'];
+    }
+
+        public function isOwnedBy($post, $user) {
         return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 }

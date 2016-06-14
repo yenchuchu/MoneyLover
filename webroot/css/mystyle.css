@@ -2,15 +2,13 @@ body{
     background-color: #edf1f2;
 }
 #navbar1{
-    background-color: #27c24c;
+    background-color: rgb(83, 163, 163);
     border-color:#27c24c;
+        min-height: 60px !important;
 }
 #navbar1 a{
     color:white;
-}
-#navbar1 a:hover{
-    background-color: rgba(35, 175, 69, 0.73);
-}
+} 
 
 .banner-header:hover {
     background-color: rgba(35, 175, 69, 0.73);
@@ -19,7 +17,7 @@ body{
 
 .banner-header:hover {
     width: 17%;
-    height: 50px;
+    height: 60px;
     margin-left: -15px;
     padding-left: 16px;
 }  
@@ -33,11 +31,13 @@ body{
     margin-right: 30px;
     margin-left: 50px;
     margin-bottom: 50px;
-    color: #27c24c;
+    color: #04B173;
+    /*color: #27c24c;*/
     /*width: 60%;*/
 }
 #card-header{
-    background-color: #27c24c;
+    /*background-color: #27c24c;*/
+    background-color: #04B173;
     font-weight: bold;
     color:white;
     font-size: 20px;
@@ -47,7 +47,7 @@ body{
 }
 
 #button{ 
-    background-color: #27c24c;
+    background-color: #04b173;
     border-color: #27c24c;
     color:white;
     position: relative;
@@ -61,15 +61,15 @@ body{
 #add-button{
     border-radius: 100%;
     border: none;
-    background-color: #b9e563;
+    background-color: #04b173;
     width: 40px;
     height: 40px; 
     color: white;
     font-size: 20px;
 }
 #add-button:hover{
-    background-color: #CAEF84;
-    color:#A5C16E;
+    background-color: rgba(39, 160, 68, 0.99);
+    color: white !important;
 }
 #update-link{
     float:right;
@@ -236,23 +236,29 @@ select {
 }
 
 h1 >a {
-    color: #27c24c;
+    /*color: #27c24c;*/
+    color: #04B173;
 }
 
 h1 >a:hover {
     text-decoration: none;
-    color: rgba(39, 194, 76, 0.69) !important;
+    color: rgb(38, 159, 68) !important;
 }
 
 #button-search-report {
     position: relative;
     bottom: 99px !important;
-    background: rgb(39, 194, 76);
+    background: #04b173;
     left: 42% !important;
     height: 34px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     color: white;
+    padding: 6px 25px !important;
+}
+
+#button-search-report:hover {
+    background-color: rgba(39, 160, 68, 0.99);
 }
 
 #add-transaction-date select {
@@ -469,4 +475,74 @@ select#WalletNameYear {
 
 #active-cate:active {
     background-color: #191D21 !important;
+}
+
+.dashboard {
+    background-color: rgba(128, 128, 128, 0.08);
+    border: 1px solid rgba(128, 128, 128, 0.16);
+    border-radius: 5px;
+}
+
+.left-dashboard {
+        float: left;
+    font-size: 17px;
+    width: 20%;
+    /* border: 1px solid; */
+    margin: 19px 5px;
+    text-align: center;
+}
+
+.right-dashboard {
+    float: left; 
+}
+
+.right-dashboard > h2 {
+    margin-top: 10px;
+}
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders-board {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders-board h4 {
+  margin-bottom: 0;
+}
+.placeholders-board {
+  margin-bottom: 20px;
+}
+.placeholders-board img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+div.polaroid {
+  width: 200px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  margin: 5%;
+  margin-top: 2%; 
+
+}
+
+table a {
+    color: #04b173;
+}
+
+table a:hover {
+    color: rgba(39, 160, 68, 0.99);
+    text-decoration: none;
 }

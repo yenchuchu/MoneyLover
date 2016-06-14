@@ -5,11 +5,11 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-wallet">
     
     <h1 class="page-header"> 
-        <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Transactions', 'action' => 'index')); ?>
+        <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
             <a id="add-button" class="btn" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i></a>
     </h1>
     
-            <p id="total-money-current"> Total money current: <?php
+            <p id="total-money-current"> Total current money: <?php
 echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' => '.',
     'wholePosition' => 'after', 'places' => 0
 ));
@@ -18,7 +18,7 @@ echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' 
         <span style="text-align: center; color: red;">
             <?php
                 if (empty($wallets)) {
-                    echo "<p>No wallet. You should add wallet to make transaction or transfer wallet!</p>";
+                    echo "<p>No wallet.</p>";
                 }
                 ?> 
         </span>
@@ -48,18 +48,7 @@ echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' 
                                     echo h($wallet['Wallet']['info']);
                                 ?> <br> 
                             </i>
-                        </li>
-
-                        <li class="list-group-item"><b>Money_initialize: </b>
-                            <span style="color: black">
-                            <?php
-                            echo $this->Number->currency($wallet['Wallet']['money_initialize'], 
-                                    '', $options = array(
-                                        'thousands' => '.',
-                                        'wholePosition' => 'after', 
-                                        'places' => 0 ));
-                            ?></span> <span style="color: black"><b>VND</b></span>
-                        </li>
+                        </li> 
 
                         <li class="list-group-item"><b>Current money: </b>
                             <span style="color: black">
@@ -80,15 +69,20 @@ echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' 
                              }
                             
                             ?>    
-                            </span> <span style="color: black"><b>VND</b></span> 
-                            <?php 
-//                            echo $this->Number->formatDelta('-123456.7890', array(
-//                                'places' => 2,
-//                                'decimals' => '.',
-//                                'thousands' => ','
-//                            ));
-                            ?>
+                            </span> <span style="color: black"><b>VND</b></span>  
                         </li>
+                        
+                        <li class="list-group-item"><b>Money_initialize: </b>
+                            <span style="color: black">
+                            <?php
+                            echo $this->Number->currency($wallet['Wallet']['money_initialize'], 
+                                    '', $options = array(
+                                        'thousands' => '.',
+                                        'wholePosition' => 'after', 
+                                        'places' => 0 ));
+                            ?></span> <span style="color: black"><b>VND</b></span>
+                        </li>
+                        
                         <li class="list-group-item"><i> 
                                 <span class="time-create-wallet"><b> Create: </b>   &nbsp; 
                                     <span style="color: black">

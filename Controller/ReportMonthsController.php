@@ -39,11 +39,7 @@ class ReportMonthsController extends AppController {
         $year = $this->request->query('year_start');
 
         $wallets = $this->Transaction->findIdWalletAuth($result_wallet_id); 
-        
-//        if($this->Auth->user('role') === '0') {
-//            $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
-//        }
-            
+         
         if(!empty($wallets)){
             $categories = $this->Transaction->findIdCategory($result_categorie_id);
 
@@ -68,9 +64,6 @@ class ReportMonthsController extends AppController {
                     }
                     $i++;
                 }
-//                debug($result_wallet_id);
-//                debug( $this->Transaction->getReportFollowType($result_wallet_id));
-//                die;
                 $months = array_unique($outputMonthTransactions);
                 rsort($months);  
                 $this->set('months', $months);

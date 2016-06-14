@@ -165,7 +165,25 @@ class User extends AppModel {
         return $walletAuth;
     }
     
-     public function isOwnedBy($post) {
+    public function countUserActive(){
+        $userActives = $this->query(
+                " select count(*) from users where active = '1' ");
+        return $userActives;
+    }
+    
+    public function countUserRequest(){
+        $userRequests = $this->query(
+                " select count(*) from users where active = '0' ");
+        return $userRequests;
+    }
+    
+    public function countAdmin(){
+        $admin = $this->query(
+                " select count(*) from users where role = '1' ");
+        return $admin;
+    }
+
+    public function isOwnedBy($post) {
         return $this->field('id', array('id' => $post)) !== false;
     }
 }

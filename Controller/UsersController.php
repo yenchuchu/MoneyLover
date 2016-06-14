@@ -41,8 +41,6 @@ class UsersController extends AppController {
                 'limit' => 20
             );
 
-//            debug($this->Paginator->paginate());die;
-
             $countAccountActive = count($this->User->find('all', array('conditions' => array('User.active' => 1))));
 
             $this->User->recursive = 0;
@@ -157,7 +155,7 @@ class UsersController extends AppController {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-        }
+        } 
         return $this->redirect(array('action' => 'index'));
     }
 
@@ -247,23 +245,24 @@ class UsersController extends AppController {
                     $count = $this->User->find('first', array(
                         'conditions' => array('User.id' => AuthComponent::user('id'))
                     ));
-                    if ($count['User']['active'] == User::USER_REQUEST) {
-                        $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
-                            'User.id' => AuthComponent::user('id')));
-                    }
+                    
                     if ($count['User']['role'] == User::ROLE_USER) {
+                        if ($count['User']['active'] == User::USER_REQUEST) {
+                            $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
+                                'User.id' => AuthComponent::user('id')));
+                        }
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
+                        if ($count['User']['active'] == User::USER_REQUEST) {
+                            $this->User->updateAll(array('User.active' => User::USER_ACTIVE), array(
+                                'User.id' => AuthComponent::user('id')));
+                        }
                         return $this->redirect(array('controller' => 'users', 'action' => 'index'));
                     }
                 }
                 $this->Flash->error(__('Invalid username or password, try again'));
             }
         }
-    }
-
-    public function confirmEmail($value = '') {
-//        $this->set('showLayoutContent', true);
     }
 
     public function change_password($id = null) {
@@ -414,6 +413,23 @@ class UsersController extends AppController {
             }
         }
     }
+    
+    public function dashboard_admin() { 
+        $this->loadModel('Category');
+        
+        $categories = $this->Category->countCategory();
+        $userActives = $this->User->countUserActive();
+        $userRequests = $this->User->countUserRequest();
+        $admin = $this->User->countAdmin();
+
+        $this->set('userActive',$userActives[0][0]['count(*)']);
+        $this->set('userRequest',$userRequests[0][0]['count(*)']);
+        $this->set('categories',$categories[0][0]['count(*)']);
+        $this->set('admin',$admin[0][0]['count(*)']);
+
+    }
+    
+    
 
     public function isAuthorized($user) {
 
@@ -429,11 +445,16 @@ class UsersController extends AppController {
             case "index":
             case "delete":
             case "deleteAll":
+            case "dashboard_admin":
                 if ($user['role'] == '1' && $user['active'] == '1') {
                     return true;
                 }
                 break;
-
+            case "dashboard_user":
+                 if ($user['role'] == '0' && $user['active'] == '1') {
+                    return true;
+                }
+                break;
             case "UploadImage":
                 if ($user['active'] == '1') {
                     $postId = (int) $this->request->params['pass'][0];

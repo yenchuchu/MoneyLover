@@ -92,12 +92,26 @@ class Wallet extends AppModel {
         return $allWallets;
     }
     
+    public function getIdWallet($idAuth) {
+        $idWallets = $this->find('all', array(
+            'fields' => array('id'),
+            'conditions' => array('user_id' => $idAuth)));
+        
+        return $idWallets;
+    }
+    
     public function getMoneyCurrent($walletId) {
         $moneyCurrent = $this->query("select money_current from wallets where id = $walletId");
         return $moneyCurrent;
     }
     
-     public function isOwnedBy($post, $user) {
+    public function countWallets($idAuth) {
+        $wallets = $this->query("select count(*) from wallets where user_id = $idAuth");
+        return $wallets;
+    }
+
+
+    public function isOwnedBy($post, $user) {
         return $this->field('id', array('id' => $post, 'user' => $user)) !== false;
     }
 }
