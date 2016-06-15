@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'wallets', 'action' => 'dashboard_user'), array('id' => 'banner')); ?> 
+            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'wallets', 'action' => 'index'), array('id' => 'banner')); ?> 
           <!--<a class="navbar-brand" href="#">Project name</a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -327,6 +327,10 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           	<ul class="nav nav-sidebar">
+                     <li>
+<?php echo $this->Html->link(__('Dashboard'), array('controller' => 'wallets', 'action' => 'dashboard_user'));
+?>
+                        </li>
                     <li>
                         <?php echo $this->Html->link(__('My Wallets'), array('controller' => 'Wallets', 'action' => 'index')); ?>
                     </li>

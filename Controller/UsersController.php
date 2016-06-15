@@ -285,10 +285,14 @@ class UsersController extends AppController {
             if (!$this->User->validates()) {
                 $this->Flash->error(__('The password could not be saved'));
             } else {
+                // validate success
                 if ($this->User->save(['password' => $changable['new_password']])) {
                     $this->Session->write('Auth.User.password', $changable['new_password']);
                     $this->Flash->success(__('Change password success!'));
+                    
+                    // redirect to index of current page
                     $this->redirect(array('action' => 'index'));
+
                 } else {
                     $this->Flash->error(__('The password could not be saved'));
                 }
@@ -448,11 +452,15 @@ class UsersController extends AppController {
             case "dashboard_admin":
                 if ($user['role'] == '1' && $user['active'] == '1') {
                     return true;
+                } else {
+                    $this->redirect(array('action' => 'main'));
                 }
                 break;
             case "dashboard_user":
                  if ($user['role'] == '0' && $user['active'] == '1') {
                     return true;
+                } else {
+                    $this->redirect(array('action' => 'main'));
                 }
                 break;
             case "UploadImage":

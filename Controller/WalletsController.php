@@ -58,10 +58,11 @@ class WalletsController extends AppController {
             if($this->Auth->user('role') === '0') {
                 $this->request->data['Wallet']['user_id'] = $this->Auth->user('id');
             }
-            
+
             if ($this->Wallet->save($data)) {
                 $changable = $this->request->data['Wallet'];
                 $this->Wallet->save(['money_current' => $changable["money_initialize"]]);
+                $this->Flash->success(__('The wallet has been Saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('The wallet could not be saved. Please, try again.'));
@@ -127,18 +128,24 @@ class WalletsController extends AppController {
         
         $id_auth = $this->Auth->user('id');
         $wallet = $this->Wallet->getIdWallet($id_auth);
-        foreach ($wallet as $walletId) {
-            $walletAuth[] = $walletId['Wallet']['id'];
+        if(!empty($wallet)) {
+            foreach ($wallet as $walletId) {
+                $walletAuth[] = $walletId['Wallet']['id'];
+            }
         }
         
+        if(isset($walletAuth)) {
+            $transaction = $this->Transaction->countTransaction($walletAuth);
+            $transfer = $this->TransferWallet->countTransfer($walletAuth);
+        } else {
+            $transaction = 0;
+            $transfer = 0;
+        }
         $countWallet = $this->Wallet->countWallets($id_auth); 
-        $transaction = $this->Transaction->countTransaction($walletAuth);
-        
-        $transfer = $this->TransferWallet->countTransfer($walletAuth);
         
         $this->set('wallets', $countWallet[0][0]['count(*)']);
         $this->set('transactions', $transaction);
-        $this->set('transfers', count($transfer));
+        $this->set('transfers', $transfer);
     }
 
      public function isAuthorized($user) {

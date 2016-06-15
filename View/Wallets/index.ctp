@@ -183,7 +183,7 @@ echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' 
                           for="inputPassword3" >Money</label>
                     <div class="col-sm-12">
                         <input name="data[Wallet][money_initialize]" step="any" 
-                                type="number" class="form-control" 
+                                type="number" class="form-control add-money" 
                                 placeholder="Enter amount of money" id="inputPassword3" required="required">
                     </div>
                   </div>
@@ -204,14 +204,15 @@ echo $this->Number->currency($sumMoneyCurrent, '', $options = array('thousands' 
                         data-dismiss="modal">
                             Close
                 </button>
-                <button type="submit" class="btn btn-md"   id="button">
+                <button type="submit" class="btn btn-md add-wallet"   id="button">
                     Add a wallet
                 </button>
             </div>
              </form>
         </div>
     </div>
-</div>
+</div> 
+
 <!-- Edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">

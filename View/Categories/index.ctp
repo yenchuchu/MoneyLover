@@ -296,7 +296,7 @@
             ids.push($(this).val());
         });
         if (ids.length >= 1) {
-            console.log(ids);
+//            console.log(ids);
             deleteAll("categories/deleteAll", ids);
         } else {
             return false;

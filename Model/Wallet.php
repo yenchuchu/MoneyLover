@@ -40,7 +40,7 @@ class Wallet extends AppModel {
         'money_current' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
-            //'message' => 'Your custom message here',
+            'message' => 'Money must be larger than 0 and less than 4 294 967 000 VND!',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -105,7 +105,26 @@ class Wallet extends AppModel {
         return $moneyCurrent;
     }
     
-    public function countWallets($idAuth) {
+    public function checkValidate($name, $money ){
+        if(empty($name)) {
+            $messageName = "Name is not null!";
+            return $messageName;
+        }
+        
+        if(empty($money)) {
+            $messageMoney = "Money is not null";
+            return $messageMoney;
+        }
+        
+        if($money < 0 || $money >= 4294967000 ) {
+            $messageMoney = "Money must be larger than 0 and less than 4 294 967 000 VND!";
+            return $messageMoney;
+        }
+        
+        return true;
+    }
+
+        public function countWallets($idAuth) {
         $wallets = $this->query("select count(*) from wallets where user_id = $idAuth");
         return $wallets;
     }

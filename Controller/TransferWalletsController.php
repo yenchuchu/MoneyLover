@@ -33,6 +33,7 @@ class TransferWalletsController extends AppController {
 
         $result_wallet_selected = Set::classicExtract($findWallet, '{n}.wallets.id');
 
+        // search
         $sentWalletId = $this->request->query('sent_wallet_id');
         $recieveWalletId = $this->request->query('receive_wallet_id');
         $money = $this->request->query('transfer_money');
@@ -78,6 +79,7 @@ class TransferWalletsController extends AppController {
         
         $countTransfer = count($this->TransferWallet->find('all',array('conditions'=>$conditions)));
         
+        // check if wallet count >= 2
         $countWallets = $this->Wallet->countWallets($id_auth);
         if($countWallets[0][0]['count(*)'] < 2) {
             $this->Flash->error(__('you must have two wallets before add transfer!'));
@@ -125,7 +127,8 @@ class TransferWalletsController extends AppController {
                 if ($this->TransferWallet->save($this->request->data)) {
                 $walletSentEdit[0]['Wallet']['money_current'] -= $moneyEdit;
                 $walletRecieveEdit[0]['Wallet']['money_current'] += $moneyEdit;
-
+                
+                // update Wallet
                 $this->Wallet->updateAll(array(
                     'Wallet.money_current' => $walletSentEdit[0]['Wallet']['money_current']), array(
                     'Wallet.id' => $idWalletSentEdit));
@@ -213,6 +216,8 @@ class TransferWalletsController extends AppController {
                 $this->Wallet->updateAll(array(
                     'Wallet.money_current' => $walletRecieveEdit[0]['Wallet']['money_current']), array(
                     'Wallet.id' => $idWalletRecieveEdit));
+                
+                // if success, redirect to index current page
                 $this->Flash->success(__('The transfer has been Updated.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
@@ -262,6 +267,8 @@ class TransferWalletsController extends AppController {
 
         $this->request->allowMethod('post', 'delete');
         if ($this->TransferWallet->delete($id, false)) {
+            
+            // update wallet when delete transfer
             $this->Wallet->updateAll(array(
                 'Wallet.money_current' => $walletSent['money_current']), array(
                 'Wallet.id' => $idWalletSent));
@@ -300,6 +307,7 @@ class TransferWalletsController extends AppController {
             $walletSent['money_current'] += $moneyTransfer;
             $walletRecieve['money_current'] -= $moneyTransfer;
             
+            // update wallet when delete transfer
             $this->Wallet->updateAll(array(
                 'Wallet.money_current' => '"' . $walletSent['money_current'] . '"'), array(
                 'Wallet.id' => $idWalletSent));

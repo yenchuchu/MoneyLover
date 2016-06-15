@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header banner-header">
              
-            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'users', 'action' => 'dashboard_admin'), array('class' => 'navbar-brand', 'style' => '    font-size: 19px;'));
+            <?php echo $this->Html->link(__('Money Lover'), array('controller' => 'users', 'action' => 'index'), array('class' => 'navbar-brand', 'style' => '    font-size: 19px;'));
             ?> 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -335,10 +335,14 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar menu-left-admin" >
+                 <li>
+<?php echo $this->Html->link(__('Dashboard'), array('controller' => 'users', 'action' => 'dashboard_admin'));
+?>
+                        </li>
                 <li class="active-menu-sibar">
                     <a class=" dropdown-toggle page-scroll" data-toggle="dropdown">Accounts 
                         <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu"> 
                         <li>
 <?php echo $this->Html->link(__('account active'), array('controller' => 'users', 'action' => 'index', '?' => array('type' => 'active')));
 ?>
