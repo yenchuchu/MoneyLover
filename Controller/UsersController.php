@@ -452,15 +452,11 @@ class UsersController extends AppController {
             case "dashboard_admin":
                 if ($user['role'] == '1' && $user['active'] == '1') {
                     return true;
-                } else {
-                    $this->redirect(array('action' => 'main'));
                 }
                 break;
             case "dashboard_user":
                  if ($user['role'] == '0' && $user['active'] == '1') {
                     return true;
-                } else {
-                    $this->redirect(array('action' => 'main'));
                 }
                 break;
             case "UploadImage":
