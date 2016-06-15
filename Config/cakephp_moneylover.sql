@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` int(1) DEFAULT 0 COMMENT '0-Thu, 1-Chi',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `role` int(1) DEFAULT 0,
+  `role` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `wallets` (
   `name` varchar(64) NOT NULL,
   `info` varchar(500) DEFAULT NULL,
   `money_current` float NOT NULL DEFAULT '0',
+  `money_initialize` int(11) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
